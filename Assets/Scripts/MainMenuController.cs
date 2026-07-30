@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,30 +8,78 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject homepagePanel;
     [SerializeField] private GameObject settingsPanel;
 
-    // Call this when pressing "Play" button
-    public void PlayGame()
+    [Header("Scene Settings")]
+    [SerializeField] private string tutorialSceneName = "TutorialView";
+
+    [Header("Fade Settings")]
+    [SerializeField] private CanvasGroup blackScreen;
+    [SerializeField] private float fadeDuration = 1.5f;
+
+    private bool isTransitioning;
+
+    private void Awake()
     {
-        SceneManager.LoadScene("TutorialView"); //Goes to the tutorial scene
+        if (blackScreen == null)
+        {
+            Debug.LogError("Black Screen Canvas Group is not assigned.");
+            return;
+        }
+
+        blackScreen.gameObject.SetActive(true);
+        blackScreen.alpha = 0f;
+        blackScreen.interactable = false;
+        blackScreen.blocksRaycasts = false;
     }
 
-    // Call this when pressing "Settings" button
+    public void PlayGame()
+    {
+        if (!isTransitioning)
+        {
+            StartCoroutine(FadeToTutorial());
+        }
+    }
+
+    private IEnumerator FadeToTutorial()
+    {
+        isTransitioning = true;
+
+        blackScreen.blocksRaycasts = true;
+
+        float timer = 0f;
+
+        while (timer < fadeDuration)
+        {
+            timer += Time.unscaledDeltaTime;
+
+            blackScreen.alpha = Mathf.Lerp(
+                0f,
+                1f,
+                timer / fadeDuration
+            );
+
+            yield return null;
+        }
+
+        blackScreen.alpha = 1f;
+
+        yield return SceneManager.LoadSceneAsync(tutorialSceneName);
+    }
+
     public void OpenSettings()
     {
         homepagePanel.SetActive(false);
         settingsPanel.SetActive(true);
     }
 
-    // Call this when pressing "Back" button inside Settings
     public void OpenHomepage()
     {
         settingsPanel.SetActive(false);
         homepagePanel.SetActive(true);
     }
 
-    // Call this when pressing "Quit" button
     public void QuitGame()
     {
         Application.Quit();
-        Debug.Log("Game Quit"); // Shows in Unity Editor
+        Debug.Log("Game Quit");
     }
 }
