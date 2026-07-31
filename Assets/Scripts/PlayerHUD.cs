@@ -29,7 +29,10 @@ public class PlayerHUD : MonoBehaviour
 
     private void Awake()
     {
-        hazardsAvoided = Mathf.Max(0, startingHazardsAvoided);
+        hazardsAvoided = Mathf.Max(
+            0,
+            startingHazardsAvoided
+        );
 
         communityTrust = Mathf.Clamp(
             startingCommunityTrust,
@@ -40,8 +43,6 @@ public class PlayerHUD : MonoBehaviour
         UpdateHUD();
     }
 
-    // Call this after the player successfully avoids a hazard
-    // or completes a mission.
     public void AddHazardAvoided(int amount = 1)
     {
         if (amount <= 0)
@@ -53,8 +54,6 @@ public class PlayerHUD : MonoBehaviour
         UpdateHazardText();
     }
 
-    // Use a positive value to increase trust.
-    // Use a negative value to decrease trust.
     public void ChangeCommunityTrust(int amount)
     {
         communityTrust = Mathf.Clamp(
@@ -77,6 +76,16 @@ public class PlayerHUD : MonoBehaviour
         UpdateTrustBars();
     }
 
+    // Use this when the player selects an NPC option
+    public void ApplyChoiceResult(
+        int hazardPoints,
+        int trustChange
+    )
+    {
+        AddHazardAvoided(hazardPoints);
+        ChangeCommunityTrust(trustChange);
+    }
+
     private void UpdateHUD()
     {
         UpdateHazardText();
@@ -94,6 +103,11 @@ public class PlayerHUD : MonoBehaviour
 
     private void UpdateTrustBars()
     {
+        if (trustBars == null)
+        {
+            return;
+        }
+
         for (int i = 0; i < trustBars.Length; i++)
         {
             if (trustBars[i] == null)
