@@ -1,14 +1,15 @@
 using System.Collections;
 using UnityEngine;
 
-public class DayIntroController : MonoBehaviour
+public class DayIntroManager : MonoBehaviour
 {
     [Header("Day Intro UI")]
+    [SerializeField] private Canvas dayIntroCanvas;
     [SerializeField] private GameObject dayIntroPanel;
     [SerializeField] private CanvasGroup blackScreen;
 
     [Header("Player Controls")]
-    [Tooltip("Add the player movement and mouse-look scripts here.")]
+    [Tooltip("Add only movement or mouse-look scripts. Do not add the Camera.")]
     [SerializeField] private Behaviour[] playerControlScripts;
 
     [Header("Timing")]
@@ -17,78 +18,105 @@ public class DayIntroController : MonoBehaviour
 
     private void Awake()
     {
-        // Show DAY 1 first
-        if (dayIntroPanel != null)
-        {
-            dayIntroPanel.SetActive(true);
-        }
+    Debug.Log("Day 1 intro started.");
 
-        // Stop player movement, but keep the player camera active
-        SetPlayerControls(false);
+    if (dayIntroCanvas != null)
+    {
+        dayIntroCanvas.gameObject.SetActive(true);
+        dayIntroCanvas.overrideSorting = true;
+        dayIntroCanvas.sortingOrder = 100;
+    }
+    else
+    {
+        Debug.LogError(
+            "DayIntroController: Day Intro Canvas is missing."
+        );
+    }
 
-        if (blackScreen != null)
-        {
-            blackScreen.transform.SetAsLastSibling();
-            blackScreen.gameObject.SetActive(true);
-            blackScreen.alpha = 1f;
-            blackScreen.interactable = false;
-            blackScreen.blocksRaycasts = true;
-        }
+    if (dayIntroPanel != null)
+    {
+        dayIntroPanel.SetActive(true);
+    }
+    else
+    {
+        Debug.LogError(
+            "DayIntroController: Day Intro Panel is missing."
+        );
+    }
+
+    SetPlayerControls(false);
+
+    if (blackScreen != null)
+    {
+        blackScreen.gameObject.SetActive(true);
+        blackScreen.transform.SetAsLastSibling();
+        blackScreen.alpha = 1f;
+        blackScreen.interactable = false;
+        blackScreen.blocksRaycasts = true;
+    }
+    else
+    {
+        Debug.LogError(
+            "DayIntroController: Black Screen is missing."
+        );
+    }
     }
 
     private IEnumerator Start()
     {
         if (blackScreen == null)
         {
-            Debug.LogError(
-                "DayIntroController: Black Screen is not assigned."
-            );
-
+            SetPlayerControls(true);
             yield break;
         }
 
-        // Reveal DAY 1
+        // Black → DAY 1
         yield return FadeBlackScreen(1f, 0f);
 
-        // Keep DAY 1 visible
+        // Keep DAY 1 visible.
         yield return new WaitForSecondsRealtime(dayIntroDuration);
 
-        // Fade DAY 1 back to black
+        // DAY 1 → black
         yield return FadeBlackScreen(0f, 1f);
 
-        // Hide the DAY 1 panel
         if (dayIntroPanel != null)
         {
             dayIntroPanel.SetActive(false);
         }
 
-        // Allow the player to move
+        // Turn the player controls back on while the screen is black.
         SetPlayerControls(true);
 
         yield return null;
 
-        // Reveal gameplay
+        // Black → gameplay
         yield return FadeBlackScreen(1f, 0f);
 
         blackScreen.blocksRaycasts = false;
         blackScreen.gameObject.SetActive(false);
+
+        Debug.Log("Day 1 intro completed.");
     }
 
-    private void SetPlayerControls(bool enabled)
+    private void SetPlayerControls(bool controlsEnabled)
     {
+        if (playerControlScripts == null)
+        {
+            return;
+        }
+
         foreach (Behaviour controlScript in playerControlScripts)
         {
             if (controlScript != null)
             {
-                controlScript.enabled = enabled;
+                controlScript.enabled = controlsEnabled;
             }
         }
     }
 
     private IEnumerator FadeBlackScreen(
         float startAlpha,
-        float endAlpha
-    )
+        float endAlpha)
     {
         float timer = 0f;
         float duration = Mathf.Max(0.01f, fadeDuration);
