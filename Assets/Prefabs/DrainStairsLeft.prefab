@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8522552696024931634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2985679158590298872}
+  m_Layer: 0
+  m_Name: DrainStairsLeft
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2985679158590298872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8522552696024931634}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 973.97723, y: 540.51196, z: -24.13351}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3799569272206273658}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &3688572761609161617
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2985679158590298872}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 313cd558f10b8c74fa91e1280312a27a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.5802002
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 313cd558f10b8c74fa91e1280312a27a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5119629
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 313cd558f10b8c74fa91e1280312a27a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.654087
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 313cd558f10b8c74fa91e1280312a27a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 313cd558f10b8c74fa91e1280312a27a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 313cd558f10b8c74fa91e1280312a27a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 313cd558f10b8c74fa91e1280312a27a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 313cd558f10b8c74fa91e1280312a27a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 313cd558f10b8c74fa91e1280312a27a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 313cd558f10b8c74fa91e1280312a27a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 313cd558f10b8c74fa91e1280312a27a, type: 3}
+      propertyPath: m_Name
+      value: Drain_stairsLeft
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 313cd558f10b8c74fa91e1280312a27a, type: 3}
+--- !u!4 &3799569272206273658 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 313cd558f10b8c74fa91e1280312a27a, type: 3}
+  m_PrefabInstance: {fileID: 3688572761609161617}
+  m_PrefabAsset: {fileID: 0}
