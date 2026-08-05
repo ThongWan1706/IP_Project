@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 17ec865a2727f80459454dc3693d24e5, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -1371,6 +1371,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 343686835474128903, guid: 3617db22bb1437a4eaa302cbfe8d4ecf, type: 3}
   m_PrefabInstance: {fileID: 349917220}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &357528797
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 0b469d3f050b7354497b7c6127a3cfe8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 991.37866
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b469d3f050b7354497b7c6127a3cfe8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 539.93054
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b469d3f050b7354497b7c6127a3cfe8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -33.158478
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b469d3f050b7354497b7c6127a3cfe8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b469d3f050b7354497b7c6127a3cfe8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b469d3f050b7354497b7c6127a3cfe8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b469d3f050b7354497b7c6127a3cfe8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b469d3f050b7354497b7c6127a3cfe8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b469d3f050b7354497b7c6127a3cfe8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 0b469d3f050b7354497b7c6127a3cfe8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0b469d3f050b7354497b7c6127a3cfe8, type: 3}
+      propertyPath: m_Name
+      value: ShelterBenchArea
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0b469d3f050b7354497b7c6127a3cfe8, type: 3}
 --- !u!1001 &363372449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7674,3 +7731,4 @@ SceneRoots:
   - {fileID: 2503726498105519053}
   - {fileID: 1660170830}
   - {fileID: 1961316913}
+  - {fileID: 357528797}
