@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7fc3de60e90751842845e747bc8a4789
+guid: 51ecda8b04ea05b46a48f350a9c9807f
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: aiStandardSurface1
+      name: SharedTextureAtlas
     second: {fileID: 2100000, guid: a823d0b0192506546ace1d90f8015a06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StairsHandle
+    second: {fileID: 2100000, guid: 97b6acb8e51503b4981963692199018d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
