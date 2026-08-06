@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1926130693221175605
+--- !u!1 &1749975829155924406
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3608256774565443264}
+  - component: {fileID: 4422472234123930407}
   m_Layer: 0
   m_Name: RoadLaneTurnHorizontal
   m_TagString: Untagged
@@ -16,41 +16,41 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3608256774565443264
+--- !u!4 &4422472234123930407
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1926130693221175605}
+  m_GameObject: {fileID: 1749975829155924406}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 956.6531, y: 540, z: -5.656329}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 964.85, y: 540.0859, z: -33.496857}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4180878514902130646}
+  - {fileID: 7364991879535548591}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &4435992473469237309
+--- !u!1001 &7043361994587979588
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3608256774565443264}
+    m_TransformParent: {fileID: 4422472234123930407}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 3e52bd7f602b8e8428cb0ec36a990c8e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.716919
+      value: -1.760437
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e52bd7f602b8e8428cb0ec36a990c8e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.20050049
+      value: 0.18127441
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e52bd7f602b8e8428cb0ec36a990c8e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.402065
+      value: -14.42593
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3e52bd7f602b8e8428cb0ec36a990c8e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -82,15 +82,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3e52bd7f602b8e8428cb0ec36a990c8e, type: 3}
       propertyPath: m_Name
-      value: RoadLaneTurn_Horizontal
+      value: Roadlaneturn_horizontal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e52bd7f602b8e8428cb0ec36a990c8e, type: 3}
---- !u!4 &4180878514902130646 stripped
+--- !u!4 &7364991879535548591 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3e52bd7f602b8e8428cb0ec36a990c8e, type: 3}
-  m_PrefabInstance: {fileID: 4435992473469237309}
+  m_PrefabInstance: {fileID: 7043361994587979588}
   m_PrefabAsset: {fileID: 0}
