@@ -3,7 +3,87 @@ guid: 69cfec05c2131ba4a80f3407d8d02af2
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bus_Stop_Floor
+    second: {fileID: 2100000, guid: 22001c8a7cd1a784e8b1b80a06abb866, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bus_logo
+    second: {fileID: 2100000, guid: 42e37add9bcabfd4eb393a0d229e586b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stone_cap
+    second: {fileID: 2100000, guid: 2c0e06fde7a65564290bb0c655e0d362, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Texture_Atlas
+    second: {fileID: 2100000, guid: bf4b54f26ea3c074885d6d71825d7ec5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: arrow
+    second: {fileID: 2100000, guid: 2fee5bc5b631e3f49ac4defc7de47f8a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: atlas
+    second: {fileID: 2100000, guid: a823d0b0192506546ace1d90f8015a06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: black_kerb
+    second: {fileID: 2100000, guid: 2c8fdc6176064684c8d6ddf3518bb943, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: black_kerb_with_hole
+    second: {fileID: 2100000, guid: 3b4a72cd079d2564bb2ce0a3a0056969, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bus_number
+    second: {fileID: 2100000, guid: 08b11aaf92b18ef4ea6a90309a1cc4e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bus_stop_number
+    second: {fileID: 2100000, guid: a33940d154ad3b842b3a26cb1a415383, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lambert1
+    second: {fileID: 2100000, guid: b4e025c094bf6584eb91d4cc5e07579a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: openPBR_shader1
+    second: {fileID: 2100000, guid: 7a0c7500dc4fb0343b7568f0f3fb5803, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: poster
+    second: {fileID: 2100000, guid: c4ef0902956e3ca4380a03e2842c2a0f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: smrt
+    second: {fileID: 2100000, guid: 95bac75db67abd643a48f3c85bef30bd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: white_kerb
+    second: {fileID: 2100000, guid: 9516f0c54f2b02241aea8617894fa626, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: white_kerb_with_hole
+    second: {fileID: 2100000, guid: af7bc38bd15044d44acdf89758e45ad2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
