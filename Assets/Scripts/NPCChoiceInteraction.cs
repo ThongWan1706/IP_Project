@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NPCChoiceInteraction : MonoBehaviour
 {
@@ -320,6 +321,12 @@ public class NPCChoiceInteraction : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // Destroy NPC after conversation ended
+        Destroy(gameObject);
+
+        // Go to Day 2
+        SceneManager.LoadScene("Day2");
     }
 
     private void SetPlayerControls(bool enabled)
