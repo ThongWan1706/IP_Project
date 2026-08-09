@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2501947401184355063
 Transform:
@@ -40,6 +40,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2501947401184355063}
     m_Modifications:
+    - target: {fileID: -9145780657412726388, guid: 472e884de2d8e574097d44ebaf7b32fb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -9038585923029775698, guid: 472e884de2d8e574097d44ebaf7b32fb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 472e884de2d8e574097d44ebaf7b32fb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.2545166
@@ -83,6 +91,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 472e884de2d8e574097d44ebaf7b32fb, type: 3}
       propertyPath: m_Name
       value: Kiosk_policePost
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 472e884de2d8e574097d44ebaf7b32fb, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
