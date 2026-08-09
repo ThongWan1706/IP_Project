@@ -1,14 +1,12 @@
-■ PolyPeople Series - City People [Free Version]
+■ PolyPeople Series - City People
 
-Thank you for downloading the free version of PolyPeople Series - City People!
-
-This free pack is a trial version of the full "PolyPeople Series - City People" asset, offering one character from the full set.
+Thank you for downloading this asset!
 
 ---
 
 ■ Package Contents
 
-- Meshes: 1 FBX file (Adult Female)
+- Meshes: 8 FBX files(Adult, Elder, Kid, Teen / Female, Male).
 
 - Materials:
   - 2 standard Unity materials (ColorA, ColorB)  
@@ -16,21 +14,21 @@ This free pack is a trial version of the full "PolyPeople Series - City People" 
   - Total: 4 materials
 
 - Prefabs:
-  - 4 prefab variants (based on material)
-  - Humanoid rig configured
+  - 4 prefab variants per character (based on material)  
+  - All configured with Humanoid rig
 
 - Textures:
   - 2 base color textures (512x512)
-  - Note: These textures are shared with the full version of the asset, and therefore contain unused areas reserved for other characters.
 
 - Scenes:
-  - 1 demo scene showcasing the character prefabs
+  - 1 demo scene showcasing all prefabs
 
 ---
 
 ■ Geometry
 
-Character model: 526 triangles
+All character models are under 600 triangles.  
+Backpacks are 144 triangles.
 
 ---
 
