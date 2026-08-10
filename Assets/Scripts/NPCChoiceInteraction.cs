@@ -241,23 +241,22 @@ public class NPCChoiceInteraction : MonoBehaviour
     public void ChooseOption1()
     {
         // Remember that the player chose NO
-        choseYes = true;
-
-        ApplyChoice(
-            hazardChange: 1,
-            trustChange: 2,
-            responseDialogue: option2Response
-        );
-    }
-
-    public void ChooseOption2()
-    {
-        // Remember that the player chose NO
         choseYes = false;
 
         ApplyChoice(
             hazardChange: 1,
             trustChange: -1,
+            responseDialogue: option1Response
+        );
+    }
+
+    public void ChooseOption2()
+    {
+        choseYes = true;
+
+        ApplyChoice(
+            hazardChange: 1,
+            trustChange: 2,
             responseDialogue: option2Response
         );
     }
