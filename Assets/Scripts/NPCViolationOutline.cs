@@ -6,11 +6,24 @@ public class NPCViolationOutline : MonoBehaviour
     [Header("Outline")]
     public Material outlineMaterial;
 
+    [Header("Violation Point")]
+    [Tooltip("Drag the Empty GameObject that represents the rule violation point here.")]
+    public Transform violationPoint;
+
+    [Tooltip("Red outline appears when NPC is this close to the violation point.")]
+    public float warningDistance = 2f;
+
+    [Tooltip("Red outline disappears when NPC reaches this distance.")]
+    public float reachedDistance = 0.5f;
+
     [Header("Testing")]
     public bool aboutToViolate = false;
 
     private List<Renderer> outlineRenderers = new List<Renderer>();
     private bool previousState;
+
+    private bool warningStarted = false;
+    private bool violationFinished = false;
 
     void Start()
     {
@@ -24,12 +37,42 @@ public class NPCViolationOutline : MonoBehaviour
 
     void Update()
     {
-        // Allows you to test using the checkbox
+        // ============================
+        // MANUAL TESTING
+        // ============================
+
         if (aboutToViolate != previousState)
         {
             SetOutline(aboutToViolate);
             previousState = aboutToViolate;
         }
+
+        // ============================
+        // VIOLATION POINT
+        // ============================
+
+        if (violationPoint == null)
+            return;
+
+        if (violationFinished)
+            return;
+
+        float distanceToViolation =
+            Vector3.Distance(
+                transform.position,
+                violationPoint.position
+            );
+
+        // NPC is getting close to violation point
+        if (distanceToViolation <= warningDistance &&
+            distanceToViolation > reachedDistance &&
+            !warningStarted)
+        {
+            AboutToViolateRule();
+
+            warningStarted = true;
+        }
+
     }
 
     void CreateOutline()
@@ -56,7 +99,10 @@ public class NPCViolationOutline : MonoBehaviour
             outlineObject.transform.localScale =
                 originalRenderer.transform.localScale;
 
+            // ============================
             // SKINNED MESH
+            // ============================
+
             if (originalRenderer is SkinnedMeshRenderer originalSkinned)
             {
                 SkinnedMeshRenderer outline =
@@ -79,7 +125,10 @@ public class NPCViolationOutline : MonoBehaviour
                 outlineRenderers.Add(outline);
             }
 
+            // ============================
             // NORMAL MESH
+            // ============================
+
             else if (originalRenderer is MeshRenderer)
             {
                 MeshFilter originalFilter =
@@ -120,14 +169,12 @@ public class NPCViolationOutline : MonoBehaviour
         }
     }
 
-    // Call this when NPC is about to break a rule
     public void AboutToViolateRule()
     {
         aboutToViolate = true;
         SetOutline(true);
     }
 
-    // Call this when warning is no longer needed
     public void StopViolationWarning()
     {
         aboutToViolate = false;

@@ -13,8 +13,13 @@ public class NPCNavMeshWalk : MonoBehaviour
     [Header("Animation")]
     public float walkingThreshold = 0.1f;
 
+    [Header("Walking Audio")]
+    public AudioSource walkingAudioSource;
+    public AudioClip walkingToTarget2Audio;
+
     [Header("Debug")]
     public int currentTargetIndex = 0;
+
 
     // NPC is waiting for the ONE condition
     public bool waitingForCondition = false;
@@ -23,6 +28,11 @@ public class NPCNavMeshWalk : MonoBehaviour
     private bool conditionPassed = false;
 
     private bool finished = false;
+
+    public bool HasReachedFinalTarget
+{
+    get { return finished; }
+}
 
     void Start()
     {
@@ -34,6 +44,11 @@ public class NPCNavMeshWalk : MonoBehaviour
         if (animator == null)
         {
             animator = GetComponentInChildren<Animator>();
+        }
+
+        if (walkingAudioSource == null)
+        {
+            walkingAudioSource = GetComponent<AudioSource>();
         }
 
         if (agent == null)
@@ -136,7 +151,15 @@ public class NPCNavMeshWalk : MonoBehaviour
         {
             finished = true;
 
-            Debug.Log("NPC finished walking.");
+            agent.isStopped = true;
+
+            // Stop walking audio
+            if (walkingAudioSource != null)
+            {
+                walkingAudioSource.Stop();
+            }
+
+            Debug.Log("NPC reached Target 2.");
 
             return;
         }
@@ -155,20 +178,28 @@ public class NPCNavMeshWalk : MonoBehaviour
     // ==========================
 
     public void ConditionYes()
+{
+    if (!waitingForCondition)
+        return;
+
+    Debug.Log("Condition YES - NPC continues to Target 2");
+
+    conditionPassed = true;
+    waitingForCondition = false;
+
+    currentTargetIndex++;
+
+    // Start audio
+    if (walkingAudioSource != null && walkingToTarget2Audio != null)
     {
-        if (!waitingForCondition)
-            return;
-
-        Debug.Log("Condition YES - NPC continues");
-
-        conditionPassed = true;
-
-        waitingForCondition = false;
-
-        currentTargetIndex++;
-
-        MoveToCurrentTarget();
+        walkingAudioSource.clip = walkingToTarget2Audio;
+        walkingAudioSource.loop = false;
+        walkingAudioSource.Play();
     }
+
+    // Start walking to Target 2
+    MoveToCurrentTarget();
+}
 
     // ==========================
     // CONDITION = NO

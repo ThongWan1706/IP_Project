@@ -74,6 +74,8 @@ public class NPCChoiceInteraction : MonoBehaviour
     private bool interactionCompleted;
     private bool rewardApplied;
 
+    private bool choseYes = false;
+
     public bool CanInteract =>
         currentStage == ConversationStage.None &&
         !interactionCompleted;
@@ -237,34 +239,28 @@ public class NPCChoiceInteraction : MonoBehaviour
 
     // Hazard Avoided +1, Community Trust +2
     public void ChooseOption1()
-{
-    // YES - NPC continues walking to Target 2
-    if (npcMovement != null)
     {
-        npcMovement.ConditionYes();
+        // Remember that the player chose NO
+        choseYes = true;
+
+        ApplyChoice(
+            hazardChange: 1,
+            trustChange: 2,
+            responseDialogue: option2Response
+        );
     }
 
-    ApplyChoice(
-        hazardChange: 1,
-        trustChange: 2,
-        responseDialogue: option1Response
-    );
-}
-
-public void ChooseOption2()
-{
-    // NO - NPC stays at Target 1
-    if (npcMovement != null)
+    public void ChooseOption2()
     {
-        npcMovement.ConditionNo();
-    }
+        // Remember that the player chose NO
+        choseYes = false;
 
-    ApplyChoice(
-        hazardChange: 1,
-        trustChange: -1,
-        responseDialogue: option2Response
-    );
-}
+        ApplyChoice(
+            hazardChange: 1,
+            trustChange: -1,
+            responseDialogue: option2Response
+        );
+    }
 
     private void ApplyChoice(
         int hazardChange,
@@ -336,12 +332,53 @@ public void ChooseOption2()
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        // Destroy NPC after conversation ended
-        Destroy(gameObject);
+        // ============================
+        // PLAYER CHOSE YES
+        // ============================
+        if (choseYes)
+        {
+            Debug.Log("Dialogue finished. NPC continues walking.");
 
-        // Go to Day 2
+            if (npcMovement != null)
+            {
+                npcMovement.ConditionYes();
+
+                // Wait for NPC to reach Target 2
+                StartCoroutine(WaitForNPCToFinish());
+            }
+
+            return;
+        }
+
+        // ============================
+        // PLAYER CHOSE NO
+        // ============================
+        Debug.Log("Player chose NO.");
+
+        if (npcMovement != null)
+        {
+            npcMovement.ConditionNo();
+        }
+
+        Destroy(gameObject);
         SceneManager.LoadScene("Day2");
     }
+
+    private System.Collections.IEnumerator WaitForNPCToFinish()
+{
+    while (!npcMovement.HasReachedFinalTarget)
+    {
+        yield return null;
+    }
+
+    Debug.Log("NPC reached Target 2.");
+
+    Destroy(gameObject);
+
+    SceneManager.LoadScene("Day2");
+}
+
+
 
     private void SetPlayerControls(bool enabled)
     {
