@@ -33,6 +33,10 @@ public class NPCChoiceInteraction : MonoBehaviour
     [Header("NPC Movement")]
     [SerializeField] private NPCNavMeshWalk npcMovement;
 
+    [Header("Interaction Sound")]
+    [SerializeField] private AudioSource interactionAudioSource;
+    [SerializeField] private AudioClip policeWhistleSound;
+
     [Header("Player UI")]
     [SerializeField] private GameObject defaultHUDPanel;
     [SerializeField] private GameObject conversationPanel;
@@ -61,6 +65,12 @@ public class NPCChoiceInteraction : MonoBehaviour
 
     [Header("Player HUD")]
     [SerializeField] private PlayerHUD playerHUD;
+
+    [Header("Point Sounds")]
+    [SerializeField] private AudioSource pointAudioSource;
+
+    [SerializeField] private AudioClip pointIncreaseSound;
+    [SerializeField] private AudioClip pointDecreaseSound;
 
     [Header("Player Controls")]
     [Tooltip("Assign the First Person Controller component.")]
@@ -109,6 +119,12 @@ public class NPCChoiceInteraction : MonoBehaviour
         if (!CanInteract)
         {
             return;
+        }
+
+        // Play police whistle when player starts talking to NPC
+        if (interactionAudioSource != null && policeWhistleSound != null)
+        {
+            interactionAudioSource.PlayOneShot(policeWhistleSound);
         }
 
         if (openingDialogue == null || openingDialogue.Length == 0)
@@ -240,23 +256,23 @@ public class NPCChoiceInteraction : MonoBehaviour
     // Hazard Avoided +1, Community Trust +2
     public void ChooseOption1()
     {
-        // Remember that the player chose NO
-        choseYes = false;
+        choseYes = true;
 
         ApplyChoice(
             hazardChange: 1,
-            trustChange: -1,
+            trustChange: 2,
             responseDialogue: option1Response
         );
     }
 
     public void ChooseOption2()
     {
-        choseYes = true;
+        // Remember that the player chose NO
+        choseYes = false;
 
         ApplyChoice(
-            hazardChange: 1,
-            trustChange: 2,
+            hazardChange: 0,
+            trustChange: -1,
             responseDialogue: option2Response
         );
     }
@@ -277,7 +293,14 @@ public class NPCChoiceInteraction : MonoBehaviour
         if (playerHUD != null)
         {
             playerHUD.AddHazardAvoided(hazardChange);
+            PlayPointSound(hazardChange);
+
             playerHUD.ChangeCommunityTrust(trustChange);
+            
+            if (trustChange != 0)
+                {
+                    PlayPointSound(trustChange);
+            }
         }
         else
         {
@@ -331,53 +354,54 @@ public class NPCChoiceInteraction : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        // ============================
-        // PLAYER CHOSE YES
-        // ============================
+        // =====================================
+        // OPTION 1 = POLITELY INFORM NPC
+        // NPC STAYS AT TARGET 1
+        // =====================================
         if (choseYes)
         {
-            Debug.Log("Dialogue finished. NPC continues walking.");
+            Debug.Log("Option 1: Politely informed NPC. NPC stays.");
 
             if (npcMovement != null)
             {
                 npcMovement.ConditionYes();
-
-                // Wait for NPC to reach Target 2
-                StartCoroutine(WaitForNPCToFinish());
             }
+
+            // Proceed to Day 2
+            SceneManager.LoadScene("Day2");
 
             return;
         }
 
-        // ============================
-        // PLAYER CHOSE NO
-        // ============================
-        Debug.Log("Player chose NO.");
+        // =====================================
+        // OPTION 2 = SCOLD NPC
+        // NPC CONTINUES AND JAYWALKS
+        // =====================================
+
+        Debug.Log("Option 2: Scolded NPC. NPC continues to jaywalk.");
 
         if (npcMovement != null)
         {
             npcMovement.ConditionNo();
-        }
 
-        Destroy(gameObject);
-        SceneManager.LoadScene("Day2");
+            // Wait until NPC reaches Target 2
+            StartCoroutine(WaitForNPCToFinish());
+        }
     }
 
     private System.Collections.IEnumerator WaitForNPCToFinish()
-{
-    while (!npcMovement.HasReachedFinalTarget)
     {
-        yield return null;
+        while (!npcMovement.HasReachedFinalTarget)
+        {
+            yield return null;
+        }
+
+        Debug.Log("NPC reached Target 2.");
+
+        Destroy(gameObject);
+
+        SceneManager.LoadScene("Day2");
     }
-
-    Debug.Log("NPC reached Target 2.");
-
-    Destroy(gameObject);
-
-    SceneManager.LoadScene("Day2");
-}
-
-
 
     private void SetPlayerControls(bool enabled)
     {
@@ -386,6 +410,30 @@ public class NPCChoiceInteraction : MonoBehaviour
             if (controlScript != null)
             {
                 controlScript.enabled = enabled;
+            }
+        }
+    }
+
+    private void PlayPointSound(int change)
+    {
+        if (pointAudioSource == null)
+            return;
+
+        // Point increased
+        if (change > 0)
+        {
+                if (pointIncreaseSound != null)
+            {
+                pointAudioSource.PlayOneShot(pointIncreaseSound);
+            }
+        }
+
+        // Point decreased
+        else if (change < 0)
+        {
+            if (pointDecreaseSound != null)
+            {
+                pointAudioSource.PlayOneShot(pointDecreaseSound);
             }
         }
     }

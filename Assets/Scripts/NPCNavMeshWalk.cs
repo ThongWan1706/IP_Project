@@ -174,15 +174,15 @@ public class NPCNavMeshWalk : MonoBehaviour
     }
 
     // ==========================
-    // CONDITION = YES
+    // CONDITION = Scold them
     // ==========================
 
-    public void ConditionYes()
+    public void ConditionNo()
 {
     if (!waitingForCondition)
         return;
 
-    Debug.Log("Condition YES - NPC continues to Target 2");
+    Debug.Log("Condition No - NPC continues to Target 2");
 
     conditionPassed = true;
     waitingForCondition = false;
@@ -202,15 +202,15 @@ public class NPCNavMeshWalk : MonoBehaviour
 }
 
     // ==========================
-    // CONDITION = NO
+    // CONDITION = Politely inform
     // ==========================
 
-    public void ConditionNo()
+    public void ConditionYes()
     {
         if (!waitingForCondition)
             return;
 
-        Debug.Log("Condition NO - NPC stays at Target 1");
+        Debug.Log("Condition - NPC stays at Target 1");
 
         agent.isStopped = true;
 
