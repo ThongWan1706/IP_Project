@@ -6,13 +6,9 @@ public class PlayerHUD : MonoBehaviour
 {
     [Header("Hazards Avoided")]
     [SerializeField] private TextMeshProUGUI hazardAvoidedText;
-    [SerializeField] private int startingHazardsAvoided = 0;
 
     [Header("Community Trust")]
     [SerializeField] private Image[] trustBars;
-
-    [Range(0, 5)]
-    [SerializeField] private int startingCommunityTrust = 3;
 
     [Header("Trust Bar Colours")]
     [SerializeField] private Color filledBarColour =
@@ -21,62 +17,82 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] private Color emptyBarColour =
         new Color(0.25f, 0.25f, 0.25f, 0.7f);
 
-    private int hazardsAvoided;
-    private int communityTrust;
-
-    public int HazardsAvoided => hazardsAvoided;
-    public int CommunityTrust => communityTrust;
-
-    private void Awake()
+    public int HazardsAvoided
     {
-        hazardsAvoided = Mathf.Max(
-            0,
-            startingHazardsAvoided
-        );
+        get
+        {
+            if (GameProgressManager.Instance != null)
+            {
+                return GameProgressManager.Instance.hazardsAvoided;
+            }
 
-        communityTrust = Mathf.Clamp(
-            startingCommunityTrust,
-            0,
-            trustBars.Length
-        );
+            return 0;
+        }
+    }
 
+    public int CommunityTrust
+    {
+        get
+        {
+            if (GameProgressManager.Instance != null)
+            {
+                return GameProgressManager.Instance.communityTrust;
+            }
+
+            return 0;
+        }
+    }
+
+    private void Start()
+    {
         UpdateHUD();
     }
 
     public void AddHazardAvoided(int amount = 1)
     {
-        if (amount <= 0)
+        if (GameProgressManager.Instance == null)
         {
+            Debug.LogError(
+                "GameProgressManager does not exist."
+            );
+
             return;
         }
 
-        hazardsAvoided += amount;
+        GameProgressManager.Instance.AddHazardAvoided(amount);
+
         UpdateHazardText();
     }
 
     public void ChangeCommunityTrust(int amount)
     {
-        communityTrust = Mathf.Clamp(
-            communityTrust + amount,
-            0,
-            trustBars.Length
-        );
+        if (GameProgressManager.Instance == null)
+        {
+            Debug.LogError(
+                "GameProgressManager does not exist."
+            );
+
+            return;
+        }
+
+        GameProgressManager.Instance.ChangeCommunityTrust(amount);
 
         UpdateTrustBars();
     }
 
     public void SetCommunityTrust(int value)
     {
-        communityTrust = Mathf.Clamp(
-            value,
-            0,
-            trustBars.Length
-        );
+        if (GameProgressManager.Instance == null)
+        {
+            return;
+        }
+
+        GameProgressManager.Instance.communityTrust =
+            Mathf.Clamp(value, 0, trustBars.Length);
 
         UpdateTrustBars();
     }
 
-    // Use this when the player selects an NPC option
     public void ApplyChoiceResult(
         int hazardPoints,
         int trustChange
@@ -94,19 +110,25 @@ public class PlayerHUD : MonoBehaviour
 
     private void UpdateHazardText()
     {
-        if (hazardAvoidedText != null)
+        if (hazardAvoidedText != null &&
+            GameProgressManager.Instance != null)
         {
             hazardAvoidedText.text =
-                "Hazard Avoided: " + hazardsAvoided;
+                "Hazard Avoided: " +
+                GameProgressManager.Instance.hazardsAvoided;
         }
     }
 
     private void UpdateTrustBars()
     {
-        if (trustBars == null)
+        if (GameProgressManager.Instance == null ||
+            trustBars == null)
         {
             return;
         }
+
+        int trust =
+            GameProgressManager.Instance.communityTrust;
 
         for (int i = 0; i < trustBars.Length; i++)
         {
@@ -115,7 +137,7 @@ public class PlayerHUD : MonoBehaviour
                 continue;
             }
 
-            if (i < communityTrust)
+            if (i < trust)
             {
                 trustBars[i].color = filledBarColour;
             }

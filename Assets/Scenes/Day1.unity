@@ -2308,6 +2308,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 992785887442622742, guid: 51b8cd9e64dc867439b7580243c9c6cf, type: 3}
   m_PrefabInstance: {fileID: 32749084}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &37371457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 37371459}
+  - component: {fileID: 37371458}
+  m_Layer: 0
+  m_Name: GameProgressManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &37371458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37371457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b47d55be7fb96064c8163e5378b9165c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameProgressManager
+  hazardsAvoided: 0
+  communityTrust: 3
+  maxCommunityTrust: 5
+--- !u!4 &37371459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37371457}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 968.7009, y: 540.8888, z: -49.97136}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &38210453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3022,7 +3069,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 45830022}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Toe Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9619,7 +9666,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 143702392}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Leg Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13820,7 +13867,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 197013541}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spine Root Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16693,7 +16740,7 @@ GameObject:
   - component: {fileID: 238267876}
   - component: {fileID: 238267878}
   - component: {fileID: 238267877}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19244,7 +19291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 277858807}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ball Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19277,7 +19324,7 @@ GameObject:
   - component: {fileID: 279436224}
   - component: {fileID: 279436223}
   - component: {fileID: 279436225}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Control Rig(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49569,7 +49616,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 458417880}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Remote Pivots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50603,7 +50650,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 469211262}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head LookAt Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61550,7 +61597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 605464726}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right Hand Hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97063,7 +97110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 653769650}
   - component: {fileID: 653769651}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head Aim Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97571,7 +97618,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 932854753}
         m_TargetAssemblyTypeName: NPCChoiceInteraction, Assembly-CSharp
         m_MethodName: ChooseOption2
         m_Mode: 1
@@ -102252,7 +102299,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 739716195}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hand Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111910,7 +111957,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 842486167}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Heel Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116013,7 +116060,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 925245539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Remote Pivots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117358,24 +117405,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
   outlineVisual: {fileID: 0}
   npcMovement: {fileID: 932854751}
-  defaultHUDPanel: {fileID: 0}
-  conversationPanel: {fileID: 0}
-  optionPanel: {fileID: 0}
-  characterNameText: {fileID: 0}
-  conversationText: {fileID: 0}
+  defaultHUDPanel: {fileID: 124629666}
+  conversationPanel: {fileID: 1481489118}
+  optionPanel: {fileID: 1976604932}
+  characterNameText: {fileID: 1732517299}
+  conversationText: {fileID: 1521663922}
   residentName: Resident
   policeName: Police Officer
   residentNameColour: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   policeNameColour: {r: 0, g: 1, b: 1, a: 1}
-  openingDialogue: []
+  openingDialogue:
+  - speaker: 1
+    sentence: Hello Sir! Are you aware that jaywalker is dangerous?
+  - speaker: 0
+    sentence: Hi Sir! Of course I know, but no choice lah, the traffic light always
+      need to wait for so long and the distance is very close.
   option1Response:
+  - speaker: 1
+    sentence: But the road is still dangerous, for your safety, please use the pedestrian
+      crossing.
   - speaker: 0
-    sentence: 
+    sentence: Ok then Sir.
   option2Response:
+  - speaker: 1
+    sentence: But it's still dangerous! I'll have to fine you!
   - speaker: 0
-    sentence: 
-  playerHUD: {fileID: 0}
-  playerControlScripts: []
+    sentence: Are you serious Sir?! It's just a one time thing!
+  playerHUD: {fileID: 1477231629}
+  playerControlScripts:
+  - {fileID: 121833268}
 --- !u!114 &932854754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117388,13 +117446,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52cab232f3f8d174ba2d366ec2f01f24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerNPCInteractor
-  playerCamera: {fileID: 0}
+  playerCamera: {fileID: 2141874595}
   interactionDistance: 4
   npcLayer:
     serializedVersion: 2
+    m_Bits: 64
+  interactPrompt: {fileID: 1134072956}
+  interactPromptText: {fileID: 1158205644}
+--- !u!136 &932854755
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932854744}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
     m_Bits: 0
-  interactPrompt: {fileID: 0}
-  interactPromptText: {fileID: 0}
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.5079346
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.7539673, z: 0}
 --- !u!4 &933049160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1958792504750802904, guid: f3e8b3a407021c544afe69faa0e72fcd, type: 3}
@@ -121191,7 +121272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1003251967}
   - component: {fileID: 1003251968}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148297,7 +148378,7 @@ GameObject:
   - component: {fileID: 1132592578}
   - component: {fileID: 1132592580}
   - component: {fileID: 1132592579}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164144,7 +164225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1152594514}
   - component: {fileID: 1152594515}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hip Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166749,7 +166830,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1188176916}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left Leg Hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167227,7 +167308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1193968969}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Heel Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186798,7 +186879,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1213927503}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spine Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191613,7 +191694,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -486.49936, y: 50}
-  m_SizeDelta: {x: 172.7001, y: 57.7854}
+  m_SizeDelta: {x: 172.7001, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1286290484
 MonoBehaviour:
@@ -191659,7 +191740,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 932854753}
         m_TargetAssemblyTypeName: NPCChoiceInteraction, Assembly-CSharp
         m_MethodName: ChooseOption1
         m_Mode: 1
@@ -193269,7 +193350,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1307512025}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ball Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193300,7 +193381,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1309980095}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Toe Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193562,7 +193643,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1315006143}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right Leg Hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204165,7 +204246,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1455599896}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spine Tip Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205438,14 +205519,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHUD
   hazardAvoidedText: {fileID: 1748050153}
-  startingHazardsAvoided: 0
   trustBars:
   - {fileID: 2061114483}
   - {fileID: 2111034816}
   - {fileID: 400410337}
   - {fileID: 289825384}
   - {fileID: 1519104175}
-  startingCommunityTrust: 3
   filledBarColour: {r: 0.2, g: 0.8, b: 0.3, a: 1}
   emptyBarColour: {r: 0.25, g: 0.25, b: 0.25, a: 0.7}
 --- !u!114 &1477231630
@@ -228290,7 +228369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1536487444}
   - component: {fileID: 1536487445}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Twist Spine Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230418,6 +230497,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 378195012401723660, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1202943308098025308, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361211397516921498, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1467688760113311778, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700199973123631694, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1902893558566140612, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940308696720521102, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2397461735899574750, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2490420537610255543, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
       propertyPath: m_LocalPosition.x
       value: 967.45087
@@ -230458,6 +230569,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2547361255865850154, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2648604435987539650, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2828687031801458308, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3025259960346012588, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208007499469049957, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3247630091602041248, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3741181828888905030, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4124981945940846765, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178968568344766712, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4580565849737540237, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
       propertyPath: m_Avatar
       value: 
@@ -230473,9 +230620,69 @@ PrefabInstance:
         by Humanoid clips.\n\tTransform 'Spine'\n\tTransform 'Hips'\n\tFrom animation
         clip 'mixamo.com'\n\tFrom animation clip 'mixamo.com'"
       objectReference: {fileID: 0}
+    - target: {fileID: 4639499286695647164, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5203112511529190353, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5220924098873729680, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455334391422147964, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551059413267140920, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811826194061445127, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906979571401617248, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6604978037946658592, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6825554723333461511, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490976543043186371, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7506611662773643142, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526323551755956213, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8054531092773125210, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8542254903221063855, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 9101643504376400040, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
       propertyPath: m_Name
       value: Male_Teen_CustomSkinB
+      objectReference: {fileID: 0}
+    - target: {fileID: 9101643504376400040, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -230502,6 +230709,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9101643504376400040, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
       insertIndex: -1
       addedObject: {fileID: 932854754}
+    - targetCorrespondingSourceObject: {fileID: 9101643504376400040, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 932854755}
   m_SourcePrefab: {fileID: 100100000, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
 --- !u!1001 &1576817475
 PrefabInstance:
@@ -230819,7 +231029,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1582535460}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right Hand Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231639,7 +231849,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1599430880}
   - component: {fileID: 1599430881}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235238,7 +235448,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1643921540}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hip target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240520,7 +240730,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1738532729}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left Hand Hint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289285,7 +289495,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1891569194}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left Leg Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291068,7 +291278,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 932854753}
         m_TargetAssemblyTypeName: NPCChoiceInteraction, Assembly-CSharp
         m_MethodName: NextDialogue
         m_Mode: 1
@@ -298609,7 +298819,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2042678501}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left Hand Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300114,7 +300324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2069707367}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right Leg Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303093,7 +303303,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Option 1:
 
-    Politely inform them'
+    Politely inform them that jaywalking is still dangerous'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -327207,6 +327417,7 @@ SceneRoots:
   - {fileID: 1404943827}
   - {fileID: 403765850}
   - {fileID: 1049970036}
+  - {fileID: 37371459}
   - {fileID: 57130151}
   - {fileID: 1978986010}
   - {fileID: 751119859}
