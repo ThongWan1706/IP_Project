@@ -3,8 +3,8 @@ using UnityEngine.AI;
 
 public class NPCNavMeshWalk : MonoBehaviour
 {
-    [Header("Target")]
-    public Transform targetPoint;
+    [Header("Targets")]
+    public Transform[] targetPoints;
 
     [Header("References")]
     public NavMeshAgent agent;
@@ -13,17 +13,24 @@ public class NPCNavMeshWalk : MonoBehaviour
     [Header("Animation")]
     public float walkingThreshold = 0.1f;
 
-    private bool hasReachedTarget = false;
+    [Header("Debug")]
+    public int currentTargetIndex = 0;
+
+    // NPC is waiting for the ONE condition
+    public bool waitingForCondition = false;
+
+    // Once YES is given, NPC continues automatically
+    private bool conditionPassed = false;
+
+    private bool finished = false;
 
     void Start()
     {
-        // Find NavMesh Agent automatically
         if (agent == null)
         {
             agent = GetComponent<NavMeshAgent>();
         }
 
-        // Find Animator automatically
         if (animator == null)
         {
             animator = GetComponentInChildren<Animator>();
@@ -43,45 +50,140 @@ public class NPCNavMeshWalk : MonoBehaviour
             return;
         }
 
-        // Give the NPC its destination
-        if (targetPoint != null)
+        if (targetPoints == null || targetPoints.Length == 0)
         {
-            agent.SetDestination(targetPoint.position);
+            Debug.LogError("No target points assigned!");
+            return;
         }
+
+        // Start walking to Target 1
+        MoveToCurrentTarget();
     }
 
     void Update()
     {
-        UpdateMovement();
+        CheckIfReachedTarget();
         UpdateAnimation();
     }
 
-    void UpdateMovement()
+    void MoveToCurrentTarget()
     {
-        if (targetPoint == null)
+        if (currentTargetIndex >= targetPoints.Length)
             return;
 
-        // Keep destination updated
-        if (!hasReachedTarget)
-        {
-            agent.SetDestination(targetPoint.position);
-        }
+        if (targetPoints[currentTargetIndex] == null)
+            return;
 
-        // Wait until NavMesh finishes calculating the path
+        agent.isStopped = false;
+
+        agent.SetDestination(
+            targetPoints[currentTargetIndex].position
+        );
+
+        Debug.Log(
+            "Walking to Target " + (currentTargetIndex + 1)
+        );
+    }
+
+    void CheckIfReachedTarget()
+    {
+        if (finished)
+            return;
+
+        if (waitingForCondition)
+            return;
+
         if (agent.pathPending)
             return;
 
-        // Check if NPC has reached the destination
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
-            // Make sure it has actually stopped moving
-            if (!agent.hasPath || agent.velocity.sqrMagnitude < 0.01f)
+            if (!agent.hasPath ||
+                agent.velocity.sqrMagnitude < 0.01f)
             {
-                hasReachedTarget = true;
-
-                agent.isStopped = true;
+                ReachedTarget();
             }
         }
+    }
+
+    void ReachedTarget()
+    {
+        agent.isStopped = true;
+
+        Debug.Log(
+            "Reached Target " + (currentTargetIndex + 1)
+        );
+
+        // ==========================
+        // TARGET 1
+        // Wait for the ONE condition
+        // ==========================
+
+        if (currentTargetIndex == 0 && !conditionPassed)
+        {
+            waitingForCondition = true;
+
+            Debug.Log("Waiting for condition...");
+
+            return;
+        }
+
+        // ==========================
+        // FINAL TARGET
+        // ==========================
+
+        if (currentTargetIndex >= targetPoints.Length - 1)
+        {
+            finished = true;
+
+            Debug.Log("NPC finished walking.");
+
+            return;
+        }
+
+        // ==========================
+        // Continue automatically
+        // ==========================
+
+        currentTargetIndex++;
+
+        MoveToCurrentTarget();
+    }
+
+    // ==========================
+    // CONDITION = YES
+    // ==========================
+
+    public void ConditionYes()
+    {
+        if (!waitingForCondition)
+            return;
+
+        Debug.Log("Condition YES - NPC continues");
+
+        conditionPassed = true;
+
+        waitingForCondition = false;
+
+        currentTargetIndex++;
+
+        MoveToCurrentTarget();
+    }
+
+    // ==========================
+    // CONDITION = NO
+    // ==========================
+
+    public void ConditionNo()
+    {
+        if (!waitingForCondition)
+            return;
+
+        Debug.Log("Condition NO - NPC stays at Target 1");
+
+        agent.isStopped = true;
+
+        // NPC remains at Target 1
     }
 
     void UpdateAnimation()
@@ -89,25 +191,10 @@ public class NPCNavMeshWalk : MonoBehaviour
         if (animator == null || agent == null)
             return;
 
-        // Check how fast the NavMeshAgent is moving
         bool isWalking =
+            !agent.isStopped &&
             agent.velocity.magnitude > walkingThreshold;
 
         animator.SetBool("isWalking", isWalking);
-    }
-
-    // Call this if you want to give the NPC a new target later
-    public void SetNewTarget(Transform newTarget)
-    {
-        if (newTarget == null)
-            return;
-
-        targetPoint = newTarget;
-
-        hasReachedTarget = false;
-
-        agent.isStopped = false;
-
-        agent.SetDestination(targetPoint.position);
     }
 }

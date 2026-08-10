@@ -7,7 +7,7 @@ public class NPCViolationOutline : MonoBehaviour
     public Material outlineMaterial;
 
     [Header("Testing")]
-    public bool aboutToViolate = true;
+    public bool aboutToViolate = false;
 
     private List<Renderer> outlineRenderers = new List<Renderer>();
     private bool previousState;
@@ -16,16 +16,15 @@ public class NPCViolationOutline : MonoBehaviour
     {
         CreateOutline();
 
-        // IMPORTANT:
-        // Show or hide based on the checkbox
-        SetOutline(aboutToViolate);
+        // Start with outline hidden
+        SetOutline(false);
 
         previousState = aboutToViolate;
     }
 
     void Update()
     {
-        // Detect checkbox change during Play Mode
+        // Allows you to test using the checkbox
         if (aboutToViolate != previousState)
         {
             SetOutline(aboutToViolate);
@@ -39,36 +38,33 @@ public class NPCViolationOutline : MonoBehaviour
 
         foreach (Renderer originalRenderer in renderers)
         {
+            // Ignore already-created outlines
             if (originalRenderer.gameObject.name.Contains("_Outline"))
                 continue;
 
             GameObject outlineObject =
                 new GameObject(originalRenderer.gameObject.name + "_Outline");
 
-            // Put outline directly under original renderer
-            outlineObject.transform.SetParent(originalRenderer.transform);
+            outlineObject.transform.SetParent(originalRenderer.transform.parent);
 
-            outlineObject.transform.localPosition = Vector3.zero;
-            outlineObject.transform.localRotation = Quaternion.identity;
-            outlineObject.transform.localScale = Vector3.one;
+            outlineObject.transform.localPosition =
+                originalRenderer.transform.localPosition;
 
-            // =========================
+            outlineObject.transform.localRotation =
+                originalRenderer.transform.localRotation;
+
+            outlineObject.transform.localScale =
+                originalRenderer.transform.localScale;
+
             // SKINNED MESH
-            // =========================
-
             if (originalRenderer is SkinnedMeshRenderer originalSkinned)
             {
                 SkinnedMeshRenderer outline =
                     outlineObject.AddComponent<SkinnedMeshRenderer>();
 
                 outline.sharedMesh = originalSkinned.sharedMesh;
-
                 outline.rootBone = originalSkinned.rootBone;
                 outline.bones = originalSkinned.bones;
-
-                outline.localBounds = originalSkinned.localBounds;
-
-                outline.updateWhenOffscreen = true;
 
                 Material[] materials =
                     new Material[originalSkinned.sharedMaterials.Length];
@@ -78,15 +74,12 @@ public class NPCViolationOutline : MonoBehaviour
                     materials[i] = outlineMaterial;
                 }
 
-                outline.sharedMaterials = materials;
+                outline.materials = materials;
 
                 outlineRenderers.Add(outline);
             }
 
-            // =========================
             // NORMAL MESH
-            // =========================
-
             else if (originalRenderer is MeshRenderer)
             {
                 MeshFilter originalFilter =
@@ -94,10 +87,10 @@ public class NPCViolationOutline : MonoBehaviour
 
                 if (originalFilter != null)
                 {
-                    MeshFilter outlineFilter =
+                    MeshFilter newFilter =
                         outlineObject.AddComponent<MeshFilter>();
 
-                    outlineFilter.sharedMesh =
+                    newFilter.sharedMesh =
                         originalFilter.sharedMesh;
 
                     MeshRenderer outline =
@@ -111,7 +104,7 @@ public class NPCViolationOutline : MonoBehaviour
                         materials[i] = outlineMaterial;
                     }
 
-                    outline.sharedMaterials = materials;
+                    outline.materials = materials;
 
                     outlineRenderers.Add(outline);
                 }
@@ -123,19 +116,18 @@ public class NPCViolationOutline : MonoBehaviour
     {
         foreach (Renderer renderer in outlineRenderers)
         {
-            if (renderer != null)
-            {
-                renderer.enabled = active;
-            }
+            renderer.enabled = active;
         }
     }
 
+    // Call this when NPC is about to break a rule
     public void AboutToViolateRule()
     {
         aboutToViolate = true;
         SetOutline(true);
     }
 
+    // Call this when warning is no longer needed
     public void StopViolationWarning()
     {
         aboutToViolate = false;

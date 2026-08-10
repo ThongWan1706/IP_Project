@@ -109039,7 +109039,7 @@ Transform:
   m_GameObject: {fileID: 794267948}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.6206055, y: 0.34558105, z: 11.67}
+  m_LocalPosition: {x: -2.63, y: 0.34558105, z: -2.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -117262,23 +117262,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9101643504376400040, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
   m_PrefabInstance: {fileID: 1576518255}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &932854745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932854744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12d8d8f13042309488d55f61753f2206, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCWalkToTarget
-  targetPoint: {fileID: 794267949}
-  moveSpeed: 1.5
-  rotationSpeed: 5
-  stoppingDistance: 0.3
-  animator: {fileID: 0}
 --- !u!4 &932854747 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2490420537610255543, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
@@ -117314,6 +117297,104 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCViolationOutline
   outlineMaterial: {fileID: 2100000, guid: f781bd4ed85a6094fb502b704c3fb6c0, type: 2}
   aboutToViolate: 1
+--- !u!195 &932854750
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932854744}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 1.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 180
+  m_StoppingDistance: 0.3
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &932854751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932854744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a6f5015c21674d478974d8bf1a3e900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCNavMeshWalk
+  targetPoints:
+  - {fileID: 794267949}
+  - {fileID: 1004622039}
+  agent: {fileID: 932854750}
+  animator: {fileID: 932854752}
+  walkingThreshold: 0.1
+  currentTargetIndex: 0
+  waitingForCondition: 1
+--- !u!95 &932854752 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4580565849737540237, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+  m_PrefabInstance: {fileID: 1576518255}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &932854753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932854744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ef4719a4ca2cb498dfb7aea3381e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
+  outlineVisual: {fileID: 0}
+  npcMovement: {fileID: 932854751}
+  defaultHUDPanel: {fileID: 0}
+  conversationPanel: {fileID: 0}
+  optionPanel: {fileID: 0}
+  characterNameText: {fileID: 0}
+  conversationText: {fileID: 0}
+  residentName: Resident
+  policeName: Police Officer
+  residentNameColour: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  policeNameColour: {r: 0, g: 1, b: 1, a: 1}
+  openingDialogue: []
+  option1Response:
+  - speaker: 0
+    sentence: 
+  option2Response:
+  - speaker: 0
+    sentence: 
+  playerHUD: {fileID: 0}
+  playerControlScripts: []
+--- !u!114 &932854754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932854744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52cab232f3f8d174ba2d366ec2f01f24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerNPCInteractor
+  playerCamera: {fileID: 0}
+  interactionDistance: 4
+  npcLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  interactPrompt: {fileID: 0}
+  interactPromptText: {fileID: 0}
 --- !u!4 &933049160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1958792504750802904, guid: f3e8b3a407021c544afe69faa0e72fcd, type: 3}
@@ -121282,6 +121363,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2917092386517071067, guid: c84f22501fd254c49b6af066d66c077a, type: 3}
   m_PrefabInstance: {fileID: 1003592807}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1004622038
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1004622039}
+  m_Layer: 0
+  m_Name: WalkToMB (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1004622039
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004622038}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.630005, y: 0.34558105, z: 2.55}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1228395610}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1004771490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -187787,6 +187899,7 @@ Transform:
   - {fileID: 1528795332}
   - {fileID: 1561077986}
   - {fileID: 794267949}
+  - {fileID: 1004622039}
   - {fileID: 2037694542}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -230373,13 +230486,22 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 9101643504376400040, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 932854745}
-    - targetCorrespondingSourceObject: {fileID: 9101643504376400040, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 932854748}
     - targetCorrespondingSourceObject: {fileID: 9101643504376400040, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
       insertIndex: -1
       addedObject: {fileID: 932854749}
+    - targetCorrespondingSourceObject: {fileID: 9101643504376400040, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 932854751}
+    - targetCorrespondingSourceObject: {fileID: 9101643504376400040, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 932854750}
+    - targetCorrespondingSourceObject: {fileID: 9101643504376400040, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 932854753}
+    - targetCorrespondingSourceObject: {fileID: 9101643504376400040, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 932854754}
   m_SourcePrefab: {fileID: 100100000, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
 --- !u!1001 &1576817475
 PrefabInstance:

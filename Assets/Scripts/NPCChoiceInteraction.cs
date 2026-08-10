@@ -30,6 +30,9 @@ public class NPCChoiceInteraction : MonoBehaviour
     [Header("NPC Highlight")]
     [SerializeField] private GameObject outlineVisual;
 
+    [Header("NPC Movement")]
+    [SerializeField] private NPCNavMeshWalk npcMovement;
+
     [Header("Player UI")]
     [SerializeField] private GameObject defaultHUDPanel;
     [SerializeField] private GameObject conversationPanel;
@@ -234,23 +237,34 @@ public class NPCChoiceInteraction : MonoBehaviour
 
     // Hazard Avoided +1, Community Trust +2
     public void ChooseOption1()
+{
+    // YES - NPC continues walking to Target 2
+    if (npcMovement != null)
     {
-        ApplyChoice(
-            hazardChange: 1,
-            trustChange: 2,
-            responseDialogue: option1Response
-        );
+        npcMovement.ConditionYes();
     }
 
-    // Hazard Avoided +1, Community Trust -1
-    public void ChooseOption2()
+    ApplyChoice(
+        hazardChange: 1,
+        trustChange: 2,
+        responseDialogue: option1Response
+    );
+}
+
+public void ChooseOption2()
+{
+    // NO - NPC stays at Target 1
+    if (npcMovement != null)
     {
-        ApplyChoice(
-            hazardChange: 1,
-            trustChange: -1,
-            responseDialogue: option2Response
-        );
+        npcMovement.ConditionNo();
     }
+
+    ApplyChoice(
+        hazardChange: 1,
+        trustChange: -1,
+        responseDialogue: option2Response
+    );
+}
 
     private void ApplyChoice(
         int hazardChange,
