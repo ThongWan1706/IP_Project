@@ -28,8 +28,15 @@ public class NPCChoiceInteraction : MonoBehaviour
         public string sentence;
     }
 
+    [Header("Interaction Type")]
+    [SerializeField] private bool isPhone = false;
+    [SerializeField] private bool transitionAfterConversation = true;
+
     [Header("NPC Highlight")]
     [SerializeField] private GameObject outlineVisual;
+
+    [Header("Objects To Destroy After Dialogue")]
+    [SerializeField] private GameObject[] objectsToDestroy;
 
     [Header("NPC Movement")]
     [SerializeField] private NPCNavMeshWalk npcMovement;
@@ -130,6 +137,24 @@ public class NPCChoiceInteraction : MonoBehaviour
         }
     }
 
+    public string GetInteractionPrompt()
+    {
+        if (isPhone)
+        {
+            return "Press E to view clue";
+        }
+
+        JaywalkingNPCController jaywalker =
+        GetComponentInParent<JaywalkingNPCController>();
+
+        if (jaywalker != null && jaywalker.WarningActive)
+        {
+            return "Press E to stop";
+        }
+
+        return "Press E to talk";
+    }
+
     public void SetHighlighted(bool highlighted)
     {
         if (outlineVisual != null)
@@ -187,35 +212,47 @@ public class NPCChoiceInteraction : MonoBehaviour
     }
 
     // Connect your existing NextButton to this function.
-    public void NextDialogue()
+public void NextDialogue()
+{
+    if (currentStage == ConversationStage.None ||
+        currentDialogue == null)
     {
-        if (currentStage == ConversationStage.None ||
-            currentDialogue == null)
-        {
-            return;
-        }
+        return;
+    }
 
-        currentDialogueIndex++;
+    // Move to the next dialogue line
+    currentDialogueIndex++;
 
-        if (currentDialogueIndex < currentDialogue.Length)
-        {
-            ShowCurrentDialogue();
-            return;
-        }
+    // There are still dialogue lines remaining
+    if (currentDialogueIndex < currentDialogue.Length)
+    {
+        ShowCurrentDialogue();
+        return;
+    }
 
-        // Opening conversation completed.
-        if (currentStage == ConversationStage.Introduction)
-        {
-            ShowOptions();
-            return;
-        }
-
-        // Result conversation completed.
-        if (currentStage == ConversationStage.Result)
+    // Opening dialogue has finished
+    if (currentStage == ConversationStage.Introduction)
+    {
+        // PHONE:
+        // Finish the phone conversation.
+        if (isPhone)
         {
             EndConversation();
+            return;
         }
+
+        // NPC:
+        // Show the normal NPC choices.
+        ShowOptions();
+        return;
     }
+
+    // Result dialogue finished
+    if (currentStage == ConversationStage.Result)
+    {
+        EndConversation();
+    }
+}
 
     private void ShowCurrentDialogue()
     {
@@ -353,8 +390,28 @@ public class NPCChoiceInteraction : MonoBehaviour
         ShowCurrentDialogue();
     }
 
+    private void DestroyObjectsAfterDialogue()
+    {
+        if (objectsToDestroy == null)
+        return;
+
+        foreach (GameObject obj in objectsToDestroy)
+        {
+            if (obj != null)
+            {
+                Destroy(obj);
+            }
+        }
+
+    }
+
     private void EndConversation()
     {
+        if (isPhone)
+        {
+            DestroyObjectsAfterDialogue();
+        }
+
         interactionCompleted = true;
         currentStage = ConversationStage.None;
         currentDialogue = null;
@@ -379,6 +436,12 @@ public class NPCChoiceInteraction : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        if (!transitionAfterConversation)
+        {
+            SetPlayerControls(true);
+            return;
+        }
 
         // =====================================
         // OPTION 1 = POLITELY INFORM NPC

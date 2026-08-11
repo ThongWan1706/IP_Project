@@ -147229,6 +147229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0ef4719a4ca2cb498dfb7aea3381e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
+  isPhone: 0
+  transitionAfterConversation: 1
   outlineVisual: {fileID: 0}
   npcMovement: {fileID: 0}
   interactionAudioSource: {fileID: 1799365481}
@@ -147244,7 +147246,7 @@ MonoBehaviour:
   policeNameColour: {r: 0, g: 1, b: 1, a: 1}
   openingDialogue:
   - speaker: 1
-    sentence: Hello Sir! Are you aware that jaywalker is dangerous?
+    sentence: Hello Sir! Are you aware that jaywalking is dangerous?
   - speaker: 0
     sentence: Hi Sir! Of course I know, but no choice lah, the traffic light always
       need to wait for so long and the distance is very close.

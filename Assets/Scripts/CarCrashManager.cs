@@ -14,8 +14,8 @@ public class CarCrashManager : MonoBehaviour
     [SerializeField] private float rotationalTorque = 10f;
 
     [Header("Scene Transition Settings")]
-    [SerializeField] private float delayBeforeSceneLoad = 2f; // 2 second pause after crash
-    [SerializeField] private int sceneToLoadIndex = 5; // 5 represent Day3Accident in Scene List
+    [SerializeField] private float delayBeforeSceneLoad = 3f; // pause after crash
+    [SerializeField] private int sceneToLoadIndex = 6; // 6 represent Day3Accident in Scene List
 
     private bool crashTriggered = false;
 

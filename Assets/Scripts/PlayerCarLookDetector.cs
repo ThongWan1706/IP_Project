@@ -13,6 +13,9 @@ public class PlayerCarLookDetector : MonoBehaviour
     [Header("Crash Manager")]
     [SerializeField] private CarCrashManager crashManager;
 
+    [Header("Crash Sound")]
+    [SerializeField] private AudioSource crashAudioSource;
+ 
     private bool hasTriggered = false;
 
     private void Update()
@@ -32,13 +35,28 @@ public class PlayerCarLookDetector : MonoBehaviour
             {
                 hasTriggered = true;
 
+                // Play crash sound
+                if (crashAudioSource != null)
+                {
+                    crashAudioSource.Play();
+                }
+                else
+                {
+                    Debug.LogWarning(
+                        "PlayerCarLookDetector: Crash Audio Source or Crash Sound is missing."
+                    );
+                }
+
+                // Trigger the existing crash sequence
                 if (crashManager != null)
                 {
                     crashManager.TriggerCrashSequence();
                 }
                 else
                 {
-                    Debug.LogError("PlayerCarLookDetector: Crash Manager reference is missing!");
+                    Debug.LogError(
+                        "PlayerCarLookDetector: Crash Manager reference is missing!"
+                    );
                 }
             }
         }

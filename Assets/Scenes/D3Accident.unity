@@ -4014,7 +4014,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0ef4719a4ca2cb498dfb7aea3381e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
+  isPhone: 0
+  transitionAfterConversation: 1
   outlineVisual: {fileID: 0}
+  objectsToDestroy: []
   npcMovement: {fileID: 0}
   interactionAudioSource: {fileID: 0}
   policeWhistleSound: {fileID: 0}
@@ -4055,6 +4058,10 @@ MonoBehaviour:
   pointDecreaseSound: {fileID: 0}
   playerControlScripts:
   - {fileID: 1038220010}
+  blackScreen: {fileID: 0}
+  fadeDuration: 1.5
+  nextSceneName: Day2
+  accidentSceneName: Day1AccidentScene
 --- !u!4 &78897899
 Transform:
   m_ObjectHideFlags: 0
@@ -11661,6 +11668,11 @@ Transform:
   - {fileID: 1758977093}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -2.32, z: 0}
+--- !u!4 &233324810 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7744621016450507797, guid: ef73560e328f1004793b1b80919be38f, type: 3}
+  m_PrefabInstance: {fileID: 965343522}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &233567504
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26937,6 +26949,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6082412936670067678}
+        m_TargetAssemblyTypeName: NPCChoiceInteraction, Assembly-CSharp
+        m_MethodName: NextDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &497071025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32806,11 +32830,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 992785887442622742, guid: 51b8cd9e64dc867439b7580243c9c6cf, type: 3}
   m_PrefabInstance: {fileID: 620585241}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &620821250 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5126527961139664765, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
-  m_PrefabInstance: {fileID: 1038220008}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &621500226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34282,6 +34301,7 @@ Transform:
   m_Children:
   - {fileID: 764960279}
   - {fileID: 797468866}
+  - {fileID: 233324810}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -2.879, y: 1.955, z: 0}
 --- !u!1001 &658865255
@@ -52666,7 +52686,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 654574071}
     m_Modifications:
     - target: {fileID: 4088979390299270387, guid: ef73560e328f1004793b1b80919be38f, type: 3}
       propertyPath: m_Name
@@ -52702,7 +52722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7744621016450507797, guid: ef73560e328f1004793b1b80919be38f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 15.62383
+      value: 15.623832
       objectReference: {fileID: 0}
     - target: {fileID: 7744621016450507797, guid: ef73560e328f1004793b1b80919be38f, type: 3}
       propertyPath: m_LocalScale.z
@@ -52710,31 +52730,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7744621016450507797, guid: ef73560e328f1004793b1b80919be38f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 960.71405
+      value: -0.7940886
       objectReference: {fileID: 0}
     - target: {fileID: 7744621016450507797, guid: ef73560e328f1004793b1b80919be38f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 541.79
+      value: 1.1151711
       objectReference: {fileID: 0}
     - target: {fileID: 7744621016450507797, guid: ef73560e328f1004793b1b80919be38f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -28.05
+      value: 10.848885
       objectReference: {fileID: 0}
     - target: {fileID: 7744621016450507797, guid: ef73560e328f1004793b1b80919be38f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 0.718838
       objectReference: {fileID: 0}
     - target: {fileID: 7744621016450507797, guid: ef73560e328f1004793b1b80919be38f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.018062597
       objectReference: {fileID: 0}
     - target: {fileID: 7744621016450507797, guid: ef73560e328f1004793b1b80919be38f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: 0.6947237
       objectReference: {fileID: 0}
     - target: {fileID: 7744621016450507797, guid: ef73560e328f1004793b1b80919be38f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.017456667
       objectReference: {fileID: 0}
     - target: {fileID: 7744621016450507797, guid: ef73560e328f1004793b1b80919be38f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -55126,7 +55146,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tiutorial
+  m_text: Tutorial
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -56653,9 +56673,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 56730834}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5126527961139664765, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 453084650579209855, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2039595655}
+      addedObject: {fileID: 1038220022}
   m_SourcePrefab: {fileID: 100100000, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
 --- !u!4 &1038220009 stripped
 Transform:
@@ -56667,17 +56687,46 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 453084650579209848, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
   m_PrefabInstance: {fileID: 1038220008}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1038220011}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55919ac34a26952479f3fc91f777b2fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1038220011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 453084650579209855, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+  m_PrefabInstance: {fileID: 1038220008}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1038220012 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5126527961139664767, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+  m_PrefabInstance: {fileID: 1038220008}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1038220021 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 937451010987979973, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
   m_PrefabInstance: {fileID: 1038220008}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1038220022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038220011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52cab232f3f8d174ba2d366ec2f01f24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerNPCInteractor
+  playerCamera: {fileID: 1038220012}
+  interactionDistance: 4
+  npcLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  interactPrompt: {fileID: 416106159}
+  interactPromptText: {fileID: 2065784013}
 --- !u!1001 &1038276757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113422,25 +113471,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1958792504750802904, guid: f3e8b3a407021c544afe69faa0e72fcd, type: 3}
   m_PrefabInstance: {fileID: 2039412803}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2039595655
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 620821250}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb3ccd7f09321474182fabf44668bed9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerCarLookDetector
-  lookDistance: 100
-  vehicleLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  carA: {fileID: 233165588}
-  carB: {fileID: 654574065}
-  crashManager: {fileID: 1650611281}
 --- !u!1001 &2039991591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114958,7 +114988,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press "E" to talk
+  m_text: Press "E" to view clue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -114968,7 +114998,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -119248,6 +119278,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 520309604419169330, guid: 08b54ba0f2f7144449f88bec7c708c06, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 613395681017179315, guid: 08b54ba0f2f7144449f88bec7c708c06, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1704387644158568900, guid: 08b54ba0f2f7144449f88bec7c708c06, type: 3}
       propertyPath: m_LocalPosition.x
       value: 963.25
@@ -119288,15 +119326,113 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -1.252
       objectReference: {fileID: 0}
+    - target: {fileID: 3404740894220658756, guid: 08b54ba0f2f7144449f88bec7c708c06, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3931702980234998557, guid: 08b54ba0f2f7144449f88bec7c708c06, type: 3}
       propertyPath: m_Name
       value: Cellphone
       objectReference: {fileID: 0}
+    - target: {fileID: 3931702980234998557, guid: 08b54ba0f2f7144449f88bec7c708c06, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7281875301879429429, guid: 08b54ba0f2f7144449f88bec7c708c06, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9143034061059123675, guid: 08b54ba0f2f7144449f88bec7c708c06, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3931702980234998557, guid: 08b54ba0f2f7144449f88bec7c708c06, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6082412936670067678}
+    - targetCorrespondingSourceObject: {fileID: 3931702980234998557, guid: 08b54ba0f2f7144449f88bec7c708c06, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6082412936670067677}
   m_SourcePrefab: {fileID: 100100000, guid: 08b54ba0f2f7144449f88bec7c708c06, type: 3}
+--- !u!1 &6082412936670067676 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3931702980234998557, guid: 08b54ba0f2f7144449f88bec7c708c06, type: 3}
+  m_PrefabInstance: {fileID: 6082412936670067675}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &6082412936670067677
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6082412936670067676}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6082412936670067678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6082412936670067676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ef4719a4ca2cb498dfb7aea3381e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
+  isPhone: 1
+  transitionAfterConversation: 0
+  outlineVisual: {fileID: 0}
+  objectsToDestroy:
+  - {fileID: 6082412936670067676}
+  - {fileID: 233165588}
+  - {fileID: 654574065}
+  npcMovement: {fileID: 0}
+  interactionAudioSource: {fileID: 0}
+  policeWhistleSound: {fileID: 0}
+  defaultHUDPanel: {fileID: 328443448}
+  conversationPanel: {fileID: 188111155}
+  optionPanel: {fileID: 1643772842}
+  characterNameText: {fileID: 81212776}
+  conversationText: {fileID: 1005378651}
+  residentName: 
+  policeName: Police Officer
+  residentNameColour: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  policeNameColour: {r: 0, g: 1, b: 1, a: 1}
+  openingDialogue:
+  - speaker: 1
+    sentence: A phone was spotted.
+  - speaker: 1
+    sentence: This could mean that the driver was using his phone while driving,
+      which is dangerous.
+  - speaker: 1
+    sentence: Let's clean up the scene and confirm with the doctor on site.
+  option1Response: []
+  option2Response: []
+  playerHUD: {fileID: 0}
+  pointAudioSource: {fileID: 0}
+  pointIncreaseSound: {fileID: 8300000, guid: 3a286ef46885ed84797efa81e4945705, type: 3}
+  pointDecreaseSound: {fileID: 8300000, guid: c7c51ec85dd75594e84be2a922ca06d8, type: 3}
+  playerControlScripts: []
+  blackScreen: {fileID: 0}
+  fadeDuration: 0
+  nextSceneName: 
+  accidentSceneName: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -119307,7 +119443,6 @@ SceneRoots:
   - {fileID: 1303354182}
   - {fileID: 624187750}
   - {fileID: 164632736}
-  - {fileID: 78897899}
   - {fileID: 1878354378}
   - {fileID: 1746052052}
   - {fileID: 1781517379}
@@ -119330,7 +119465,7 @@ SceneRoots:
   - {fileID: 468131143}
   - {fileID: 279221457}
   - {fileID: 1650611282}
+  - {fileID: 78897899}
   - {fileID: 233165594}
   - {fileID: 654574071}
   - {fileID: 6082412936670067675}
-  - {fileID: 965343522}

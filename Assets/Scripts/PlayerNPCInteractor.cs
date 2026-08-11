@@ -131,24 +131,10 @@ public class PlayerNPCInteractor : MonoBehaviour
 
     private void ShowPrompt()
     {
-        if (interactPromptText != null)
+        if (interactPromptText != null && currentNPC != null)
         {
-            JaywalkingNPCController jaywalker =
-                currentNPC != null
-                ? currentNPC.GetComponentInParent<JaywalkingNPCController>()
-                : null;
-
-            if (jaywalker != null &&
-                jaywalker.WarningActive)
-            {
-                interactPromptText.text =
-                    "Press E to stop";
-            }
-            else
-            {
-                interactPromptText.text =
-                    "Press E to talk";
-            }
+            interactPromptText.text =
+            currentNPC.GetInteractionPrompt();
         }
 
         if (interactPrompt != null)
