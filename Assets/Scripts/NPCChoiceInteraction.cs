@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -76,6 +77,21 @@ public class NPCChoiceInteraction : MonoBehaviour
     [Tooltip("Assign the First Person Controller component.")]
     [SerializeField] private Behaviour[] playerControlScripts;
 
+    [Header("Scene Transition")]
+    [Tooltip("Assign a full-screen black Image that has a CanvasGroup.")]
+    [SerializeField] private CanvasGroup blackScreen;
+
+    [Tooltip("How long the screen takes to fade to black.")]
+    [SerializeField] private float fadeDuration = 1.5f;
+
+    [Tooltip("Scene loaded after Option 1 or Option 2.")]
+    [SerializeField] private string nextSceneName = "Day2";
+
+    [Tooltip("Scene loaded when the player fails to stop the jaywalker in time.")]
+    [SerializeField] private string accidentSceneName = "Day1AccidentScene";
+
+    private bool isTransitioning = false;
+
     private ConversationStage currentStage = ConversationStage.None;
 
     private DialogueLine[] currentDialogue;
@@ -102,6 +118,15 @@ public class NPCChoiceInteraction : MonoBehaviour
         if (optionPanel != null)
         {
             optionPanel.SetActive(false);
+        }
+
+        // Start with the transition screen invisible.
+        if (blackScreen != null)
+        {
+            blackScreen.gameObject.SetActive(true);
+            blackScreen.alpha = 0f;
+            blackScreen.interactable = false;
+            blackScreen.blocksRaycasts = false;
         }
     }
 
@@ -349,64 +374,104 @@ public class NPCChoiceInteraction : MonoBehaviour
             defaultHUDPanel.SetActive(true);
         }
 
-        SetPlayerControls(true);
+        // Keep controls disabled while the screen is fading.
+        SetPlayerControls(false);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         // =====================================
         // OPTION 1 = POLITELY INFORM NPC
-        // NPC STAYS AT TARGET 1
         // =====================================
         if (choseYes)
         {
-            Debug.Log("Option 1: Politely informed NPC. NPC stays.");
+            Debug.Log("Option 1 selected. Fading to next scene.");
 
             if (npcMovement != null)
             {
                 npcMovement.ConditionYes();
             }
 
-            // Proceed to Day 2
-            SceneManager.LoadScene("Day2");
-
+            StartSceneTransition(nextSceneName);
             return;
         }
 
         // =====================================
         // OPTION 2 = SCOLD NPC
-        // NPC CONTINUES AND JAYWALKS
         // =====================================
-
-        Debug.Log("Option 2: Scolded NPC. NPC continues to jaywalk.");
+        Debug.Log("Option 2 selected. Fading to next scene.");
 
         if (npcMovement != null)
         {
             npcMovement.ConditionNo();
-
-            // Wait until NPC reaches Target 2
-            StartCoroutine(WaitForNPCToFinish());
         }
-        
-        // Proceed to Day 2
-        SceneManager.LoadScene("Day2");
-        return;
 
-
+        StartSceneTransition(nextSceneName);
     }
 
-    private System.Collections.IEnumerator WaitForNPCToFinish()
+    /// <summary>
+    /// Can also be called by another script if you want the same
+    /// black-screen transition to a different scene.
+    /// </summary>
+    // Call this when the player fails to stop the jaywalker in time.
+    // This uses the exact same black-screen fade before loading the accident scene.
+    public void FadeToAccidentScene()
     {
-        while (!npcMovement.HasReachedFinalTarget)
+        StartSceneTransition(accidentSceneName);
+    }
+
+    public void StartSceneTransition(string sceneName)
+    {
+        if (isTransitioning)
+            return;
+
+        if (string.IsNullOrWhiteSpace(sceneName))
         {
+            Debug.LogError("NPCChoiceInteraction: Scene name is empty.");
+            return;
+        }
+
+        StartCoroutine(FadeToScene(sceneName));
+    }
+
+    private IEnumerator FadeToScene(string sceneName)
+    {
+        isTransitioning = true;
+
+        // If no black screen was assigned, still load the scene.
+        if (blackScreen == null)
+        {
+            Debug.LogWarning(
+                "NPCChoiceInteraction: Black Screen is not assigned. Loading scene without fade."
+            );
+
+            yield return SceneManager.LoadSceneAsync(sceneName);
+            yield break;
+        }
+
+        blackScreen.gameObject.SetActive(true);
+        blackScreen.blocksRaycasts = true;
+        blackScreen.interactable = true;
+
+        float timer = 0f;
+        float startAlpha = blackScreen.alpha;
+
+        while (timer < fadeDuration)
+        {
+            timer += Time.unscaledDeltaTime;
+
+            blackScreen.alpha = Mathf.Lerp(
+                startAlpha,
+                1f,
+                timer / fadeDuration
+            );
+
             yield return null;
         }
 
-        Debug.Log("NPC reached Target 2.");
+        blackScreen.alpha = 1f;
 
-        Destroy(gameObject);
-
-        SceneManager.LoadScene("Day2");
+        yield return SceneManager.LoadSceneAsync(sceneName);
     }
 
     private void SetPlayerControls(bool enabled)

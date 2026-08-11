@@ -36,16 +36,19 @@ public class JaywalkingNPCController : MonoBehaviour
     [Tooltip("Drag player movement / mouse-look scripts here so they are disabled during the conversation.")]
     public Behaviour[] playerControlScripts;
 
-    [Header("Failure Scene")]
-    [Tooltip("Scene name to load if the player does not stop the jaywalker in time.")]
-    public string accidentSceneName = "Day1AccidentScene";
-
     [Header("Events")]
     [Tooltip("Hook your existing NPC dialogue StartDialogue/Talk method here.")]
     public UnityEvent onStoppedInTime;
 
     [Tooltip("Optional event just before the accident scene loads.")]
     public UnityEvent onFailedToStop;
+
+    [Header("Accident Scene Transition")]
+    [SerializeField] private CanvasGroup blackScreen;
+    [SerializeField] private float fadeDuration = 1.5f;
+    [SerializeField] private string accidentSceneName = "D1Accident";
+
+private bool accidentTransitionStarted = false;
 
     public bool WarningActive { get; private set; }
     public bool WasStopped { get; private set; }
@@ -59,6 +62,19 @@ public class JaywalkingNPCController : MonoBehaviour
     private Vector3 cameraStartLocalPosition;
     private Quaternion cameraStartLocalRotation;
     private bool cameraStartSaved;
+
+    private void Awake()
+    {
+        // Keep the black transition screen active but invisible
+        // so it is ready when the player fails to stop the NPC.
+        if (blackScreen != null)
+        {
+            blackScreen.gameObject.SetActive(true);
+            blackScreen.alpha = 0f;
+            blackScreen.interactable = false;
+            blackScreen.blocksRaycasts = false;
+        }
+    }
 
     private void Start()
     {
@@ -319,17 +335,37 @@ public class JaywalkingNPCController : MonoBehaviour
         failed = true;
         WarningActive = false;
 
+        // Stop the red violation outline.
         if (violationOutline != null)
         {
             violationOutline.StopViolationWarning();
         }
 
-        // Stop warning sound before loading accident scene.
+        // Stop the warning sound.
         if (currentJaywalkTrigger != null)
         {
             currentJaywalkTrigger.StopWarningSound();
         }
 
+        // Stop the NPC while the transition happens.
+        if (agent != null && agent.isOnNavMesh)
+        {
+            agent.isStopped = true;
+            agent.ResetPath();
+        }
+
+        if (animator != null)
+        {
+            animator.speed = 1f;
+            animator.SetBool("isWalking", false);
+        }
+
+        // Prevent the player from moving during the fade.
+        SetPlayerControls(false);
+
+        // IMPORTANT:
+        // Do not connect On Failed To Stop to another LoadScene method,
+        // otherwise it can bypass this fade.
         onFailedToStop?.Invoke();
 
         if (string.IsNullOrWhiteSpace(accidentSceneName))
@@ -339,11 +375,66 @@ public class JaywalkingNPCController : MonoBehaviour
         }
 
         Debug.Log(
-            "Player failed to stop the jaywalker. Loading scene: " +
-        accidentSceneName
+            "Player failed to stop the jaywalker. Starting black fade to: " +
+            accidentSceneName
         );
 
-        SceneManager.LoadScene(accidentSceneName);
+        StartCoroutine(FadeToAccidentScene());
+    }
+
+    private IEnumerator FadeToAccidentScene()
+    {
+        if (accidentTransitionStarted)
+            yield break;
+
+        accidentTransitionStarted = true;
+
+        // If the BlackScreen was not assigned, load the scene directly
+        // instead of getting stuck.
+        if (blackScreen == null)
+        {
+            Debug.LogError(
+                "JaywalkingNPCController: Black Screen is not assigned. " +
+                "Loading accident scene without fade."
+            );
+
+            yield return SceneManager.LoadSceneAsync(accidentSceneName);
+            yield break;
+        }
+
+        // Make sure it is visible above the other PlayerCanvas UI.
+        blackScreen.gameObject.SetActive(true);
+        blackScreen.transform.SetAsLastSibling();
+
+        blackScreen.alpha = 0f;
+        blackScreen.blocksRaycasts = true;
+        blackScreen.interactable = true;
+
+        float timer = 0f;
+
+        while (timer < fadeDuration)
+        {
+            timer += Time.unscaledDeltaTime;
+
+            blackScreen.alpha = Mathf.Lerp(
+                0f,
+                1f,
+                timer / fadeDuration
+            );
+
+            yield return null;
+        }
+
+        blackScreen.alpha = 1f;
+
+        Debug.Log(
+            "Black fade complete. Loading accident scene: " +
+            accidentSceneName
+        );
+
+        Time.timeScale = 1f;
+
+        yield return SceneManager.LoadSceneAsync(accidentSceneName);
     }
 
     private void UpdateAnimation()
