@@ -142,7 +142,7 @@ public class PlayerNPCInteractor : MonoBehaviour
                 jaywalker.WarningActive)
             {
                 interactPromptText.text =
-                    "Press E to stop pedestrian";
+                    "Press E to stop";
             }
             else
             {
