@@ -18901,14 +18901,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHUD
   hazardAvoidedText: {fileID: 1052126145}
-  startingHazardsAvoided: 0
   trustBars:
   - {fileID: 911302611}
   - {fileID: 803661240}
   - {fileID: 613014333}
   - {fileID: 123513977}
   - {fileID: 1526669623}
-  startingCommunityTrust: 3
   filledBarColour: {r: 0.2, g: 0.8, b: 0.3, a: 1}
   emptyBarColour: {r: 0.25, g: 0.25, b: 0.25, a: 0.7}
 --- !u!114 &323884016
@@ -52106,6 +52104,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
   outlineVisual: {fileID: 0}
+  npcMovement: {fileID: 0}
+  interactionAudioSource: {fileID: 0}
+  policeWhistleSound: {fileID: 0}
   defaultHUDPanel: {fileID: 1609043725}
   conversationPanel: {fileID: 90928889}
   optionPanel: {fileID: 1518068435}
@@ -52138,6 +52139,9 @@ MonoBehaviour:
   - speaker: 0
     sentence: Piss off!
   playerHUD: {fileID: 323884015}
+  pointAudioSource: {fileID: 0}
+  pointIncreaseSound: {fileID: 0}
+  pointDecreaseSound: {fileID: 0}
   playerControlScripts:
   - {fileID: 479123210}
 --- !u!4 &898054514
@@ -57911,70 +57915,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5812558eb9ab943499a859d2cb2748da, type: 3}
---- !u!1 &997737574
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 997737576}
-  - component: {fileID: 997737575}
-  m_Layer: 0
-  m_Name: Navmesh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &997737575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 997737574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
-  m_SerializedVersion: 0
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_GenerateLinks: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 75bbcfd9cab9011439748043adde7b40, type: 2}
-  m_BuildHeightMesh: 0
---- !u!4 &997737576
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 997737574}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 977.49, y: 540.335, z: -35.58969}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &997954275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -95414,6 +95354,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCViolationOutline
   outlineMaterial: {fileID: 2100000, guid: f781bd4ed85a6094fb502b704c3fb6c0, type: 2}
+  violationPoint: {fileID: 0}
+  warningDistance: 2
+  reachedDistance: 0.5
   aboutToViolate: 1
 --- !u!114 &1715345886
 MonoBehaviour:
@@ -119354,7 +119297,6 @@ SceneRoots:
   - {fileID: 89508887}
   - {fileID: 2068112440}
   - {fileID: 602858076}
-  - {fileID: 997737576}
   - {fileID: 984917628}
   - {fileID: 898054514}
   - {fileID: 1259794971}
