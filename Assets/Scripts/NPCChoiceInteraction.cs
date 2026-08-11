@@ -387,6 +387,12 @@ public class NPCChoiceInteraction : MonoBehaviour
             // Wait until NPC reaches Target 2
             StartCoroutine(WaitForNPCToFinish());
         }
+        
+        // Proceed to Day 2
+        SceneManager.LoadScene("Day2");
+        return;
+
+
     }
 
     private System.Collections.IEnumerator WaitForNPCToFinish()

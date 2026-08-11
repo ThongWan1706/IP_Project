@@ -38,48 +38,70 @@ public class PlayerNPCInteractor : MonoBehaviour
             NPCChoiceInteraction selectedNPC = currentNPC;
 
             ChangeHighlightedNPC(null);
+
+            // =========================================
+            // CHECK IF THIS NPC IS THE JAYWALKER
+            // =========================================
+            JaywalkingNPCController jaywalker =
+                selectedNPC.GetComponentInParent<JaywalkingNPCController>();
+
+            // Only stop the jaywalker while the warning is active
+            if (jaywalker != null && jaywalker.WarningActive)
+            {
+                jaywalker.StopJaywalkerInTime();
+
+                // IMPORTANT:
+                // Do NOT call BeginConversation here.
+                // JaywalkingNPCController will call it
+                // through "On Stopped In Time".
+                return;
+            }
+
+            // =========================================
+            // NORMAL NPC
+            // =========================================
             selectedNPC.BeginConversation();
         }
     }
 
     private NPCChoiceInteraction DetectNPC()
     {
-    if (playerCamera == null)
-    {
+        if (playerCamera == null)
+        {
+            return null;
+        }
+
+        Vector3 rayStart =
+            playerCamera.transform.position;
+
+        Vector3 rayDirection =
+            playerCamera.transform.forward;
+
+        bool didHit = Physics.Raycast(
+            rayStart,
+            rayDirection,
+            out RaycastHit hit,
+            interactionDistance,
+            npcLayer,
+            QueryTriggerInteraction.Ignore
+        );
+
+        Debug.DrawRay(
+            rayStart,
+            rayDirection * interactionDistance,
+            didHit ? Color.green : Color.red,
+            0f,
+            false
+        );
+
+        if (didHit)
+        {
+            return hit.collider
+                .GetComponentInParent<NPCChoiceInteraction>();
+        }
+
         return null;
     }
-
-    Vector3 rayStart = playerCamera.transform.position;
-    Vector3 rayDirection = playerCamera.transform.forward;
-
-    bool didHit = Physics.Raycast(
-        rayStart,
-        rayDirection,
-        out RaycastHit hit,
-        interactionDistance,
-        npcLayer,
-        QueryTriggerInteraction.Ignore
-    );
-
-    // Green when the ray hits something on the NPC layer.
-    // Red when it does not hit anything.
-    Debug.DrawRay(
-        rayStart,
-        rayDirection * interactionDistance,
-        didHit ? Color.green : Color.red,
-        0f,
-        false
-    );
-
-    if (didHit)
-    {
-        return hit.collider
-            .GetComponentInParent<NPCChoiceInteraction>();
-    }
-
-    return null;
-    }
-    
 
     private void ChangeHighlightedNPC(
         NPCChoiceInteraction newNPC)
@@ -111,7 +133,22 @@ public class PlayerNPCInteractor : MonoBehaviour
     {
         if (interactPromptText != null)
         {
-            interactPromptText.text = "Press E to talk";
+            JaywalkingNPCController jaywalker =
+                currentNPC != null
+                ? currentNPC.GetComponentInParent<JaywalkingNPCController>()
+                : null;
+
+            if (jaywalker != null &&
+                jaywalker.WarningActive)
+            {
+                interactPromptText.text =
+                    "Press E to stop pedestrian";
+            }
+            else
+            {
+                interactPromptText.text =
+                    "Press E to talk";
+            }
         }
 
         if (interactPrompt != null)

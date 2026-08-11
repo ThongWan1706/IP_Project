@@ -11,6 +11,8 @@ public class JaywalkingNPCController : MonoBehaviour
     public Animator animator;
     public NPCViolationOutline violationOutline;
 
+    private bool cameraLocked = false;
+
     [Header("Jaywalk Route")]
     [Tooltip("Where the jaywalking NPC is trying to reach across the road.")]
     public Transform jaywalkDestination;
@@ -18,6 +20,7 @@ public class JaywalkingNPCController : MonoBehaviour
     [Header("Warning / Slow Walk")]
     public float normalWalkSpeed = 2f;
     public float slowWalkSpeed = 0.65f;
+
     [Range(0.05f, 1f)]
     public float slowAnimationSpeed = 0.45f;
 
@@ -28,6 +31,7 @@ public class JaywalkingNPCController : MonoBehaviour
     public Camera playerCamera;
     public Transform cameraFocusPoint;
     public float cameraFocusDuration = 0.65f;
+    public float turnTowardPlayerDuration = 0.4f;
 
     [Tooltip("Drag player movement / mouse-look scripts here so they are disabled during the conversation.")]
     public Behaviour[] playerControlScripts;
@@ -48,6 +52,9 @@ public class JaywalkingNPCController : MonoBehaviour
 
     private float warningTimer;
     private bool failed;
+
+    // Remembers which trigger started the warning sound.
+    private JaywalkTriggerArea currentJaywalkTrigger;
 
     private Vector3 cameraStartLocalPosition;
     private Quaternion cameraStartLocalRotation;
@@ -74,7 +81,9 @@ public class JaywalkingNPCController : MonoBehaviour
         agent.speed = normalWalkSpeed;
 
         if (jaywalkDestination != null && agent.isOnNavMesh)
+        {
             agent.SetDestination(jaywalkDestination.position);
+        }
 
         if (playerCamera != null)
         {
@@ -84,7 +93,9 @@ public class JaywalkingNPCController : MonoBehaviour
         }
 
         if (violationOutline != null)
+        {
             violationOutline.StopViolationWarning();
+        }
     }
 
     private void Update()
@@ -97,10 +108,17 @@ public class JaywalkingNPCController : MonoBehaviour
             warningTimer += Time.deltaTime;
 
             if (warningTimer >= interactionTimeLimit)
+            {
                 FailJaywalkEvent();
+            }
         }
 
         UpdateAnimation();
+    }
+
+    public void SetJaywalkTrigger(JaywalkTriggerArea trigger)
+    {
+        currentJaywalkTrigger = trigger;
     }
 
     public void BeginJaywalkWarning()
@@ -114,15 +132,21 @@ public class JaywalkingNPCController : MonoBehaviour
         agent.speed = slowWalkSpeed;
 
         if (animator != null)
+        {
             animator.speed = slowAnimationSpeed;
+        }
 
         if (violationOutline != null)
+        {
             violationOutline.AboutToViolateRule();
+        }
 
-        Debug.Log(gameObject.name + " is attempting to jaywalk. Player can stop them now.");
+        Debug.Log(
+            gameObject.name +
+            " is attempting to jaywalk. Player can stop them now."
+        );
     }
 
-    // Call this from your existing PlayerInteract script when E is pressed on this NPC.
     public void StopJaywalkerInTime()
     {
         if (!WarningActive || WasStopped || failed)
@@ -131,26 +155,100 @@ public class JaywalkingNPCController : MonoBehaviour
         WasStopped = true;
         WarningActive = false;
 
+        // Stop the NPC immediately.
         agent.isStopped = true;
         agent.ResetPath();
 
+        // Prevent the NavMeshAgent from rotating while
+        // we manually turn the NPC toward the player.
+        agent.updateRotation = false;
+
+        // Return NPC to normal animation speed and idle.
         if (animator != null)
         {
             animator.speed = 1f;
             animator.SetBool("isWalking", false);
         }
 
+        // Turn off the red outline.
         if (violationOutline != null)
+        {
             violationOutline.StopViolationWarning();
+        }
+
+        // Stop the warning sound immediately.
+        if (currentJaywalkTrigger != null)
+        {
+            currentJaywalkTrigger.StopWarningSound();
+        }
 
         SetPlayerControls(false);
 
-        if (playerCamera != null && cameraFocusPoint != null)
-            StartCoroutine(FocusCameraThenTalk());
+        if (playerCamera != null)
+        {
+            StartCoroutine(TurnTowardsPlayer());
+        }
         else
+        {
             onStoppedInTime?.Invoke();
+        }
 
         Debug.Log(gameObject.name + " was stopped before jaywalking.");
+    }
+
+    private IEnumerator TurnTowardsPlayer()
+    {
+        if (playerCamera == null)
+        {
+            onStoppedInTime?.Invoke();
+            yield break;
+        }
+
+        Vector3 direction =
+            playerCamera.transform.position -
+            transform.position;
+
+        direction.y = 0f;
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            Quaternion startRotation = transform.rotation;
+            Quaternion targetRotation =
+                Quaternion.LookRotation(direction.normalized);
+
+            float elapsed = 0f;
+
+            while (elapsed < turnTowardPlayerDuration)
+            {
+                elapsed += Time.deltaTime;
+
+                float t = Mathf.Clamp01(
+                    elapsed / turnTowardPlayerDuration
+                );
+
+                t = Mathf.SmoothStep(0f, 1f, t);
+
+                transform.rotation =
+                    Quaternion.Slerp(
+                        startRotation,
+                        targetRotation,
+                        t
+                    );
+
+                yield return null;
+            }
+
+            transform.rotation = targetRotation;
+        }
+
+        if (cameraFocusPoint != null)
+        {
+            StartCoroutine(FocusCameraThenTalk());
+        }
+        else
+        {
+            onStoppedInTime?.Invoke();
+        }
     }
 
     private IEnumerator FocusCameraThenTalk()
@@ -165,20 +263,26 @@ public class JaywalkingNPCController : MonoBehaviour
         while (elapsed < cameraFocusDuration)
         {
             elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / cameraFocusDuration);
+
+            float t = Mathf.Clamp01(
+                elapsed / cameraFocusDuration
+            );
+
             t = Mathf.SmoothStep(0f, 1f, t);
 
-            cam.position = Vector3.Lerp(
-                startPosition,
-                cameraFocusPoint.position,
-                t
-            );
+            cam.position =
+                Vector3.Lerp(
+                    startPosition,
+                    cameraFocusPoint.position,
+                    t
+                );
 
-            cam.rotation = Quaternion.Slerp(
-                startRotation,
-                cameraFocusPoint.rotation,
-                t
-            );
+            cam.rotation =
+                Quaternion.Slerp(
+                    startRotation,
+                    cameraFocusPoint.rotation,
+                    t
+                );
 
             yield return null;
         }
@@ -186,17 +290,22 @@ public class JaywalkingNPCController : MonoBehaviour
         cam.position = cameraFocusPoint.position;
         cam.rotation = cameraFocusPoint.rotation;
 
-        // Your existing dialogue can begin here.
+        cameraLocked = true;
+
         onStoppedInTime?.Invoke();
     }
 
-    // Call this from your dialogue system when the conversation is finished.
     public void EndConversation()
     {
+        cameraLocked = false;
+
         if (playerCamera != null && cameraStartSaved)
         {
-            playerCamera.transform.localPosition = cameraStartLocalPosition;
-            playerCamera.transform.localRotation = cameraStartLocalRotation;
+            playerCamera.transform.localPosition =
+                cameraStartLocalPosition;
+
+            playerCamera.transform.localRotation =
+                cameraStartLocalRotation;
         }
 
         SetPlayerControls(true);
@@ -211,7 +320,15 @@ public class JaywalkingNPCController : MonoBehaviour
         WarningActive = false;
 
         if (violationOutline != null)
+        {
             violationOutline.StopViolationWarning();
+        }
+
+        // Stop warning sound before loading accident scene.
+        if (currentJaywalkTrigger != null)
+        {
+            currentJaywalkTrigger.StopWarningSound();
+        }
 
         onFailedToStop?.Invoke();
 
@@ -221,7 +338,11 @@ public class JaywalkingNPCController : MonoBehaviour
             return;
         }
 
-        Debug.Log("Player failed to stop the jaywalker. Loading scene: " + accidentSceneName);
+        Debug.Log(
+            "Player failed to stop the jaywalker. Loading scene: " +
+            accidentSceneName
+        );
+
         SceneManager.LoadScene(accidentSceneName);
     }
 
@@ -245,7 +366,24 @@ public class JaywalkingNPCController : MonoBehaviour
         foreach (Behaviour script in playerControlScripts)
         {
             if (script != null)
+            {
                 script.enabled = enabledState;
+            }
         }
+    }
+
+    private void LateUpdate()
+    {
+        if (!cameraLocked)
+            return;
+
+        if (playerCamera == null || cameraFocusPoint == null)
+            return;
+
+        playerCamera.transform.position =
+            cameraFocusPoint.position;
+
+        playerCamera.transform.rotation =
+            cameraFocusPoint.rotation;
     }
 }
