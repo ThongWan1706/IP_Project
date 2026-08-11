@@ -70,13 +70,13 @@ public class DayIntroManager : MonoBehaviour
             yield break;
         }
 
-        // Black → DAY 1
+        // Black -> DAY 1
         yield return FadeBlackScreen(1f, 0f);
 
         // Keep DAY 1 visible.
         yield return new WaitForSecondsRealtime(dayIntroDuration);
 
-        // DAY 1 → black
+        // DAY 1 -> black
         yield return FadeBlackScreen(0f, 1f);
 
         if (dayIntroPanel != null)
@@ -89,7 +89,7 @@ public class DayIntroManager : MonoBehaviour
 
         yield return null;
 
-        // Black → gameplay
+        // Black -> gameplay
         yield return FadeBlackScreen(1f, 0f);
 
         blackScreen.blocksRaycasts = false;

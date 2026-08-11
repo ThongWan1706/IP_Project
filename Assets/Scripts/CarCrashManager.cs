@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class CarCrashManager : MonoBehaviour
 {
@@ -12,9 +13,12 @@ public class CarCrashManager : MonoBehaviour
     [SerializeField] private float upwardLiftForce = 5f;
     [SerializeField] private float rotationalTorque = 10f;
 
+    [Header("Scene Transition Settings")]
+    [SerializeField] private float delayBeforeSceneLoad = 2f; // 2 second pause after crash
+    [SerializeField] private int sceneToLoadIndex = 5; // 5 represent Day3Accident in Scene List
+
     private bool crashTriggered = false;
 
-    // MUST BE PUBLIC so CarCollisionTrigger can call it
     public void TriggerCrashSequence()
     {
         if (crashTriggered) return;
@@ -28,13 +32,15 @@ public class CarCrashManager : MonoBehaviour
 
         PrepareCarForPhysics(carA, carB.transform.position);
         PrepareCarForPhysics(carB, carA.transform.position);
+
+        // Schedule scene load 5 seconds after impact
+        Invoke(nameof(LoadNextScene), delayBeforeSceneLoad);
     }
 
     private void PrepareCarForPhysics(GameObject car, Vector3 targetPosition)
     {
         if (car == null) return;
 
-        // Disable AI components
         CarNavMeshTraffic navTraffic = car.GetComponentInChildren<CarNavMeshTraffic>();
         if (navTraffic != null) navTraffic.enabled = false;
 
@@ -45,7 +51,6 @@ public class CarCrashManager : MonoBehaviour
             agent.enabled = false;
         }
 
-        // Configure Rigidbody physics
         Rigidbody rb = car.GetComponent<Rigidbody>();
         if (rb == null)
         {
@@ -59,7 +64,6 @@ public class CarCrashManager : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
-        // Apply crash velocity
         Vector3 driveDirection = targetPosition - car.transform.position;
         driveDirection.y = 0f;
         driveDirection.Normalize();
@@ -74,5 +78,11 @@ public class CarCrashManager : MonoBehaviour
         ) * rotationalTorque;
 
         rb.AddTorque(randomTorque, ForceMode.VelocityChange);
+    }
+
+    private void LoadNextScene()
+    {
+        Debug.Log($"Loading scene index {sceneToLoadIndex}...");
+        SceneManager.LoadScene(sceneToLoadIndex);
     }
 }
