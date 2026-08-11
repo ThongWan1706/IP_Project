@@ -9,13 +9,13 @@ public class CarCollisionTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (hasCollided || targetCar == null) return;
+        if (hasCollided || targetCar == null)
+            return;
 
-        // Check if the object entering our trigger is the target car
         if (other.gameObject == targetCar || other.transform.IsChildOf(targetCar.transform))
         {
             hasCollided = true;
-            Debug.Log($"Impact registered with {other.gameObject.name}!");
+            Debug.Log("Cars collided!");
 
             if (crashManager != null)
             {
