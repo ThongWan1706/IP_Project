@@ -3953,6 +3953,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
   outlineVisual: {fileID: 0}
+  npcMovement: {fileID: 0}
+  interactionAudioSource: {fileID: 0}
+  policeWhistleSound: {fileID: 0}
   defaultHUDPanel: {fileID: 328443448}
   conversationPanel: {fileID: 188111155}
   optionPanel: {fileID: 1643772842}
@@ -3985,6 +3988,9 @@ MonoBehaviour:
   - speaker: 0
     sentence: Piss off!
   playerHUD: {fileID: 1505380836}
+  pointAudioSource: {fileID: 0}
+  pointIncreaseSound: {fileID: 0}
+  pointDecreaseSound: {fileID: 0}
   playerControlScripts:
   - {fileID: 1038220010}
 --- !u!4 &78897899
@@ -51389,6 +51395,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCViolationOutline
   outlineMaterial: {fileID: 2100000, guid: f781bd4ed85a6094fb502b704c3fb6c0, type: 2}
+  violationPoint: {fileID: 0}
+  warningDistance: 2
+  reachedDistance: 0.5
   aboutToViolate: 1
 --- !u!114 &946093633
 MonoBehaviour:
@@ -82985,14 +82994,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHUD
   hazardAvoidedText: {fileID: 724982533}
-  startingHazardsAvoided: 0
   trustBars:
   - {fileID: 1713900912}
   - {fileID: 2047690995}
   - {fileID: 552252496}
   - {fileID: 1852493349}
   - {fileID: 2110152988}
-  startingCommunityTrust: 3
   filledBarColour: {r: 0.2, g: 0.8, b: 0.3, a: 1}
   emptyBarColour: {r: 0.25, g: 0.25, b: 0.25, a: 0.7}
 --- !u!114 &1505380837

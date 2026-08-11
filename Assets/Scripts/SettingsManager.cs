@@ -14,11 +14,4 @@ public class SettingsManager : MonoBehaviour
         if (bgmSource != null)
             bgmSource.volume = volume; // volume rangeed 0 to 1
     }
-
-    // Linking this to the SFX Slider
-    public void SetSFXVolume(float volume)
-    {
-        if (sfxSource != null)
-            sfxSource.volume = volume;
-    }
 }
