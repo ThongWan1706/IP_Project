@@ -38,7 +38,7 @@ public class JaywalkingNPCController : MonoBehaviour
 
     [Header("Failure Scene")]
     [Tooltip("Scene name to load if the player does not stop the jaywalker in time.")]
-    public string accidentSceneName = "CarAccident";
+    public string accidentSceneName = "Day1AccidentScene";
 
     [Header("Events")]
     [Tooltip("Hook your existing NPC dialogue StartDialogue/Talk method here.")]
@@ -340,7 +340,7 @@ public class JaywalkingNPCController : MonoBehaviour
 
         Debug.Log(
             "Player failed to stop the jaywalker. Loading scene: " +
-            accidentSceneName
+        accidentSceneName
         );
 
         SceneManager.LoadScene(accidentSceneName);

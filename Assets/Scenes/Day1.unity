@@ -147170,7 +147170,7 @@ MonoBehaviour:
   - speaker: 1
     sentence: But it's still dangerous! I'll have to fine you!
   - speaker: 0
-    sentence: Are you serious Sir?! It's just a one time thing
+    sentence: Are you serious Sir?! It's just a one time thing!
   playerHUD: {fileID: 1477231629}
   pointAudioSource: {fileID: 1799365481}
   pointIncreaseSound: {fileID: 8300000, guid: 3a286ef46885ed84797efa81e4945705, type: 3}
@@ -147236,14 +147236,14 @@ MonoBehaviour:
   jaywalkDestination: {fileID: 1072243439}
   normalWalkSpeed: 2
   slowWalkSpeed: 0.65
-  slowAnimationSpeed: 0.562
-  interactionTimeLimit: 10
+  slowAnimationSpeed: 0.566
+  interactionTimeLimit: 5
   playerCamera: {fileID: 2141874595}
   cameraFocusPoint: {fileID: 1757537430}
   cameraFocusDuration: 0.65
   turnTowardPlayerDuration: 0.4
   playerControlScripts: []
-  accidentSceneName: CarAccident
+  accidentSceneName: Day1AccidentScene
   onStoppedInTime:
     m_PersistentCalls:
       m_Calls:
@@ -178940,7 +178940,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1134072957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197184,7 +197184,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: f3a81b0e48b5e964cba9610d7870b5e4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.075
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -227464,7 +227464,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: c7c51ec85dd75594e84be2a922ca06d8, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.085
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -251228,7 +251228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1481489119
 RectTransform:
   m_ObjectHideFlags: 0
@@ -276007,7 +276007,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2490420537610255543, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -58.91
+      value: -60.225
       objectReference: {fileID: 0}
     - target: {fileID: 2490420537610255543, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
       propertyPath: m_LocalRotation.w
@@ -309023,7 +309023,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 3a286ef46885ed84797efa81e4945705, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.099
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

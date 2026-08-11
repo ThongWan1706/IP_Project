@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -36,36 +37,70 @@ public class AccidentSequenceController : MonoBehaviour
     public NavMeshAgent victimAgent;
 
     [Header("Flying Effect")]
-    [Tooltip("Forward force from the car.")]
     public float flyForce = 12f;
-
-    [Tooltip("Upward force so the victim flies into the air.")]
     public float upwardForce = 7f;
-
-    [Tooltip("How much the victim spins after impact.")]
     public float spinForce = 7f;
 
-    [Header("Replay Panel")]
-    public GameObject replayPanel;
+    [Header("Accident Ending")]
+    [Tooltip("How long after the crash before the blackout begins.")]
+    public float blackoutDelay = 2.5f;
 
-    [Tooltip("How many seconds after the impact before the replay panel appears.")]
-    public float replayPanelDelay = 2.5f;
+    [Tooltip("How long the screen takes to fade to black.")]
+    public float blackFadeDuration = 1.5f;
 
-    [Header("Scenes")]
-    [Tooltip("The gameplay scene containing the jaywalking attempt.")]
-    public string restartSceneName = "Day1";
+    [Tooltip("How long the safety message takes to fade in/out.")]
+    public float messageFadeDuration = 1f;
+
+    [Tooltip("How long the safety message stays visible.")]
+    public float messageHoldDuration = 3f;
+
+    [Header("Black Screen")]
+    [Tooltip("Full-screen black Image with a CanvasGroup.")]
+    public CanvasGroup blackScreen;
+
+    [Header("Safety Message")]
+    [Tooltip("CanvasGroup on the safety message text.")]
+    public CanvasGroup safetyMessageGroup;
+
+    [Tooltip("TextMeshPro text used for the safety message.")]
+    public TextMeshProUGUI safetyMessageText;
+
+    [TextArea(2, 4)]
+    public string safetyMessage =
+        "You only get one life. Stay alert, stay safe, and never take the road for granted.";
+
+    [Header("Scene")]
+    public string day1SceneName = "Day1";
 
     private bool impactTriggered = false;
     private bool sequenceFinished = false;
 
-    private void Start()
+    private void Awake()
     {
-        if (replayPanel != null)
+        if (blackScreen != null)
         {
-            replayPanel.SetActive(false);
+            blackScreen.gameObject.SetActive(true);
+            blackScreen.alpha = 0f;
+            blackScreen.interactable = false;
+            blackScreen.blocksRaycasts = false;
         }
 
-        // Keep the victim controlled by animation until impact.
+        if (safetyMessageGroup != null)
+        {
+            safetyMessageGroup.gameObject.SetActive(true);
+            safetyMessageGroup.alpha = 0f;
+            safetyMessageGroup.interactable = false;
+            safetyMessageGroup.blocksRaycasts = false;
+        }
+
+        if (safetyMessageText != null)
+        {
+            safetyMessageText.text = safetyMessage;
+        }
+    }
+
+    private void Start()
+    {
         if (victimRigidbody != null)
         {
             victimRigidbody.isKinematic = true;
@@ -96,7 +131,9 @@ public class AccidentSequenceController : MonoBehaviour
         if (crashCar == null || impactPoint == null)
             return;
 
-        Vector3 direction = impactPoint.position - crashCar.position;
+        Vector3 direction =
+            impactPoint.position - crashCar.position;
+
         direction.y = 0f;
 
         if (direction.sqrMagnitude > 0.001f)
@@ -114,11 +151,10 @@ public class AccidentSequenceController : MonoBehaviour
             carSpeed * Time.deltaTime
         );
 
-        float distance =
-            Vector3.Distance(
-                crashCar.position,
-                impactPoint.position
-            );
+        float distance = Vector3.Distance(
+            crashCar.position,
+            impactPoint.position
+        );
 
         if (distance <= impactDistance)
         {
@@ -133,13 +169,13 @@ public class AccidentSequenceController : MonoBehaviour
 
         impactTriggered = true;
 
-        // Play car crash sound
+        // Play crash sound.
         if (crashAudioSource != null && crashSound != null)
         {
             crashAudioSource.PlayOneShot(crashSound);
         }
 
-        // Stop all normal NPC movement/animation control.
+        // Stop NavMesh movement.
         if (victimAgent != null)
         {
             if (victimAgent.isOnNavMesh)
@@ -151,12 +187,13 @@ public class AccidentSequenceController : MonoBehaviour
             victimAgent.enabled = false;
         }
 
+        // Stop animation so physics controls the NPC.
         if (victimAnimator != null)
         {
             victimAnimator.enabled = false;
         }
 
-        // Turn the NPC into a physics object.
+        // Launch the victim.
         if (victimRigidbody != null)
         {
             victimRigidbody.isKinematic = false;
@@ -186,7 +223,7 @@ public class AccidentSequenceController : MonoBehaviour
             );
         }
 
-        StartCoroutine(ShowReplayPanelAfterDelay());
+        StartCoroutine(AccidentEndingSequence());
     }
 
     private void MoveCarAfterImpact()
@@ -201,44 +238,108 @@ public class AccidentSequenceController : MonoBehaviour
         );
     }
 
-    private IEnumerator ShowReplayPanelAfterDelay()
+    private IEnumerator AccidentEndingSequence()
     {
-        yield return new WaitForSeconds(replayPanelDelay);
+        // Let the player see the crash first.
+        yield return new WaitForSeconds(blackoutDelay);
 
         sequenceFinished = true;
 
-        if (replayPanel != null)
+        // If no black screen is assigned, return directly to Day1.
+        if (blackScreen == null)
         {
-            replayPanel.SetActive(true);
+            Debug.LogWarning(
+                "Black Screen is not assigned. Returning to Day1 without fade."
+            );
+
+            SceneManager.LoadScene(day1SceneName);
+            yield break;
         }
 
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-    }
+        blackScreen.blocksRaycasts = true;
 
-    // Connect the Restart button to this.
-    public void RestartJaywalkScene()
-    {
-        Time.timeScale = 1f;
+        // Fade screen to black.
+        yield return FadeCanvasGroup(
+            blackScreen,
+            0f,
+            1f,
+            blackFadeDuration
+        );
 
-        if (string.IsNullOrWhiteSpace(restartSceneName))
+        // Set the message in case it was changed in the Inspector.
+        if (safetyMessageText != null)
         {
-            Debug.LogError("Restart Scene Name is empty.");
-            return;
+            safetyMessageText.text = safetyMessage;
         }
 
-        SceneManager.LoadScene(restartSceneName);
-    }
+        // Fade safety message in.
+        if (safetyMessageGroup != null)
+        {
+            yield return FadeCanvasGroup(
+                safetyMessageGroup,
+                0f,
+                1f,
+                messageFadeDuration
+            );
 
-    // Connect the Quit button to this.
-    public void QuitGame()
-    {
+            // Keep message visible.
+            yield return new WaitForSecondsRealtime(
+                messageHoldDuration
+            );
+
+            // Fade safety message out.
+            yield return FadeCanvasGroup(
+                safetyMessageGroup,
+                1f,
+                0f,
+                messageFadeDuration
+            );
+        }
+        else
+        {
+            // Still wait briefly if no text group was assigned.
+            yield return new WaitForSecondsRealtime(
+                messageHoldDuration
+            );
+        }
+
         Time.timeScale = 1f;
 
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        // Screen remains black while Day1 loads.
+        yield return SceneManager.LoadSceneAsync(day1SceneName);
+    }
+
+    private IEnumerator FadeCanvasGroup(
+        CanvasGroup canvasGroup,
+        float startAlpha,
+        float endAlpha,
+        float duration)
+    {
+        if (canvasGroup == null)
+            yield break;
+
+        if (duration <= 0f)
+        {
+            canvasGroup.alpha = endAlpha;
+            yield break;
+        }
+
+        float timer = 0f;
+        canvasGroup.alpha = startAlpha;
+
+        while (timer < duration)
+        {
+            timer += Time.unscaledDeltaTime;
+
+            canvasGroup.alpha = Mathf.Lerp(
+                startAlpha,
+                endAlpha,
+                timer / duration
+            );
+
+            yield return null;
+        }
+
+        canvasGroup.alpha = endAlpha;
     }
 }
