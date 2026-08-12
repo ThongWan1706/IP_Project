@@ -26,7 +26,6 @@ public class CarNavMeshTraffic : MonoBehaviour
     [Header("Random Direction")]
     public Transform leftDestination;
     public Transform straightDestination;
-    public Transform rightDestination;
 
     [Header("Respawn")]
     public Transform respawnPoint;
@@ -364,7 +363,6 @@ public class CarNavMeshTraffic : MonoBehaviour
         {
             leftDestination,
             straightDestination,
-            rightDestination
         };
 
         for (int i = 0; i < 10; i++)
@@ -400,14 +398,6 @@ public class CarNavMeshTraffic : MonoBehaviour
                         " chose STRAIGHT"
                     );
                 }
-                else if (chosenDestination == rightDestination)
-                {
-                    Debug.Log(
-                        gameObject.name +
-                        " chose RIGHT"
-                    );
-                }
-
                 return;
             }
         }
