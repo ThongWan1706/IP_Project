@@ -3962,11 +3962,16 @@ MonoBehaviour:
   outlineVisual: {fileID: 0}
   objectsToDestroy: []
   npcMovement: {fileID: 0}
+  incidentManager: {fileID: 0}
+  completeIncidentAfterConversation: 0
   interactionAudioSource: {fileID: 0}
   policeWhistleSound: {fileID: 0}
   defaultHUDPanel: {fileID: 328443448}
   conversationPanel: {fileID: 188111155}
   optionPanel: {fileID: 1643772842}
+  nextButton: {fileID: 0}
+  option1Button: {fileID: 0}
+  option2Button: {fileID: 0}
   characterNameText: {fileID: 81212776}
   conversationText: {fileID: 1005378651}
   residentName: Resident
@@ -11655,7 +11660,6 @@ MonoBehaviour:
   busStopReachDistance: 1
   leftDestination: {fileID: 0}
   straightDestination: {fileID: 0}
-  rightDestination: {fileID: 0}
   respawnPoint: {fileID: 0}
   respawnDelay: 1
   speed: 5
@@ -34372,7 +34376,6 @@ MonoBehaviour:
   busStopReachDistance: 1
   leftDestination: {fileID: 0}
   straightDestination: {fileID: 0}
-  rightDestination: {fileID: 0}
   respawnPoint: {fileID: 0}
   respawnDelay: 1
   speed: 5
@@ -119299,6 +119302,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6473694054362495177, guid: 679d87e5054da96449b9a6ee885a0380, type: 3}
   m_PrefabInstance: {fileID: 2147259532}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5115535521119249936
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2192030450716674543, guid: 37e7b7ab19b6a80479d6a03bb17b7190, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 963.59015
+      objectReference: {fileID: 0}
+    - target: {fileID: 2192030450716674543, guid: 37e7b7ab19b6a80479d6a03bb17b7190, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 540.06665
+      objectReference: {fileID: 0}
+    - target: {fileID: 2192030450716674543, guid: 37e7b7ab19b6a80479d6a03bb17b7190, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -23.3231
+      objectReference: {fileID: 0}
+    - target: {fileID: 2192030450716674543, guid: 37e7b7ab19b6a80479d6a03bb17b7190, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2192030450716674543, guid: 37e7b7ab19b6a80479d6a03bb17b7190, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2192030450716674543, guid: 37e7b7ab19b6a80479d6a03bb17b7190, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2192030450716674543, guid: 37e7b7ab19b6a80479d6a03bb17b7190, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2192030450716674543, guid: 37e7b7ab19b6a80479d6a03bb17b7190, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2192030450716674543, guid: 37e7b7ab19b6a80479d6a03bb17b7190, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2192030450716674543, guid: 37e7b7ab19b6a80479d6a03bb17b7190, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6322617783714625748, guid: 37e7b7ab19b6a80479d6a03bb17b7190, type: 3}
+      propertyPath: m_Name
+      value: Doctor
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 37e7b7ab19b6a80479d6a03bb17b7190, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -119334,3 +119394,4 @@ SceneRoots:
   - {fileID: 1650611282}
   - {fileID: 233165594}
   - {fileID: 654574071}
+  - {fileID: 5115535521119249936}
