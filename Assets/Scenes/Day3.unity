@@ -147065,6 +147065,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
   isPhone: 0
   transitionAfterConversation: 1
+  doctorAI: {fileID: 0}
   outlineVisual: {fileID: 0}
   objectsToDestroy: []
   npcMovement: {fileID: 0}
@@ -283780,7 +283781,7 @@ MonoBehaviour:
   carA: {fileID: 1609234981}
   carB: {fileID: 1576583265}
   inwardForce: 30
-  upwardLiftForce: 3
+  upwardLiftForce: 1
   rotationalTorque: 1
   delayBeforeSceneLoad: 3
   sceneToLoadIndex: 8

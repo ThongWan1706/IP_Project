@@ -33,6 +33,10 @@ public class NPCChoiceInteraction : MonoBehaviour
     [SerializeField] private bool isPhone = false;
     [SerializeField] private bool transitionAfterConversation = true;
 
+    [Header("Clue Phone / Doctor Trigger")]
+    [Tooltip("Assign the Doctor AI script to activate the Doctor when this dialogue finishes.")]
+    [SerializeField] private DoctorAI doctorAI;
+
     [Header("NPC Highlight")]
     [SerializeField] private GameObject outlineVisual;
 
@@ -494,9 +498,16 @@ public void NextDialogue()
             nextButton.onClick.RemoveListener(NextDialogue);
         }
 
+        DestroyObjectsAfterDialogue();
+
         if (isPhone)
         {
-            DestroyObjectsAfterDialogue();
+
+            // Doctor Appears when phone is destroyed
+            if (doctorAI != null)
+            {
+                doctorAI.OnPhoneDialogueFinished();
+            }
         }
 
         interactionCompleted = true;
