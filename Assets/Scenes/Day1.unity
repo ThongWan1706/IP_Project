@@ -112219,7 +112219,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 493, y: 50}
-  m_SizeDelta: {x: 172.7001, y: 90}
+  m_SizeDelta: {x: 172.7001, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &661655597
 MonoBehaviour:
@@ -147232,6 +147232,7 @@ MonoBehaviour:
   isPhone: 0
   transitionAfterConversation: 1
   outlineVisual: {fileID: 0}
+  objectsToDestroy: []
   npcMovement: {fileID: 0}
   interactionAudioSource: {fileID: 1799365481}
   policeWhistleSound: {fileID: 8300000, guid: 60d5bb7732644604b829863b23cbe828, type: 3}
@@ -195551,7 +195552,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -107, y: 0}
+  m_AnchoredPosition: {x: -107, y: 4.4}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1159927249
@@ -222793,7 +222794,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -486.49936, y: 50}
-  m_SizeDelta: {x: 172.7001, y: 90}
+  m_SizeDelta: {x: 172.7001, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1286290484
 MonoBehaviour:
@@ -349604,7 +349605,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Option 1:
 
-    Politely inform them that jaywalking is still dangerous'
+    Politely inform them'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
