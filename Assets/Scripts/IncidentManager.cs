@@ -9,14 +9,16 @@ public class IncidentManager : MonoBehaviour
 
     private void Start()
     {
-        // Turn all incidents off first
+        // Turn all incidents off
         for (int i = 0; i < incidents.Length; i++)
         {
             if (incidents[i] != null)
+            {
                 incidents[i].SetActive(false);
+                Debug.Log("Disabled incident: " + incidents[i].name);
+            }
         }
 
-        // Start the first incident
         StartCurrentIncident();
     }
 
@@ -28,13 +30,17 @@ public class IncidentManager : MonoBehaviour
             return;
         }
 
-        if (incidents[currentIncidentIndex] != null)
+        GameObject currentIncident = incidents[currentIncidentIndex];
+
+        if (currentIncident != null)
         {
-            incidents[currentIncidentIndex].SetActive(true);
+            currentIncident.SetActive(true);
 
             Debug.Log(
-                "Starting incident " +
-                (currentIncidentIndex + 1)
+                "STARTING INCIDENT " +
+                (currentIncidentIndex + 1) +
+                ": " +
+                currentIncident.name
             );
         }
     }
@@ -44,15 +50,22 @@ public class IncidentManager : MonoBehaviour
         if (currentIncidentIndex >= incidents.Length)
             return;
 
-        // Turn off completed incident
-        if (incidents[currentIncidentIndex] != null)
+        GameObject currentIncident = incidents[currentIncidentIndex];
+
+        if (currentIncident != null)
         {
-            incidents[currentIncidentIndex].SetActive(false);
+            Debug.Log(
+                "COMPLETED INCIDENT " +
+                (currentIncidentIndex + 1) +
+                ": " +
+                currentIncident.name
+            );
+
+            currentIncident.SetActive(false);
         }
 
         currentIncidentIndex++;
 
-        // Start next incident
         StartCurrentIncident();
     }
 }

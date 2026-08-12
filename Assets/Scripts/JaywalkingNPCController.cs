@@ -63,6 +63,10 @@ private bool accidentTransitionStarted = false;
     private Quaternion cameraStartLocalRotation;
     private bool cameraStartSaved;
 
+    [Header("Incident Activation")]
+    [Tooltip("Turn this ON only for NPCs that are disabled and later re-enabled by IncidentManager.")]
+    public bool restartMovementWhenEnabled = false;
+
     private void Awake()
     {
         // Keep the black transition screen active but invisible
@@ -73,6 +77,88 @@ private bool accidentTransitionStarted = false;
             blackScreen.alpha = 0f;
             blackScreen.interactable = false;
             blackScreen.blocksRaycasts = false;
+        }
+    }
+
+    private void OnEnable()
+    {
+        // Leave this OFF for existing NPCs that already work normally.
+        // Turn it ON only for NPCs that are activated later by IncidentManager.
+        if (!restartMovementWhenEnabled)
+            return;
+
+        StartCoroutine(RestartMovementAfterEnable());
+    }
+
+    private IEnumerator RestartMovementAfterEnable()
+    {
+        // Wait one frame so the NavMeshAgent has time to register
+        // after the incident parent GameObject becomes active.
+        yield return null;
+
+        // Do not restart an NPC that has already been stopped
+        // by the player or has already failed the incident.
+        if (WasStopped || failed)
+            yield break;
+
+        if (agent == null)
+            agent = GetComponent<NavMeshAgent>();
+
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
+
+        if (agent == null)
+        {
+            Debug.LogError(gameObject.name + " has no NavMeshAgent.");
+            yield break;
+        }
+
+        // Sometimes the agent is enabled before Unity has placed it
+        // back onto the NavMesh. Give it a short amount of time.
+        int attempts = 0;
+        const int maxAttempts = 30;
+
+        while ((!agent.isActiveAndEnabled || !agent.isOnNavMesh) &&
+               attempts < maxAttempts)
+        {
+            attempts++;
+            yield return null;
+        }
+
+        if (!agent.isActiveAndEnabled || !agent.isOnNavMesh)
+        {
+            Debug.LogWarning(
+                gameObject.name +
+                " was enabled by the incident, but its NavMeshAgent is not on a NavMesh."
+            );
+            yield break;
+        }
+
+        agent.isStopped = false;
+        agent.updateRotation = true;
+        agent.speed = WarningActive ? slowWalkSpeed : normalWalkSpeed;
+
+        if (animator != null)
+        {
+            animator.speed = WarningActive ? slowAnimationSpeed : 1f;
+        }
+
+        if (jaywalkDestination != null)
+        {
+            agent.ResetPath();
+            agent.SetDestination(jaywalkDestination.position);
+
+            Debug.Log(
+                gameObject.name +
+                " restarted movement after being enabled by IncidentManager."
+            );
+        }
+        else
+        {
+            Debug.LogWarning(
+                gameObject.name +
+                " cannot restart movement because Jaywalk Destination is not assigned."
+            );
         }
     }
 
