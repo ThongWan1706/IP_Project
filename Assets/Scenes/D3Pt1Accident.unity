@@ -178173,14 +178173,14 @@ MonoBehaviour:
   completeIncidentAfterConversation: 0
   interactionAudioSource: {fileID: 0}
   policeWhistleSound: {fileID: 0}
-  defaultHUDPanel: {fileID: 0}
-  conversationPanel: {fileID: 0}
-  optionPanel: {fileID: 0}
-  nextButton: {fileID: 0}
-  option1Button: {fileID: 0}
-  option2Button: {fileID: 0}
-  characterNameText: {fileID: 0}
-  conversationText: {fileID: 0}
+  defaultHUDPanel: {fileID: 124629666}
+  conversationPanel: {fileID: 1481489118}
+  optionPanel: {fileID: 1976604932}
+  nextButton: {fileID: 1922823551}
+  option1Button: {fileID: 1286290484}
+  option2Button: {fileID: 661655597}
+  characterNameText: {fileID: 1732517299}
+  conversationText: {fileID: 1521663922}
   residentName: 
   policeName: Police Officer
   residentNameColour: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -178195,12 +178195,12 @@ MonoBehaviour:
     sentence: Let's clean up the scene and confirm with the doctor on site.
   option1Response: []
   option2Response: []
-  playerHUD: {fileID: 0}
+  playerHUD: {fileID: 1477231629}
   pointAudioSource: {fileID: 0}
   pointIncreaseSound: {fileID: 8300000, guid: 3a286ef46885ed84797efa81e4945705, type: 3}
   pointDecreaseSound: {fileID: 8300000, guid: c7c51ec85dd75594e84be2a922ca06d8, type: 3}
   playerControlScripts: []
-  blackScreen: {fileID: 0}
+  blackScreen: {fileID: 745165744}
   fadeDuration: 0
   nextSceneName: 
   accidentSceneName: 
