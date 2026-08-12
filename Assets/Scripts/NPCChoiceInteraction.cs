@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NPCChoiceInteraction : MonoBehaviour
 {
@@ -41,6 +42,13 @@ public class NPCChoiceInteraction : MonoBehaviour
     [Header("NPC Movement")]
     [SerializeField] private NPCNavMeshWalk npcMovement;
 
+    [Header("Incident Progression")]
+    [Tooltip("Optional. Assign the IncidentManager when finishing this NPC conversation should start the next incident.")]
+    [SerializeField] private IncidentManager incidentManager;
+
+    [Tooltip("Turn this on if ending this conversation should complete the current incident and activate the next one.")]
+    [SerializeField] private bool completeIncidentAfterConversation = false;
+
     [Header("Interaction Sound")]
     [SerializeField] private AudioSource interactionAudioSource;
     [SerializeField] private AudioClip policeWhistleSound;
@@ -49,6 +57,15 @@ public class NPCChoiceInteraction : MonoBehaviour
     [SerializeField] private GameObject defaultHUDPanel;
     [SerializeField] private GameObject conversationPanel;
     [SerializeField] private GameObject optionPanel;
+
+    [Tooltip("Optional. Assign this when multiple NPCs share the same Conversation Panel/Next button. Leave None to keep using an existing Inspector OnClick setup.")]
+    [SerializeField] private Button nextButton;
+
+    [Tooltip("Optional. Assign this when multiple NPCs share the same Option 1 button. Leave None to keep using an existing Inspector OnClick setup.")]
+    [SerializeField] private Button option1Button;
+
+    [Tooltip("Optional. Assign this when multiple NPCs share the same Option 2 button. Leave None to keep using an existing Inspector OnClick setup.")]
+    [SerializeField] private Button option2Button;
 
     [Header("Conversation Text")]
     [SerializeField] private TextMeshProUGUI characterNameText;
@@ -108,6 +125,12 @@ public class NPCChoiceInteraction : MonoBehaviour
     private bool rewardApplied;
 
     private bool choseYes = false;
+
+    // Stores which point sound should play after the result dialogue ends.
+    //  1 = point increase sound
+    // -1 = point decrease sound
+    //  0 = no pending sound
+    private int pendingPointSound = 0;
 
     public bool CanInteract =>
         currentStage == ConversationStage.None &&
@@ -169,6 +192,18 @@ public class NPCChoiceInteraction : MonoBehaviour
         if (!CanInteract)
         {
             return;
+        }
+
+        // OPTIONAL SHARED NEXT BUTTON:
+        // If this NPC has a Next Button assigned, connect only this NPC's
+        // NextDialogue() while its conversation is active.
+        //
+        // If nextButton is left as None, nothing changes. This keeps older
+        // scenes (for example Day 1) compatible with their existing Inspector setup.
+        if (nextButton != null)
+        {
+            nextButton.onClick.RemoveListener(NextDialogue);
+            nextButton.onClick.AddListener(NextDialogue);
         }
 
         // Play police whistle when player starts talking to NPC
@@ -313,12 +348,31 @@ public void NextDialogue()
             optionPanel.SetActive(true);
             optionPanel.transform.SetAsLastSibling();
         }
+
+        // OPTIONAL SHARED OPTION BUTTONS:
+        // When assigned, connect the shared buttons only to the NPC
+        // whose conversation is currently active.
+        if (option1Button != null)
+        {
+            option1Button.onClick.RemoveListener(ChooseOption1);
+            option1Button.onClick.AddListener(ChooseOption1);
+        }
+
+        if (option2Button != null)
+        {
+            option2Button.onClick.RemoveListener(ChooseOption2);
+            option2Button.onClick.AddListener(ChooseOption2);
+        }
     }
 
     // Hazard Avoided +1, Community Trust +2
     public void ChooseOption1()
     {
         choseYes = true;
+
+        // The choice has been made, so this NPC no longer needs
+        // to listen to the shared option buttons.
+        DisconnectOptionButtons();
 
         ApplyChoice(
             hazardChange: 1,
@@ -332,11 +386,28 @@ public void NextDialogue()
         // Remember that the player chose NO
         choseYes = false;
 
+        // The choice has been made, so this NPC no longer needs
+        // to listen to the shared option buttons.
+        DisconnectOptionButtons();
+
         ApplyChoice(
             hazardChange: 0,
             trustChange: -1,
             responseDialogue: option2Response
         );
+    }
+
+    private void DisconnectOptionButtons()
+    {
+        if (option1Button != null)
+        {
+            option1Button.onClick.RemoveListener(ChooseOption1);
+        }
+
+        if (option2Button != null)
+        {
+            option2Button.onClick.RemoveListener(ChooseOption2);
+        }
     }
 
     private void ApplyChoice(
@@ -352,23 +423,29 @@ public void NextDialogue()
 
         rewardApplied = true;
 
+        // Apply the point changes now, but do NOT play the sound yet.
         if (playerHUD != null)
         {
             playerHUD.AddHazardAvoided(hazardChange);
-            PlayPointSound(hazardChange);
-
             playerHUD.ChangeCommunityTrust(trustChange);
-            
-            if (trustChange != 0)
-                {
-                    PlayPointSound(trustChange);
-            }
         }
         else
         {
             Debug.LogError(
                 "NPCChoiceInteraction: PlayerHUD is not assigned."
             );
+        }
+
+        // Save one sound to play only after the response dialogue finishes.
+        if (choseYes)
+        {
+            // Option 1 = polite / positive choice
+            pendingPointSound = 1;
+        }
+        else
+        {
+            // Option 2 = scolding / negative choice
+            pendingPointSound = -1;
         }
 
         if (responseDialogue == null ||
@@ -407,6 +484,16 @@ public void NextDialogue()
 
     private void EndConversation()
     {
+        // Remove this NPC from any optional shared option buttons.
+        DisconnectOptionButtons();
+
+        // If this NPC was using the optional shared Next Button,
+        // disconnect it when the conversation finishes.
+        if (nextButton != null)
+        {
+            nextButton.onClick.RemoveListener(NextDialogue);
+        }
+
         if (isPhone)
         {
             DestroyObjectsAfterDialogue();
@@ -437,9 +524,38 @@ public void NextDialogue()
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
+        // Play the point increase/decrease sound only after
+        // the response conversation has completely ended.
+        if (pendingPointSound != 0)
+        {
+            PlayPointSound(pendingPointSound);
+            pendingPointSound = 0;
+        }
+
         if (!transitionAfterConversation)
         {
             SetPlayerControls(true);
+
+            // OPTIONAL INCIDENT PROGRESSION:
+            // Used for encounters such as the elderly incident in Day 2.
+            // When enabled, completing this conversation tells the
+            // IncidentManager to disable the current incident and activate
+            // the next one.
+            if (completeIncidentAfterConversation)
+            {
+                if (incidentManager != null)
+                {
+                    incidentManager.CompleteCurrentIncident();
+                }
+                else
+                {
+                    Debug.LogWarning(
+                        "NPCChoiceInteraction: Complete Incident After Conversation is ON, " +
+                        "but Incident Manager is not assigned."
+                    );
+                }
+            }
+
             return;
         }
 
@@ -535,6 +651,18 @@ public void NextDialogue()
         blackScreen.alpha = 1f;
 
         yield return SceneManager.LoadSceneAsync(sceneName);
+    }
+
+    private void OnDisable()
+    {
+        // Safety cleanup so this NPC cannot stay connected to shared
+        // UI buttons if the object is disabled before EndConversation().
+        if (nextButton != null)
+        {
+            nextButton.onClick.RemoveListener(NextDialogue);
+        }
+
+        DisconnectOptionButtons();
     }
 
     private void SetPlayerControls(bool enabled)
