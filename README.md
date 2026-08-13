@@ -124,6 +124,7 @@ Throughout this project our team meet a few limitations and some bugs while deve
 - For the 3rd day, we were planning to have 3 items to investigate to understand why the car accident happened, but due to time constraint we only make the phone interactive, but we modified the conversation content where it will also mention the other 2 reasons.
 - For the player perspective, the camera will move together with the screen when the player need to click onto the Next Button in order to read the next line, we tried to set fixed camera but it will make the user experience weird as the camera would be stuck in place.
 - Due to difference of screen sizes, the text would either looks too small or look misalign in the player screen.
+- The dropdown of the language box even though I had increased the height of the box, the Tamil box would still be cut off.
 
 ### Bugs
 - For our game in order to restrict the player walking area, we implemented airwall at 4 areas of the map, but sometime the player can walk pass the airwall barrier as it's not long enough.
