@@ -81,7 +81,10 @@ The game consist of 3 levels which requires the player to investigate incidents 
 - E key: Interaction with items around the map and with NPCs
 - Mouse: Look around the surrounding, clicking of options and the Next button for conversations
 
-**5. Answer Keys**
+**5. Game View**
+- Full HD (1920x1080) is recommended when playing
+
+**6. Answer Keys**
 - The answers key pictures are located in the AnswerKey Folder (add link)
 
 # Limitations & Bugs
@@ -105,6 +108,7 @@ For our team, each of us handled one section of AI througout the gameplay:
 2. Xavier
 
 3. Keno
+- Programmed an interactable AI NPC Doctor that spawns on clue discovery, follows the player from a distance and despawns after dialogue ends.
 
 # References and credits to external assets
 ### 3D models & Prefabs
