@@ -97,13 +97,16 @@ Throughout this project our team meet a few limitations and some bugs while deve
 - For our game in order to restrict the player walking area, we implemented airwall at 4 areas of the map, but sometime the player can walk pass the airwall barrier as it's not long enough.
 
 # FSM Diagrams
-- The FSM diagrams pictures are located in the FSMDiagram Folder (add link)
+- The FSM diagrams pictures are located in the FSM Diagram Folder (add link)
 
 # Implementations of AIs
 For our team, each of us handled one section of AI througout the gameplay:
 1. Thong Wan
-- Handled the vehicles where I located a stop point for the vehicle to stop where it's red light, and then move either straight or turn left.
-- After reaching the destination, it will respawn back from where they started and continues the loop.
+- Handled the vehicles where it follows the NavMesh path until it reaches a stop point at the traffic light, the car waits if the light is red while it moves if it turns green
+- When it goes, the vehicle can choose either to go straight or turn left (random).
+- After they reaches the destintaion, it will stay there for a few seconds then respawn back to where it originally come from
+- The vehicles also has front sensor detectors where it'll stop when they detect a vehicle being too close.
+- For buses, they worked slightly different as they can only go straight but have an extra stop at the bus stop. It will stay there for a few seconds and then move again.
 
 2. Xavier
 - NPC follows the NavMesh path until reaching a traffic light. If the light is red, the NPC waits; if it is green, or if the NPC turns left or right, it continues walking, crosses the road at the zebra crossing, reaches the nearest endpoint, and then resets to the starting position.
