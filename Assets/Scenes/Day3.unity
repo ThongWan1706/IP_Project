@@ -113088,6 +113088,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 992785887442622742, guid: 51b8cd9e64dc867439b7580243c9c6cf, type: 3}
   m_PrefabInstance: {fileID: 667589491}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &668977892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 668977893}
+  m_Layer: 0
+  m_Name: Bike Stop Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &668977893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668977892}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.459961, y: 0.20245361, z: 17.34}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1547550899}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &669213773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -151468,6 +151499,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4657773379610064021, guid: 2c2d6278f10beb544b018ead705b6e37, type: 3}
   m_PrefabInstance: {fileID: 991398971}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &995323792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 995323793}
+  m_Layer: 0
+  m_Name: Restart Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &995323793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995323792}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 957.93, y: 540.2717, z: -56.53}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &996273728
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -179535,8 +179597,49 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b695e425f0d069142b84d7a1bc6daf4e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1136051107}
   m_SourcePrefab: {fileID: 100100000, guid: b695e425f0d069142b84d7a1bc6daf4e, type: 3}
+--- !u!1 &1136051106 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b695e425f0d069142b84d7a1bc6daf4e, type: 3}
+  m_PrefabInstance: {fileID: 1136051105}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1136051107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1136051106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53d4f6bfb43358f4792e92f3d21f83fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarNavMeshTraffic
+  agent: {fileID: 0}
+  greenLight: {fileID: 2110819865}
+  stopPoint: {fileID: 668977893}
+  stopCheckDistance: 2.5
+  isBus: 0
+  busStopPoint: {fileID: 0}
+  busStopDuration: 10
+  busStopReachDistance: 1
+  leftDestination: {fileID: 1828951695}
+  straightDestination: {fileID: 0}
+  respawnPoint: {fileID: 995323793}
+  respawnDelay: 1
+  speed: 5
+  acceleration: 8
+  angularSpeed: 120
+  vehicleLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  frontSensorPoint: {fileID: 0}
+  detectionDistance: 5
+  detectionBoxHalfSize: {x: 0.8, y: 0.6, z: 0.5}
 --- !u!1001 &1137214080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -275119,14 +275222,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1547550899}
   - component: {fileID: 1547550901}
-  - component: {fileID: 1547550900}
   m_Layer: 0
   m_Name: Bike with NPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1547550899
 Transform:
   m_ObjectHideFlags: 0
@@ -275136,47 +275238,16 @@ Transform:
   m_GameObject: {fileID: 1547550898}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 953.7738, y: 540.0693, z: -32.10625}
+  m_LocalPosition: {x: 955.39, y: 540.0693, z: -56.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 304426778}
   - {fileID: 997501893}
+  - {fileID: 668977893}
+  - {fileID: 1828951695}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1547550900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547550898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53d4f6bfb43358f4792e92f3d21f83fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarNavMeshTraffic
-  agent: {fileID: 0}
-  greenLight: {fileID: 0}
-  stopPoint: {fileID: 0}
-  stopCheckDistance: 2.5
-  isBus: 0
-  busStopPoint: {fileID: 0}
-  busStopDuration: 10
-  busStopReachDistance: 1
-  leftDestination: {fileID: 0}
-  straightDestination: {fileID: 0}
-  respawnPoint: {fileID: 0}
-  respawnDelay: 1
-  speed: 5
-  acceleration: 8
-  angularSpeed: 120
-  vehicleLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  frontSensorPoint: {fileID: 0}
-  detectionDistance: 5
-  detectionBoxHalfSize: {x: 0.8, y: 0.6, z: 0.5}
 --- !u!195 &1547550901
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -330229,6 +330300,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1774062415567960114, guid: 0c73367d3f8541042953c81598d2182b, type: 3}
   m_PrefabInstance: {fileID: 1828405753}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1828951694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1828951695}
+  m_Layer: 0
+  m_Name: Bike Stop Point 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1828951695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828951694}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.0200195, y: 0.20245361, z: 26.289999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1547550899}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1830521135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -390411,3 +390513,4 @@ SceneRoots:
   - {fileID: 1693944009}
   - {fileID: 1609234987}
   - {fileID: 1576583271}
+  - {fileID: 995323793}
