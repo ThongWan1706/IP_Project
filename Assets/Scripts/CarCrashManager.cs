@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -15,9 +16,28 @@ public class CarCrashManager : MonoBehaviour
 
     [Header("Scene Transition Settings")]
     [SerializeField] private float delayBeforeSceneLoad = 3f; // pause after crash
-    [SerializeField] private int sceneToLoadIndex = 6; // 6 represent Day3Accident in Scene List
+    [SerializeField] private int sceneToLoadIndex = 6; // scene to load after the fade
+
+    [Header("Black Screen Fade")]
+    [Tooltip("Assign a full-screen black UI Image with a CanvasGroup component.")]
+    [SerializeField] private CanvasGroup blackScreen;
+
+    [Tooltip("How long it takes to fade from the crash scene to black.")]
+    [SerializeField] private float fadeDuration = 1.5f;
 
     private bool crashTriggered = false;
+
+    private void Awake()
+    {
+        // Start with the black screen invisible.
+        if (blackScreen != null)
+        {
+            blackScreen.gameObject.SetActive(true);
+            blackScreen.alpha = 0f;
+            blackScreen.interactable = false;
+            blackScreen.blocksRaycasts = false;
+        }
+    }
 
     public void TriggerCrashSequence()
     {
@@ -33,8 +53,9 @@ public class CarCrashManager : MonoBehaviour
         PrepareCarForPhysics(carA, carB.transform.position);
         PrepareCarForPhysics(carB, carA.transform.position);
 
-        // Schedule scene load 5 seconds after impact
-        Invoke(nameof(LoadNextScene), delayBeforeSceneLoad);
+        // Wait after the crash, fade the screen to black,
+        // then load the next scene.
+        StartCoroutine(CrashThenFadeAndLoad());
     }
 
     private void PrepareCarForPhysics(GameObject car, Vector3 targetPosition)
@@ -80,8 +101,43 @@ public class CarCrashManager : MonoBehaviour
         rb.AddTorque(randomTorque, ForceMode.VelocityChange);
     }
 
-    private void LoadNextScene()
+    private IEnumerator CrashThenFadeAndLoad()
     {
+        // Let the player see the crash first.
+        yield return new WaitForSeconds(delayBeforeSceneLoad);
+
+        if (blackScreen == null)
+        {
+            Debug.LogWarning(
+                "CarCrashManager: Black Screen is not assigned. Loading scene without fade."
+            );
+
+            SceneManager.LoadScene(sceneToLoadIndex);
+            yield break;
+        }
+
+        blackScreen.gameObject.SetActive(true);
+        blackScreen.blocksRaycasts = true;
+        blackScreen.interactable = true;
+
+        float timer = 0f;
+        float startAlpha = blackScreen.alpha;
+
+        while (timer < fadeDuration)
+        {
+            timer += Time.unscaledDeltaTime;
+
+            blackScreen.alpha = Mathf.Lerp(
+                startAlpha,
+                1f,
+                timer / fadeDuration
+            );
+
+            yield return null;
+        }
+
+        blackScreen.alpha = 1f;
+
         Debug.Log($"Loading scene index {sceneToLoadIndex}...");
         SceneManager.LoadScene(sceneToLoadIndex);
     }

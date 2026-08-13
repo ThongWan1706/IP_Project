@@ -108,6 +108,10 @@ public class NPCChoiceInteraction : MonoBehaviour
     [Header("Player HUD")]
     [SerializeField] private PlayerHUD playerHUD;
 
+    [Header("Score Settings")]
+    [Tooltip("Turn OFF if this NPC should only change Community Trust.")]
+    [SerializeField] private bool changeHazardAvoided = true;
+
     [Header("Point Sounds")]
     [SerializeField] private AudioSource pointAudioSource;
 
@@ -455,7 +459,13 @@ public void NextDialogue()
         // Apply the point changes now, but do NOT play the sound yet.
         if (playerHUD != null)
         {
-            playerHUD.AddHazardAvoided(hazardChange);
+            // Only change Hazard Avoided if enabled for this NPC.
+            if (changeHazardAvoided)
+            {
+                playerHUD.AddHazardAvoided(hazardChange);
+            }
+
+            // Community Trust always changes normally.
             playerHUD.ChangeCommunityTrust(trustChange);
         }
         else
