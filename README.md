@@ -84,8 +84,38 @@ The game consist of 3 levels which requires the player to investigate incidents 
 **5. Game View**
 - Full HD (1920x1080) is recommended when playing
 
-**6. Answer Keys**
-- The answers key pictures are located in the AnswerKey Folder (add link)
+# Answer Keys
+### Day 1
+1. Day 1 start up simple by approaching the NPC that contains the red outline with addition of alarm sound
+2. Press E key to interact with him and continue the conversation
+3. After the conversation, it will pop out 2 options, can select either of them which can resulted in increase or decreasing of hazard avoided and community trust
+4. Lastly when the conversation ended, it will lead to the next day scene.
+
+### Day 2
+1. Day 2 start up the 1st incident by approaching the elderly NPC that contains the red outline with addition of alarm sound
+2. Press E key to interact with him and continue the conversation
+3. After the conversation, it will pop out 2 options, can select either of them which can resulted in increase or decreasing of hazard avoided and community trust
+4. After the incident is done, the 2nd incident will start by having the group of children running.
+5. Approaching the child NPC that contains the red outline with addition of alarm sound
+6. Press E key to interact with the group and continue the conversation
+7. After the conversation, it will pop out 2 options, can select either of them which can resulted in increase or decreasing of hazard avoided and community trust
+8. Lastly when the conversation ended, it will lead to the next day scene.
+
+### Day 3
+1. Day 3 start up the 1st incident by approaching to the car crash scene
+2. Press E key to interact with the phone that's on the floor
+3. After interacting, the scene will be cleared and the doctor will appear behind the player
+4. Press E key to interact with him and continue the conversation
+5. After the conversation, it will pop out 2 options, can select either of them which can resulted in increase or decreasing of hazard avoided and community trust
+6. After the incident is done, the scene will be clear and the 2nd incident will start by having the motorist riding without a helmet.
+7. Approaching the motorist that contains the red outline with addition of alarm sound
+8. Press E key to interact with the group and continue the conversation
+9. After the conversation, it will pop out 2 options, can select either of them which can resulted in increase or decreasing of hazard avoided and community trust after the accident (will announce whether the motorist is in good or bad condition)
+10. After the incident is done, the scene will be clear and the 3rd incident will start by having a distracted pedestrian crossing the road.
+11. Approaching the NPC that contains the red outline with addition of alarm sound
+12. Press E key to interact with the NPC and continue the conversation
+13. After the conversation, it will pop out 2 options, can select either of them which can resulted in increase or decreasing of hazard avoided and community trust
+14. Lastly when the conversation ended, it will lead to the ending game scene.
 
 # Limitations & Bugs
 Throughout this project our team meet a few limitations and some bugs while developing the game.
@@ -97,7 +127,7 @@ Throughout this project our team meet a few limitations and some bugs while deve
 - For our game in order to restrict the player walking area, we implemented airwall at 4 areas of the map, but sometime the player can walk pass the airwall barrier as it's not long enough.
 
 # FSM Diagrams
-- The FSM diagrams pictures are located in the FSM Diagram Folder (add link)
+- The FSM diagrams pictures (.jpeg) are located in the FSM Diagram Folder (https://github.com/ThongWan1706/IP_Project/tree/main/Assets/FSM%20diagrams)
 
 # Implementations of AIs
 For our team, each of us handled one section of AI througout the gameplay:
