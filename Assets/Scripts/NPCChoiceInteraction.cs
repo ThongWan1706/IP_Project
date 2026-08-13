@@ -33,6 +33,10 @@ public class NPCChoiceInteraction : MonoBehaviour
     [SerializeField] private bool isPhone = false;
     [SerializeField] private bool transitionAfterConversation = true;
 
+    [Header("Conversation Options")]
+    [Tooltip("Leave ON for normal NPCs with Option 1 / Option 2. Turn OFF for report-only conversations.")]
+    [SerializeField] private bool hasChoices = true;
+
     [Header("No-Helmet Vehicle Violation")]
     [Tooltip("Turn this ON for the rider NPC so the player can only interact after the bike enters the violation trigger.")]
     [SerializeField] private bool onlyInteractDuringNoHelmetViolation = false;
@@ -126,6 +130,16 @@ public class NPCChoiceInteraction : MonoBehaviour
     [Tooltip("Turn OFF if this NPC should not change Community Trust yet.")]
     [SerializeField] private bool changeCommunityTrust = true;
 
+    [Header("Score On Conversation End")]
+    [Tooltip("Turn this ON for report/result scenes where points should be awarded only after the dialogue finishes.")]
+    [SerializeField] private bool applyScoreOnConversationEnd = false;
+
+    [Tooltip("Hazard Avoided points applied when the conversation ends.")]
+    [SerializeField] private int endConversationHazardChange = 0;
+
+    [Tooltip("Community Trust bars/points applied when the conversation ends.")]
+    [SerializeField] private int endConversationTrustChange = 0;
+
     [Header("Point Sounds")]
     [SerializeField] private AudioSource pointAudioSource;
 
@@ -179,6 +193,9 @@ public class NPCChoiceInteraction : MonoBehaviour
     // -1 = point decrease sound
     //  0 = no pending sound
     private int pendingPointSound = 0;
+
+    // Prevents report/result scoring from being applied more than once.
+    private bool endConversationScoreApplied = false;
 
     public bool CanInteract
     {
@@ -361,6 +378,14 @@ public void NextDialogue()
         // PHONE:
         // Finish the phone conversation.
         if (isPhone)
+        {
+            EndConversation();
+            return;
+        }
+
+        // REPORT / RESULT-ONLY NPC:
+        // End after the opening dialogue instead of showing Option 1 / Option 2.
+        if (!hasChoices)
         {
             EndConversation();
             return;
@@ -595,6 +620,42 @@ public void NextDialogue()
         ShowCurrentDialogue();
     }
 
+    private void ApplyEndConversationScore()
+    {
+        if (!applyScoreOnConversationEnd || endConversationScoreApplied)
+            return;
+
+        if (playerHUD == null)
+        {
+            Debug.LogError(
+                "NPCChoiceInteraction: PlayerHUD is not assigned for end-of-conversation scoring."
+            );
+            return;
+        }
+
+        endConversationScoreApplied = true;
+
+        if (changeHazardAvoided && endConversationHazardChange != 0)
+        {
+            playerHUD.AddHazardAvoided(endConversationHazardChange);
+        }
+
+        if (changeCommunityTrust && endConversationTrustChange != 0)
+        {
+            playerHUD.ChangeCommunityTrust(endConversationTrustChange);
+        }
+
+        // Play the matching point sound for this report outcome.
+        if (endConversationHazardChange > 0 || endConversationTrustChange > 0)
+        {
+            PlayPointSound(1);
+        }
+        else if (endConversationHazardChange < 0 || endConversationTrustChange < 0)
+        {
+            PlayPointSound(-1);
+        }
+    }
+
     private void DestroyObjectsAfterDialogue()
     {
         if (objectsToDestroy == null)
@@ -612,6 +673,11 @@ public void NextDialogue()
 
     private void EndConversation()
     {
+        // Optional report/result scoring.
+        // This is useful when the score should only change AFTER the doctor
+        // finishes revealing the report in the destination scene.
+        ApplyEndConversationScore();
+
         // Remove this NPC from any optional shared option buttons.
         DisconnectOptionButtons();
 
