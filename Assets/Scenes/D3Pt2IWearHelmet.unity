@@ -144650,7 +144650,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 0166e70e4f1d37f4088117989b414d4f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.083
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -146372,6 +146372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
   isPhone: 0
   transitionAfterConversation: 1
+  hasChoices: 1
   onlyInteractDuringNoHelmetViolation: 0
   helmetController: {fileID: 0}
   doctorAI: {fileID: 0}
@@ -146386,6 +146387,7 @@ MonoBehaviour:
   conversationPanel: {fileID: 0}
   optionPanel: {fileID: 0}
   nextButton: {fileID: 0}
+  noHelmetViolationTrigger: {fileID: 0}
   option1Button: {fileID: 0}
   option2Button: {fileID: 0}
   option1ButtonText: {fileID: 0}
@@ -146417,6 +146419,10 @@ MonoBehaviour:
     sentence: Are you serious Sir?! It's just a one time thing!
   playerHUD: {fileID: 0}
   changeHazardAvoided: 1
+  changeCommunityTrust: 1
+  applyScoreOnConversationEnd: 0
+  endConversationHazardChange: 0
+  endConversationTrustChange: 0
   pointAudioSource: {fileID: 1799365481}
   pointIncreaseSound: {fileID: 8300000, guid: 3a286ef46885ed84797efa81e4945705, type: 3}
   pointDecreaseSound: {fileID: 8300000, guid: c7c51ec85dd75594e84be2a922ca06d8, type: 3}
@@ -146424,6 +146430,10 @@ MonoBehaviour:
   blackScreen: {fileID: 0}
   fadeDuration: 1.5
   nextSceneName: Day2
+  useSeparateChoiceScenes: 0
+  option1SceneName: 
+  option2SceneName: 
+  accidentUsesOption2Scene: 0
   accidentSceneName: D1Accident
 --- !u!114 &932854754
 MonoBehaviour:
@@ -218051,6 +218061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
   isPhone: 0
   transitionAfterConversation: 1
+  hasChoices: 1
   onlyInteractDuringNoHelmetViolation: 1
   helmetController: {fileID: 1246966174}
   doctorAI: {fileID: 0}
@@ -218065,6 +218076,7 @@ MonoBehaviour:
   conversationPanel: {fileID: 0}
   optionPanel: {fileID: 0}
   nextButton: {fileID: 0}
+  noHelmetViolationTrigger: {fileID: 0}
   option1Button: {fileID: 0}
   option2Button: {fileID: 0}
   option1ButtonText: {fileID: 0}
@@ -218101,6 +218113,10 @@ MonoBehaviour:
     sentence: Seriously officer?! It's just a one time thing!
   playerHUD: {fileID: 0}
   changeHazardAvoided: 0
+  changeCommunityTrust: 1
+  applyScoreOnConversationEnd: 0
+  endConversationHazardChange: 0
+  endConversationTrustChange: 0
   pointAudioSource: {fileID: 0}
   pointIncreaseSound: {fileID: 0}
   pointDecreaseSound: {fileID: 0}
@@ -218108,6 +218124,10 @@ MonoBehaviour:
   blackScreen: {fileID: 0}
   fadeDuration: 1.5
   nextSceneName: Day2
+  useSeparateChoiceScenes: 0
+  option1SceneName: 
+  option2SceneName: 
+  accidentUsesOption2Scene: 0
   accidentSceneName: Day1AccidentScene
 --- !u!136 &1246966180
 CapsuleCollider:

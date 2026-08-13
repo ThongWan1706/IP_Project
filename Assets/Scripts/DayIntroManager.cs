@@ -12,6 +12,13 @@ public class DayIntroManager : MonoBehaviour
     [Tooltip("Add only movement or mouse-look scripts. Do not add the Camera.")]
     [SerializeField] private Behaviour[] playerControlScripts;
 
+    [Header("Optional Day 3 Crash Sequence")]
+    [Tooltip("Optional. Assign only in the Day 3 crash scene. Leave None for other days.")]
+    [SerializeField] private CarCrashManager carCrashManager;
+
+    [Tooltip("Optional. Assign only in the Day 3 crash scene. Leave None for other days.")]
+    [SerializeField] private PlayerCarLookDetector playerCarLookDetector;
+
     [Header("Timing")]
     [SerializeField] private float fadeDuration = 1.5f;
     [SerializeField] private float dayIntroDuration = 2.5f;
@@ -95,7 +102,20 @@ public class DayIntroManager : MonoBehaviour
         blackScreen.blocksRaycasts = false;
         blackScreen.gameObject.SetActive(false);
 
-        Debug.Log("Day 1 intro completed.");
+        // OPTIONAL DAY 3 CRASH SEQUENCE:
+        // These only run when references are assigned in the Inspector.
+        // Leave them as None for Day 1 / Day 2 / other normal intro scenes.
+        if (carCrashManager != null)
+        {
+            carCrashManager.NotifyDayIntroFinished();
+        }
+
+        if (playerCarLookDetector != null)
+        {
+            playerCarLookDetector.EnableDetection();
+        }
+
+        Debug.Log("Day intro completed.");
     }
 
     private void SetPlayerControls(bool controlsEnabled)

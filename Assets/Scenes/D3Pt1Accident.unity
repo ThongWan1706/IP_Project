@@ -11204,94 +11204,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 992785887442622742, guid: 51b8cd9e64dc867439b7580243c9c6cf, type: 3}
   m_PrefabInstance: {fileID: 171105763}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &172273940
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 172273941}
-  - component: {fileID: 172273944}
-  - component: {fileID: 172273943}
-  - component: {fileID: 172273942}
-  m_Layer: 5
-  m_Name: blackscreen
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &172273941
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 172273940}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 468143826}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!225 &172273942
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 172273940}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
---- !u!114 &172273943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 172273940}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &172273944
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 172273940}
-  m_CullTransparentMesh: 1
 --- !u!1001 &173195978
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50396,109 +50308,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4657773379610064021, guid: 2c2d6278f10beb544b018ead705b6e37, type: 3}
   m_PrefabInstance: {fileID: 467834622}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &468143822
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 468143826}
-  - component: {fileID: 468143825}
-  - component: {fileID: 468143824}
-  - component: {fileID: 468143823}
-  m_Layer: 5
-  m_Name: DayIntroCanvas
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &468143823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 468143822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
---- !u!114 &468143824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 468143822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
---- !u!223 &468143825
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 468143822}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 100
-  m_TargetDisplay: 0
---- !u!224 &468143826
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 468143822}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1143433457}
-  - {fileID: 172273941}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
 --- !u!1001 &468355510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -111480,12 +111289,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
   isPhone: 0
   transitionAfterConversation: 1
+  hasChoices: 1
   onlyInteractDuringNoHelmetViolation: 0
   helmetController: {fileID: 0}
   doctorAI: {fileID: 0}
   outlineVisual: {fileID: 0}
-  objectsToDestroy:
-  - {fileID: 640949477}
+  objectsToDestroy: []
   npcMovement: {fileID: 0}
   incidentManager: {fileID: 0}
   completeIncidentAfterConversation: 0
@@ -111495,6 +111304,7 @@ MonoBehaviour:
   conversationPanel: {fileID: 1481489118}
   optionPanel: {fileID: 1976604932}
   nextButton: {fileID: 1922823551}
+  noHelmetViolationTrigger: {fileID: 0}
   option1Button: {fileID: 1286290484}
   option2Button: {fileID: 661655597}
   option1ButtonText: {fileID: 2123765192}
@@ -111524,6 +111334,10 @@ MonoBehaviour:
     sentence: He DESERVED it, I will still fine him accordingly!
   playerHUD: {fileID: 1477231629}
   changeHazardAvoided: 0
+  changeCommunityTrust: 1
+  applyScoreOnConversationEnd: 0
+  endConversationHazardChange: 0
+  endConversationTrustChange: 0
   pointAudioSource: {fileID: 1431613603}
   pointIncreaseSound: {fileID: 8300000, guid: 3a286ef46885ed84797efa81e4945705, type: 3}
   pointDecreaseSound: {fileID: 8300000, guid: c7c51ec85dd75594e84be2a922ca06d8, type: 3}
@@ -111531,6 +111345,10 @@ MonoBehaviour:
   blackScreen: {fileID: 745165744}
   fadeDuration: 2
   nextSceneName: D3Pt2Incident
+  useSeparateChoiceScenes: 0
+  option1SceneName: 
+  option2SceneName: 
+  accidentUsesOption2Scene: 0
   accidentSceneName: 
 --- !u!136 &640949484
 CapsuleCollider:
@@ -114134,57 +113952,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4657773379610064021, guid: 2c2d6278f10beb544b018ead705b6e37, type: 3}
   m_PrefabInstance: {fileID: 683475627}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &683488079
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 683488081}
-  - component: {fileID: 683488080}
-  m_Layer: 0
-  m_Name: DayIntroManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &683488080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683488079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2212aeda2d0e6d4b864abdb647b9154, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DayIntroManager
-  dayIntroCanvas: {fileID: 468143825}
-  dayIntroPanel: {fileID: 1143433456}
-  blackScreen: {fileID: 0}
-  playerControlScripts:
-  - {fileID: 0}
-  fadeDuration: 1.5
-  dayIntroDuration: 1
---- !u!4 &683488081
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683488079}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 954.0671, y: 537.68243, z: -0.09019}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &684159209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147756,6 +147523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
   isPhone: 0
   transitionAfterConversation: 1
+  hasChoices: 1
   onlyInteractDuringNoHelmetViolation: 0
   helmetController: {fileID: 0}
   doctorAI: {fileID: 0}
@@ -147770,6 +147538,7 @@ MonoBehaviour:
   conversationPanel: {fileID: 1481489118}
   optionPanel: {fileID: 1976604932}
   nextButton: {fileID: 0}
+  noHelmetViolationTrigger: {fileID: 0}
   option1Button: {fileID: 0}
   option2Button: {fileID: 0}
   option1ButtonText: {fileID: 0}
@@ -147801,6 +147570,10 @@ MonoBehaviour:
     sentence: Are you serious Sir?! It's just a one time thing!
   playerHUD: {fileID: 1477231629}
   changeHazardAvoided: 1
+  changeCommunityTrust: 1
+  applyScoreOnConversationEnd: 0
+  endConversationHazardChange: 0
+  endConversationTrustChange: 0
   pointAudioSource: {fileID: 1799365481}
   pointIncreaseSound: {fileID: 8300000, guid: 3a286ef46885ed84797efa81e4945705, type: 3}
   pointDecreaseSound: {fileID: 8300000, guid: c7c51ec85dd75594e84be2a922ca06d8, type: 3}
@@ -147808,6 +147581,10 @@ MonoBehaviour:
   blackScreen: {fileID: 745165744}
   fadeDuration: 1.5
   nextSceneName: Day2
+  useSeparateChoiceScenes: 0
+  option1SceneName: 
+  option2SceneName: 
+  accidentUsesOption2Scene: 0
   accidentSceneName: D1Accident
 --- !u!114 &932854754
 MonoBehaviour:
@@ -178720,6 +178497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
   isPhone: 1
   transitionAfterConversation: 0
+  hasChoices: 1
   onlyInteractDuringNoHelmetViolation: 0
   helmetController: {fileID: 0}
   doctorAI: {fileID: 640949480}
@@ -178737,6 +178515,7 @@ MonoBehaviour:
   conversationPanel: {fileID: 1481489118}
   optionPanel: {fileID: 1976604932}
   nextButton: {fileID: 1922823551}
+  noHelmetViolationTrigger: {fileID: 0}
   option1Button: {fileID: 1286290484}
   option2Button: {fileID: 661655597}
   option1ButtonText: {fileID: 0}
@@ -178761,6 +178540,10 @@ MonoBehaviour:
   option2Response: []
   playerHUD: {fileID: 1477231629}
   changeHazardAvoided: 1
+  changeCommunityTrust: 1
+  applyScoreOnConversationEnd: 0
+  endConversationHazardChange: 0
+  endConversationTrustChange: 0
   pointAudioSource: {fileID: 1431613603}
   pointIncreaseSound: {fileID: 8300000, guid: 3a286ef46885ed84797efa81e4945705, type: 3}
   pointDecreaseSound: {fileID: 8300000, guid: c7c51ec85dd75594e84be2a922ca06d8, type: 3}
@@ -178768,6 +178551,10 @@ MonoBehaviour:
   blackScreen: {fileID: 745165744}
   fadeDuration: 0
   nextSceneName: 
+  useSeparateChoiceScenes: 0
+  option1SceneName: 
+  option2SceneName: 
+  accidentUsesOption2Scene: 0
   accidentSceneName: 
 --- !u!1001 &1118387831
 PrefabInstance:
@@ -180545,81 +180332,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 371834493961513021, guid: 395f2d73436457644b4dc7c5acedae08, type: 3}
   m_PrefabInstance: {fileID: 1141531792}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1143433456
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1143433457}
-  - component: {fileID: 1143433459}
-  - component: {fileID: 1143433458}
-  m_Layer: 5
-  m_Name: Day3Panel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1143433457
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1143433456}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 468143826}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1143433458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1143433456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1143433459
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1143433456}
-  m_CullTransparentMesh: 1
 --- !u!4 &1143482744 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1958792504750802904, guid: f3e8b3a407021c544afe69faa0e72fcd, type: 3}
@@ -308990,6 +308702,9 @@ MonoBehaviour:
   inwardForce: 25
   upwardLiftForce: 3
   rotationalTorque: 1
+  crashAudioSource: {fileID: 0}
+  crashSound: {fileID: 0}
+  waitForDayIntro: 1
   delayBeforeSceneLoad: 2
   sceneToLoadIndex: 5
   blackScreen: {fileID: 0}
@@ -390750,8 +390465,6 @@ SceneRoots:
   - {fileID: 1231461887}
   - {fileID: 1404943827}
   - {fileID: 403765850}
-  - {fileID: 683488081}
-  - {fileID: 468143826}
   - {fileID: 1049970036}
   - {fileID: 37371459}
   - {fileID: 751119859}

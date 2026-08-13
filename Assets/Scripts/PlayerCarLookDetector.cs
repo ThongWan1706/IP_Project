@@ -13,41 +13,65 @@ public class PlayerCarLookDetector : MonoBehaviour
     [Header("Crash Manager")]
     [SerializeField] private CarCrashManager crashManager;
 
-    [Header("Crash Sound")]
-    [SerializeField] private AudioSource crashAudioSource;
- 
+    [Header("Day Intro")]
+    [Tooltip("Detection will stay disabled until EnableDetection() is called.")]
+    [SerializeField] private bool waitForDayIntro = true;
+
+    private bool detectionEnabled = false;
     private bool hasTriggered = false;
+
+    private void Awake()
+    {
+        // If we don't need an intro delay,
+        // detection can begin immediately.
+        detectionEnabled = !waitForDayIntro;
+    }
 
     private void Update()
     {
-        if (hasTriggered) return;
+        // Do absolutely nothing while Day Intro is showing.
+        if (!detectionEnabled)
+            return;
 
-        Ray ray = new Ray(transform.position, transform.forward);
+        if (hasTriggered)
+            return;
 
-        if (Physics.Raycast(ray, out RaycastHit hit, lookDistance, vehicleLayer))
+        Ray ray = new Ray(
+            transform.position,
+            transform.forward
+        );
+
+        if (Physics.Raycast(
+            ray,
+            out RaycastHit hit,
+            lookDistance,
+            vehicleLayer))
         {
-            GameObject hitObject = hit.collider.gameObject;
+            GameObject hitObject =
+                hit.collider.gameObject;
 
-            // Detect car or any nested sub-mesh/collider child object
-            if (hitObject == carA || hitObject == carB ||
-                hitObject.transform.IsChildOf(carA.transform) ||
-                hitObject.transform.IsChildOf(carB.transform))
+            bool lookingAtCarA =
+                carA != null &&
+                (
+                    hitObject == carA ||
+                    hitObject.transform.IsChildOf(carA.transform)
+                );
+
+            bool lookingAtCarB =
+                carB != null &&
+                (
+                    hitObject == carB ||
+                    hitObject.transform.IsChildOf(carB.transform)
+                );
+
+            if (lookingAtCarA || lookingAtCarB)
             {
                 hasTriggered = true;
 
-                // Play crash sound
-                if (crashAudioSource != null)
-                {
-                    crashAudioSource.Play();
-                }
-                else
-                {
-                    Debug.LogWarning(
-                        "PlayerCarLookDetector: Crash Audio Source or Crash Sound is missing."
-                    );
-                }
+                Debug.Log(
+                    "Player is looking at crash cars. Triggering crash."
+                );
 
-                // Trigger the existing crash sequence
                 if (crashManager != null)
                 {
                     crashManager.TriggerCrashSequence();
@@ -55,10 +79,25 @@ public class PlayerCarLookDetector : MonoBehaviour
                 else
                 {
                     Debug.LogError(
-                        "PlayerCarLookDetector: Crash Manager reference is missing!"
+                        "PlayerCarLookDetector: Crash Manager is missing!"
                     );
                 }
             }
         }
+    }
+
+    // Call this ONLY after the Day Intro has completely faded away.
+    public void EnableDetection()
+    {
+        detectionEnabled = true;
+
+        Debug.Log(
+            "PlayerCarLookDetector: Car detection enabled."
+        );
+    }
+
+    public void DisableDetection()
+    {
+        detectionEnabled = false;
     }
 }

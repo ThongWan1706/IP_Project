@@ -14,65 +14,170 @@ public class CarCrashManager : MonoBehaviour
     [SerializeField] private float upwardLiftForce = 5f;
     [SerializeField] private float rotationalTorque = 10f;
 
-    [Header("Scene Transition Settings")]
-    [SerializeField] private float delayBeforeSceneLoad = 3f; // pause after crash
-    [SerializeField] private int sceneToLoadIndex = 6; // scene to load after the fade
+    [Header("Crash Sound")]
+    [SerializeField] private AudioSource crashAudioSource;
+    [SerializeField] private AudioClip crashSound;
 
-    [Header("Black Screen Fade")]
-    [Tooltip("Assign a full-screen black UI Image with a CanvasGroup component.")]
+    [Header("Day Intro")]
+    [Tooltip("Crash cannot happen until NotifyDayIntroFinished() is called.")]
+    [SerializeField] private bool waitForDayIntro = true;
+
+    [Header("Scene Transition")]
+    [SerializeField] private float delayBeforeSceneLoad = 3f;
+    [SerializeField] private int sceneToLoadIndex = 6;
+
+    [Header("Black Screen")]
     [SerializeField] private CanvasGroup blackScreen;
-
-    [Tooltip("How long it takes to fade from the crash scene to black.")]
     [SerializeField] private float fadeDuration = 1.5f;
 
+    private bool introFinished = false;
+    private bool crashRequested = false;
     private bool crashTriggered = false;
 
     private void Awake()
     {
-        // Start with the black screen invisible.
+        introFinished = !waitForDayIntro;
+
         if (blackScreen != null)
         {
             blackScreen.gameObject.SetActive(true);
             blackScreen.alpha = 0f;
-            blackScreen.interactable = false;
             blackScreen.blocksRaycasts = false;
+            blackScreen.interactable = false;
+        }
+
+        // VERY IMPORTANT:
+        // Make sure crash sound cannot play on scene start.
+        if (crashAudioSource != null)
+        {
+            crashAudioSource.playOnAwake = false;
+            crashAudioSource.Stop();
         }
     }
+
+    // ========================================================
+    // SOMETHING TRIED TO START THE CRASH
+    // ========================================================
 
     public void TriggerCrashSequence()
     {
-        if (crashTriggered) return;
-        crashTriggered = true;
+        if (crashTriggered)
+            return;
 
-        if (carA == null || carB == null)
+        // Day Intro still showing.
+        if (waitForDayIntro && !introFinished)
         {
-            Debug.LogError("CarCrashManager: Assign Car A and Car B in the Inspector!");
+            crashRequested = true;
+
+            Debug.Log(
+                "Crash requested, but waiting for Day Intro to finish."
+            );
+
             return;
         }
 
-        PrepareCarForPhysics(carA, carB.transform.position);
-        PrepareCarForPhysics(carB, carA.transform.position);
+        StartCrash();
+    }
 
-        // Wait after the crash, fade the screen to black,
-        // then load the next scene.
+    // ========================================================
+    // CALL THIS AFTER THE DAY INTRO COMPLETELY DISAPPEARS
+    // ========================================================
+
+    public void NotifyDayIntroFinished()
+    {
+        if (introFinished)
+            return;
+
+        introFinished = true;
+
+        Debug.Log("Day Intro finished. Crash system enabled.");
+
+        // If the crash was already triggered while the intro was showing,
+        // start it only now.
+        if (crashRequested)
+        {
+            crashRequested = false;
+            StartCrash();
+        }
+    }
+
+    // ========================================================
+    // ACTUAL CRASH
+    // ========================================================
+
+    private void StartCrash()
+    {
+        if (crashTriggered)
+            return;
+
+        if (!introFinished && waitForDayIntro)
+            return;
+
+        if (carA == null || carB == null)
+        {
+            Debug.LogError(
+                "CarCrashManager: Car A or Car B is missing."
+            );
+
+            return;
+        }
+
+        crashTriggered = true;
+
+        Debug.Log("CAR CRASH STARTED");
+
+        // Play crash sound ONLY NOW.
+        if (crashAudioSource != null &&
+            crashSound != null)
+        {
+            crashAudioSource.PlayOneShot(crashSound);
+        }
+
+        PrepareCarForPhysics(
+            carA,
+            carB.transform.position
+        );
+
+        PrepareCarForPhysics(
+            carB,
+            carA.transform.position
+        );
+
         StartCoroutine(CrashThenFadeAndLoad());
     }
 
-    private void PrepareCarForPhysics(GameObject car, Vector3 targetPosition)
+    private void PrepareCarForPhysics(
+        GameObject car,
+        Vector3 targetPosition)
     {
-        if (car == null) return;
+        if (car == null)
+            return;
 
-        CarNavMeshTraffic navTraffic = car.GetComponentInChildren<CarNavMeshTraffic>();
-        if (navTraffic != null) navTraffic.enabled = false;
+        // These are disabled ONLY when the actual crash starts.
+        CarNavMeshTraffic traffic =
+            car.GetComponentInChildren<CarNavMeshTraffic>();
 
-        NavMeshAgent agent = car.GetComponentInChildren<NavMeshAgent>();
+        if (traffic != null)
+        {
+            traffic.enabled = false;
+        }
+
+        NavMeshAgent agent =
+            car.GetComponentInChildren<NavMeshAgent>();
+
         if (agent != null)
         {
-            agent.isStopped = true;
+            if (agent.isOnNavMesh)
+            {
+                agent.isStopped = true;
+                agent.ResetPath();
+            }
+
             agent.enabled = false;
         }
 
         Rigidbody rb = car.GetComponent<Rigidbody>();
+
         if (rb == null)
         {
             rb = car.AddComponent<Rigidbody>();
@@ -85,60 +190,67 @@ public class CarCrashManager : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
-        Vector3 driveDirection = targetPosition - car.transform.position;
-        driveDirection.y = 0f;
-        driveDirection.Normalize();
+        Vector3 direction =
+            targetPosition - car.transform.position;
 
-        Vector3 crashVelocity = (driveDirection * inwardForce) + (Vector3.up * upwardLiftForce);
-        rb.AddForce(crashVelocity, ForceMode.VelocityChange);
+        direction.y = 0f;
 
-        Vector3 randomTorque = new Vector3(
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            direction.Normalize();
+        }
+
+        Vector3 force =
+            direction * inwardForce +
+            Vector3.up * upwardLiftForce;
+
+        rb.AddForce(
+            force,
+            ForceMode.VelocityChange
+        );
+
+        Vector3 torque = new Vector3(
             Random.Range(-1f, 1f),
             Random.Range(-1f, 1f),
             Random.Range(-1f, 1f)
         ) * rotationalTorque;
 
-        rb.AddTorque(randomTorque, ForceMode.VelocityChange);
+        rb.AddTorque(
+            torque,
+            ForceMode.VelocityChange
+        );
     }
 
     private IEnumerator CrashThenFadeAndLoad()
     {
-        // Let the player see the crash first.
-        yield return new WaitForSeconds(delayBeforeSceneLoad);
+        yield return new WaitForSecondsRealtime(
+            delayBeforeSceneLoad
+        );
 
-        if (blackScreen == null)
+        if (blackScreen != null)
         {
-            Debug.LogWarning(
-                "CarCrashManager: Black Screen is not assigned. Loading scene without fade."
-            );
+            blackScreen.gameObject.SetActive(true);
+            blackScreen.blocksRaycasts = true;
+            blackScreen.interactable = true;
 
-            SceneManager.LoadScene(sceneToLoadIndex);
-            yield break;
+            float timer = 0f;
+
+            while (timer < fadeDuration)
+            {
+                timer += Time.unscaledDeltaTime;
+
+                blackScreen.alpha = Mathf.Lerp(
+                    0f,
+                    1f,
+                    timer / fadeDuration
+                );
+
+                yield return null;
+            }
+
+            blackScreen.alpha = 1f;
         }
 
-        blackScreen.gameObject.SetActive(true);
-        blackScreen.blocksRaycasts = true;
-        blackScreen.interactable = true;
-
-        float timer = 0f;
-        float startAlpha = blackScreen.alpha;
-
-        while (timer < fadeDuration)
-        {
-            timer += Time.unscaledDeltaTime;
-
-            blackScreen.alpha = Mathf.Lerp(
-                startAlpha,
-                1f,
-                timer / fadeDuration
-            );
-
-            yield return null;
-        }
-
-        blackScreen.alpha = 1f;
-
-        Debug.Log($"Loading scene index {sceneToLoadIndex}...");
         SceneManager.LoadScene(sceneToLoadIndex);
     }
 }
