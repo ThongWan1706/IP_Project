@@ -33,6 +33,14 @@ public class NPCChoiceInteraction : MonoBehaviour
     [SerializeField] private bool isPhone = false;
     [SerializeField] private bool transitionAfterConversation = true;
 
+    [Header("No-Helmet Vehicle Violation")]
+    [Tooltip("Turn this ON for the rider NPC so the player can only interact after the bike enters the violation trigger.")]
+    [SerializeField] private bool onlyInteractDuringNoHelmetViolation = false;
+
+    [Header("Helmet")]
+    [Tooltip("Optional. Assign this only for NPCs that should put on/remove a helmet based on the dialogue choice.")]
+    [SerializeField] private HelmetController helmetController;
+
     [Header("Clue Phone / Doctor Trigger")]
     [Tooltip("Assign the Doctor AI script to activate the Doctor when this dialogue finishes.")]
     [SerializeField] private DoctorAI doctorAI;
@@ -153,9 +161,25 @@ public class NPCChoiceInteraction : MonoBehaviour
     //  0 = no pending sound
     private int pendingPointSound = 0;
 
-    public bool CanInteract =>
-        currentStage == ConversationStage.None &&
-        !interactionCompleted;
+    public bool CanInteract
+    {
+        get
+        {
+            if (currentStage != ConversationStage.None || interactionCompleted)
+                return false;
+
+            if (onlyInteractDuringNoHelmetViolation)
+            {
+                NoHelmetVehicleViolation vehicleViolation =
+                    GetComponentInParent<NoHelmetVehicleViolation>();
+
+                return vehicleViolation != null &&
+                       vehicleViolation.WarningActive;
+            }
+
+            return true;
+        }
+    }
 
     private void Awake()
     {
@@ -188,6 +212,14 @@ public class NPCChoiceInteraction : MonoBehaviour
             return "Press E to view clue";
         }
 
+        NoHelmetVehicleViolation vehicleViolation =
+            GetComponentInParent<NoHelmetVehicleViolation>();
+
+        if (vehicleViolation != null && vehicleViolation.WarningActive)
+        {
+            return "Press E to stop";
+        }
+
         JaywalkingNPCController jaywalker =
         GetComponentInParent<JaywalkingNPCController>();
 
@@ -213,6 +245,16 @@ public class NPCChoiceInteraction : MonoBehaviour
         if (!CanInteract)
         {
             return;
+        }
+
+        // If this interaction belongs to a no-helmet rider and the warning
+        // is active, pressing E stops the vehicle before the dialogue begins.
+        NoHelmetVehicleViolation vehicleViolation =
+            GetComponentInParent<NoHelmetVehicleViolation>();
+
+        if (vehicleViolation != null && vehicleViolation.WarningActive)
+        {
+            vehicleViolation.StopVehicleInTime();
         }
 
         // OPTIONAL SHARED NEXT BUTTON:
@@ -407,6 +449,15 @@ public void NextDialogue()
         // to listen to the shared option buttons.
         DisconnectOptionButtons();
 
+        // OPTIONAL HELMET:
+        // Only NPCs with a HelmetController assigned will use this.
+        // For the no-helmet rider, Option 1 (politely inform) makes
+        // the rider put the helmet on.
+        if (helmetController != null)
+        {
+            helmetController.ShowHelmet();
+        }
+
         ApplyChoice(
             hazardChange: 1,
             trustChange: 2,
@@ -422,6 +473,14 @@ public void NextDialogue()
         // The choice has been made, so this NPC no longer needs
         // to listen to the shared option buttons.
         DisconnectOptionButtons();
+
+        // OPTIONAL HELMET:
+        // If this NPC has a HelmetController, keep the helmet off
+        // for Option 2.
+        if (helmetController != null)
+        {
+            helmetController.HideHelmet();
+        }
 
         ApplyChoice(
             hazardChange: 0,
