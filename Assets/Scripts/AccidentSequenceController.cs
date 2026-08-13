@@ -10,6 +10,10 @@ public class AccidentSequenceController : MonoBehaviour
     [Tooltip("The car that will drive into the pedestrian.")]
     public Transform crashCar;
 
+    [Header("Victim Setup")]
+    [Tooltip("Turn this ON when the victim is parented to a bike/vehicle and should detach on impact.")]
+    public bool detachVictimOnImpact = false;
+
     [Tooltip("Where the car should drive to before the impact happens.")]
     public Transform impactPoint;
 
@@ -35,6 +39,19 @@ public class AccidentSequenceController : MonoBehaviour
 
     [Tooltip("Optional NavMeshAgent on the victim.")]
     public NavMeshAgent victimAgent;
+
+    [Header("Motorcycle Crash Physics")]
+    [Tooltip("Optional. Assign the motorcycle/bike Rigidbody only for motorcycle accident scenes. Leave None for other NPC accidents.")]
+    public Rigidbody motorcycleRigidbody;
+
+    [Tooltip("Forward push applied to the motorcycle when the crash happens.")]
+    public float motorcyclePushForce = 5f;
+
+    [Tooltip("Small upward force applied to the motorcycle when the crash happens.")]
+    public float motorcycleUpwardForce = 1.5f;
+
+    [Tooltip("Rotational force that makes the motorcycle tip/fall over.")]
+    public float motorcycleSpinForce = 6f;
 
     [Header("Flying Effect")]
     public float flyForce = 12f;
@@ -105,6 +122,14 @@ public class AccidentSequenceController : MonoBehaviour
         {
             victimRigidbody.isKinematic = true;
             victimRigidbody.useGravity = false;
+        }
+
+        // Keep the motorcycle controlled by NavMesh/traffic before impact.
+        // This only runs when a motorcycle Rigidbody has been assigned.
+        if (motorcycleRigidbody != null)
+        {
+            motorcycleRigidbody.isKinematic = true;
+            motorcycleRigidbody.useGravity = false;
         }
 
         Cursor.visible = false;
@@ -193,11 +218,23 @@ public class AccidentSequenceController : MonoBehaviour
             victimAnimator.enabled = false;
         }
 
+        // OPTIONAL:
+        // Detach the victim from a bike/vehicle before physics takes over.
+        // Leave Detach Victim On Impact OFF for normal NPCs.
+        if (detachVictimOnImpact && victim != null)
+        {
+            victim.transform.SetParent(null, true);
+        }
+
         // Launch the victim.
         if (victimRigidbody != null)
         {
             victimRigidbody.isKinematic = false;
             victimRigidbody.useGravity = true;
+            victimRigidbody.constraints = RigidbodyConstraints.None;
+
+            victimRigidbody.linearVelocity = Vector3.zero;
+            victimRigidbody.angularVelocity = Vector3.zero;
 
             Vector3 launchDirection =
                 crashCar != null
@@ -218,6 +255,43 @@ public class AccidentSequenceController : MonoBehaviour
                     spinForce,
                     spinForce * 0.5f,
                     spinForce
+                ),
+                ForceMode.Impulse
+            );
+        }
+
+        // OPTIONAL MOTORCYCLE CRASH PHYSICS:
+        // Leave Motorcycle Rigidbody as None for non-motorcycle accident scenes.
+        if (motorcycleRigidbody != null)
+        {
+            motorcycleRigidbody.isKinematic = false;
+            motorcycleRigidbody.useGravity = true;
+            motorcycleRigidbody.constraints = RigidbodyConstraints.None;
+
+            motorcycleRigidbody.linearVelocity = Vector3.zero;
+            motorcycleRigidbody.angularVelocity = Vector3.zero;
+
+            Vector3 motorcycleDirection =
+                crashCar != null
+                ? crashCar.forward
+                : Vector3.forward;
+
+            Vector3 motorcycleForce =
+                motorcycleDirection * motorcyclePushForce +
+                Vector3.up * motorcycleUpwardForce;
+
+            motorcycleRigidbody.AddForce(
+                motorcycleForce,
+                ForceMode.Impulse
+            );
+
+            // Apply sideways/forward rotation so the bike tips over
+            // instead of staying perfectly upright.
+            motorcycleRigidbody.AddTorque(
+                new Vector3(
+                    motorcycleSpinForce,
+                    motorcycleSpinForce * 0.35f,
+                    motorcycleSpinForce
                 ),
                 ForceMode.Impulse
             );

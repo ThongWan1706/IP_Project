@@ -8,6 +8,13 @@ public class NoHelmetViolationTrigger : MonoBehaviour
     private readonly HashSet<NoHelmetVehicleViolation> triggeredVehicles =
         new HashSet<NoHelmetVehicleViolation>();
 
+    [Header("Warning Sound")]
+    [Tooltip("AudioSource used to play the warning sound.")]
+    [SerializeField] private AudioSource warningAudioSource;
+
+    [Tooltip("Sound played once when a rider enters the no-helmet trigger zone.")]
+    [SerializeField] private AudioClip warningSound;
+
     private void Reset()
     {
         Collider triggerCollider = GetComponent<Collider>();
@@ -53,6 +60,13 @@ public class NoHelmetViolationTrigger : MonoBehaviour
             return;
 
         triggeredVehicles.Add(vehicleViolation);
+
+        // Play the warning sound once when this rider enters the trigger.
+        if (warningAudioSource != null && warningSound != null)
+        {
+            warningAudioSource.PlayOneShot(warningSound);
+        }
+
         vehicleViolation.BeginViolationWarning();
     }
 }
