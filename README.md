@@ -106,8 +106,10 @@ For our team, each of us handled one section of AI througout the gameplay:
 - After reaching the destination, it will respawn back from where they started and continues the loop.
 
 2. Xavier
+- NPC follows the NavMesh path until reaching a traffic light. If the light is red, the NPC waits; if it is green, or if the NPC turns left or right, it continues walking, crosses the road at the zebra crossing, reaches the nearest endpoint, and then resets to the starting position.
+- NPC walks to the traffic light and decides whether to jaywalk or listen the police officer (player). If the NPC chooses to jaywalk, it continues walking; if it listens to the police officer, it stops moving.
 
-3. Keno
+4. Keno
 - Programmed an interactable AI NPC Doctor that spawns on clue discovery, follows the player from a distance and despawns after dialogue ends.
 
 # References and credits to external assets
