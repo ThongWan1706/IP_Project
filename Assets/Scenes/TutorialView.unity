@@ -889,20 +889,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c05f0d9a05a7548bfdc7b468d3966d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController1
-  trafficLight1:
-    red: {fileID: 390393006}
-    yellow: {fileID: 1268219225}
-    green: {fileID: 1091165309}
-  trafficLight2:
-    red: {fileID: 1651061058}
-    yellow: {fileID: 1186154379}
-    green: {fileID: 1677536547}
-  trafficLight3:
-    red: {fileID: 810709549}
-    yellow: {fileID: 1220384884}
-    green: {fileID: 252005837}
-  greenTime: 20
-  yellowTime: 5
 --- !u!1001 &31060707
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5255,81 +5241,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4657773379610064021, guid: 2c2d6278f10beb544b018ead705b6e37, type: 3}
   m_PrefabInstance: {fileID: 115289404}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &124610810
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 124610811}
-  - component: {fileID: 124610812}
-  - component: {fileID: 124610813}
-  m_Layer: 5
-  m_Name: GameplayStep1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &124610811
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124610810}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.378644, y: 4.81212, z: 4.81212}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1518988078}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -638, y: 206}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &124610812
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124610810}
-  m_CullTransparentMesh: 1
---- !u!114 &124610813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124610810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6bd955d87b12b714b8dea68a2610524c, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1001 &127349823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6859,20 +6770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c05f0d9a05a7548bfdc7b468d3966d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController1
-  trafficLight1:
-    red: {fileID: 1812756731}
-    yellow: {fileID: 1870317221}
-    green: {fileID: 740388423}
-  trafficLight2:
-    red: {fileID: 1396455082}
-    yellow: {fileID: 830889590}
-    green: {fileID: 1937116634}
-  trafficLight3:
-    red: {fileID: 1139249335}
-    yellow: {fileID: 870983253}
-    green: {fileID: 1016059832}
-  greenTime: 20
-  yellowTime: 5
 --- !u!1001 &151422283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15422,7 +15319,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Police Officer
+  m_text: 'Senior Police Officer
 
 '
   m_isRightToLeft: 0
@@ -15433,8 +15330,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294908416
+  m_fontColor: {r: 0, g: 0.10076237, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -15490,7 +15387,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -196.67908, w: 0}
+  m_margin: {x: 0, y: 0, z: -393.57312, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -25642,7 +25539,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: aefa35498bbc02043a4ffc42f56a208a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.074
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -27945,7 +27842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6431373}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.3647059}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -28005,9 +27902,10 @@ MonoBehaviour:
   conversationBox: {fileID: 1920141050}
   dialogueText: {fileID: 1517776747}
   gameplayImageContainer: {fileID: 1518988077}
-  gameplayImageDisplay1: {fileID: 124610813}
-  gameplayImageDisplay2: {fileID: 1236976122}
-  gameplayImageDisplay3: {fileID: 649291841}
+  gameplayImageDisplay1: {fileID: 1236976122}
+  gameplayImageDisplay2: {fileID: 1326392645}
+  gameplayImageDisplay3: {fileID: 0}
+  gameplayImageSize: {x: 800, y: 500}
   tutorialSteps:
   - sentence: Greetings player!
     showImages: 0
@@ -28054,13 +27952,13 @@ MonoBehaviour:
       happen!
     showImages: 1
     gameplayImage1: {fileID: 0}
-    gameplayImage2: {fileID: 21300000, guid: 6bd955d87b12b714b8dea68a2610524c, type: 3}
+    gameplayImage2: {fileID: 21300000, guid: 6d32d03b7e8612d46a2425ec5a46587c, type: 3}
     gameplayImage3: {fileID: 0}
   - sentence: Secondly, spoke to them! As a police officer, it's a must to inform
       residents to be aware of risks and dangers on roads.
     showImages: 1
     gameplayImage1: {fileID: 0}
-    gameplayImage2: {fileID: 21300000, guid: 6bd955d87b12b714b8dea68a2610524c, type: 3}
+    gameplayImage2: {fileID: 21300000, guid: 4faf9b9eea8aa754a9c1d2561c5405d8, type: 3}
     gameplayImage3: {fileID: 0}
   - sentence: Lastly, repeat! It's your duty to keep the community safe and sound.
       Good luck!
@@ -31029,81 +30927,6 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
---- !u!1 &649291840
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 649291843}
-  - component: {fileID: 649291842}
-  - component: {fileID: 649291841}
-  m_Layer: 5
-  m_Name: GameplayStep3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &649291841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 649291840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6bd955d87b12b714b8dea68a2610524c, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &649291842
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 649291840}
-  m_CullTransparentMesh: 1
---- !u!224 &649291843
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 649291840}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.378644, y: 4.81212, z: 4.81212}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1518988078}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 646, y: 206}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &651758632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38255,20 +38078,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c05f0d9a05a7548bfdc7b468d3966d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController1
-  trafficLight1:
-    red: {fileID: 40928003}
-    yellow: {fileID: 504079465}
-    green: {fileID: 1533101728}
-  trafficLight2:
-    red: {fileID: 691977212}
-    yellow: {fileID: 2080170855}
-    green: {fileID: 794644052}
-  trafficLight3:
-    red: {fileID: 1493529865}
-    yellow: {fileID: 963473320}
-    green: {fileID: 1054692630}
-  greenTime: 20
-  yellowTime: 5
 --- !u!1001 &784943419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63065,7 +62874,7 @@ GameObject:
   - component: {fileID: 1236976121}
   - component: {fileID: 1236976122}
   m_Layer: 5
-  m_Name: GameplayStep2
+  m_Name: GameplayStep1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63080,7 +62889,7 @@ RectTransform:
   m_GameObject: {fileID: 1236976119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.378644, y: 4.81212, z: 4.81212}
+  m_LocalScale: {x: 8.139236, y: 4.81212, z: 4.81212}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1518988078}
@@ -63118,7 +62927,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6bd955d87b12b714b8dea68a2610524c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6d32d03b7e8612d46a2425ec5a46587c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -64692,20 +64501,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c05f0d9a05a7548bfdc7b468d3966d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrafficLightController1
-  trafficLight1:
-    red: {fileID: 2064977192}
-    yellow: {fileID: 1295430715}
-    green: {fileID: 1654958963}
-  trafficLight2:
-    red: {fileID: 1018764201}
-    yellow: {fileID: 2092516753}
-    green: {fileID: 1254932021}
-  trafficLight3:
-    red: {fileID: 1285704744}
-    yellow: {fileID: 264888625}
-    green: {fileID: 1590493639}
-  greenTime: 20
-  yellowTime: 5
 --- !u!1001 &1261708386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67832,6 +67627,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7818898516255054330, guid: e2062589834161f4ebc86b15f26afab1, type: 3}
   m_PrefabInstance: {fileID: 1324950171}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1326392644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1326392647}
+  - component: {fileID: 1326392646}
+  - component: {fileID: 1326392645}
+  m_Layer: 5
+  m_Name: GameplayStep2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1326392645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326392644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 4faf9b9eea8aa754a9c1d2561c5405d8, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1326392646
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326392644}
+  m_CullTransparentMesh: 1
+--- !u!224 &1326392647
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326392644}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 8.252074, y: 4.81212, z: 4.81212}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1518988078}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 3, y: 206}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1328575151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -79214,7 +79084,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1518988078
 RectTransform:
   m_ObjectHideFlags: 0
@@ -79228,8 +79098,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1236976120}
-  - {fileID: 649291843}
-  - {fileID: 124610811}
+  - {fileID: 1326392647}
   m_Father: {fileID: 285430849}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -103690,7 +103559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.14117648}
+  m_Color: {r: 0.19999999, g: 0.19999999, b: 0.19999999, a: 0.2784314}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

@@ -30,6 +30,10 @@ public class TutorialDialogue : MonoBehaviour
     [SerializeField] private Image gameplayImageDisplay2;
     [SerializeField] private Image gameplayImageDisplay3;
 
+    [Header("Gameplay Image Size")]
+    [Tooltip("The maximum size used by each tutorial gameplay image.")]
+    [SerializeField] private Vector2 gameplayImageSize = new Vector2(600f, 350f);
+
     [Header("Tutorial Content")]
     [SerializeField] private TutorialStep[] tutorialSteps;
 
@@ -67,9 +71,10 @@ public class TutorialDialogue : MonoBehaviour
         // Conversation box appears from the start
         conversationBox.SetActive(true);
 
-        // Images are hidden at the beginning
+        // Keep the gameplay image container from stretching the images.
         if (gameplayImageContainer != null)
         {
+            gameplayImageContainer.transform.localScale = Vector3.one;
             gameplayImageContainer.SetActive(false);
         }
 
@@ -151,7 +156,26 @@ public class TutorialDialogue : MonoBehaviour
         if (sprite != null)
         {
             imageDisplay.sprite = sprite;
+
+            // Keep the image from being stretched or squeezed.
             imageDisplay.preserveAspect = true;
+
+            RectTransform rect = imageDisplay.rectTransform;
+
+            // UI images should be resized with Width/Height, not uneven Scale values.
+            rect.localScale = Vector3.one;
+
+            // Give every tutorial gameplay image the same container size.
+            rect.SetSizeWithCurrentAnchors(
+                RectTransform.Axis.Horizontal,
+                gameplayImageSize.x
+            );
+
+            rect.SetSizeWithCurrentAnchors(
+                RectTransform.Axis.Vertical,
+                gameplayImageSize.y
+            );
+
             imageDisplay.gameObject.SetActive(true);
         }
         else
