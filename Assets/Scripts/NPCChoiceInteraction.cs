@@ -73,6 +73,9 @@ public class NPCChoiceInteraction : MonoBehaviour
     [Tooltip("Optional. Assign this when multiple NPCs share the same Conversation Panel/Next button. Leave None to keep using an existing Inspector OnClick setup.")]
     [SerializeField] private Button nextButton;
 
+    [Tooltip("Assign the NoHelmetZone trigger.")]
+    [SerializeField] private NoHelmetViolationTrigger noHelmetViolationTrigger;
+
     [Tooltip("Optional. Assign this when multiple NPCs share the same Option 1 button. Leave None to keep using an existing Inspector OnClick setup.")]
     [SerializeField] private Button option1Button;
 
@@ -117,8 +120,11 @@ public class NPCChoiceInteraction : MonoBehaviour
     [SerializeField] private PlayerHUD playerHUD;
 
     [Header("Score Settings")]
-    [Tooltip("Turn OFF if this NPC should only change Community Trust.")]
+    [Tooltip("Turn OFF if this NPC should not change Hazard Avoided.")]
     [SerializeField] private bool changeHazardAvoided = true;
+
+    [Tooltip("Turn OFF if this NPC should not change Community Trust yet.")]
+    [SerializeField] private bool changeCommunityTrust = true;
 
     [Header("Point Sounds")]
     [SerializeField] private AudioSource pointAudioSource;
@@ -137,10 +143,23 @@ public class NPCChoiceInteraction : MonoBehaviour
     [Tooltip("How long the screen takes to fade to black.")]
     [SerializeField] private float fadeDuration = 1.5f;
 
-    [Tooltip("Scene loaded after Option 1 or Option 2.")]
+    [Tooltip("Default scene loaded after Option 1 or Option 2 when Separate Choice Scenes is OFF.")]
     [SerializeField] private string nextSceneName = "Day2";
 
-    [Tooltip("Scene loaded when the player fails to stop the jaywalker in time.")]
+    [Header("Separate Choice Scenes")]
+    [Tooltip("Turn this ON only for NPCs such as the motorist that need different scenes for Option 1 and Option 2.")]
+    [SerializeField] private bool useSeparateChoiceScenes = false;
+
+    [Tooltip("Scene loaded after Option 1 when Separate Choice Scenes is ON.")]
+    [SerializeField] private string option1SceneName = "";
+
+    [Tooltip("Scene loaded after Option 2 when Separate Choice Scenes is ON.")]
+    [SerializeField] private string option2SceneName = "";
+
+    [Tooltip("Turn this ON if failing to stop this NPC should go to the same scene as Option 2.")]
+    [SerializeField] private bool accidentUsesOption2Scene = false;
+
+    [Tooltip("Scene loaded when the player fails to stop the NPC, unless Accident Uses Option 2 Scene is ON.")]
     [SerializeField] private string accidentSceneName = "Day1AccidentScene";
 
     private bool isTransitioning = false;
@@ -254,7 +273,15 @@ public class NPCChoiceInteraction : MonoBehaviour
 
         if (vehicleViolation != null && vehicleViolation.WarningActive)
         {
+            // Stop the motorist/bike when the player interacts in time.
             vehicleViolation.StopVehicleInTime();
+
+            // Stop the no-helmet warning/alarm sound immediately
+            // when the player successfully interacts with the motorist.
+            if (noHelmetViolationTrigger != null)
+            {
+                noHelmetViolationTrigger.StopWarningSound();
+            }
         }
 
         // OPTIONAL SHARED NEXT BUTTON:
@@ -524,8 +551,11 @@ public void NextDialogue()
                 playerHUD.AddHazardAvoided(hazardChange);
             }
 
-            // Community Trust always changes normally.
-            playerHUD.ChangeCommunityTrust(trustChange);
+            // Only change Community Trust if enabled for this NPC.
+            if (changeCommunityTrust)
+            {
+                playerHUD.ChangeCommunityTrust(trustChange);
+            }
         }
         else
         {
@@ -676,7 +706,12 @@ public void NextDialogue()
                 npcMovement.ConditionYes();
             }
 
-            StartSceneTransition(nextSceneName);
+            string option1SceneToLoad =
+                useSeparateChoiceScenes
+                ? option1SceneName
+                : nextSceneName;
+
+            StartSceneTransition(option1SceneToLoad);
             return;
         }
 
@@ -690,7 +725,12 @@ public void NextDialogue()
             npcMovement.ConditionNo();
         }
 
-        StartSceneTransition(nextSceneName);
+        string option2SceneToLoad =
+            useSeparateChoiceScenes
+            ? option2SceneName
+            : nextSceneName;
+
+        StartSceneTransition(option2SceneToLoad);
     }
 
     /// <summary>
@@ -701,7 +741,14 @@ public void NextDialogue()
     // This uses the exact same black-screen fade before loading the accident scene.
     public void FadeToAccidentScene()
     {
-        StartSceneTransition(accidentSceneName);
+        string sceneToLoad = accidentSceneName;
+
+        if (useSeparateChoiceScenes && accidentUsesOption2Scene)
+        {
+            sceneToLoad = option2SceneName;
+        }
+
+        StartSceneTransition(sceneToLoad);
     }
 
     public void StartSceneTransition(string sceneName)

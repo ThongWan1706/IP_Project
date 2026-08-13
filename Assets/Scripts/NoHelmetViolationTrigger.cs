@@ -9,34 +9,40 @@ public class NoHelmetViolationTrigger : MonoBehaviour
         new HashSet<NoHelmetVehicleViolation>();
 
     [Header("Warning Sound")]
-    [Tooltip("AudioSource used to play the warning sound.")]
+    [Tooltip("AudioSource that plays the warning/alarm.")]
     [SerializeField] private AudioSource warningAudioSource;
 
-    [Tooltip("Sound played once when a rider enters the no-helmet trigger zone.")]
+    [Tooltip("Sound that plays while the motorist is in the violation zone.")]
     [SerializeField] private AudioClip warningSound;
+
+    private NoHelmetVehicleViolation currentVehicle;
 
     private void Reset()
     {
-        Collider triggerCollider = GetComponent<Collider>();
-
-        if (triggerCollider != null)
-            triggerCollider.isTrigger = true;
-
-        Rigidbody rb = GetComponent<Rigidbody>();
-
-        if (rb != null)
-        {
-            rb.isKinematic = true;
-            rb.useGravity = false;
-        }
+        SetupTrigger();
     }
 
     private void Awake()
     {
+        SetupTrigger();
+
+        // Make sure it does not start playing automatically.
+        if (warningAudioSource != null)
+        {
+            warningAudioSource.playOnAwake = false;
+            warningAudioSource.loop = true;
+            warningAudioSource.Stop();
+        }
+    }
+
+    private void SetupTrigger()
+    {
         Collider triggerCollider = GetComponent<Collider>();
 
         if (triggerCollider != null)
+        {
             triggerCollider.isTrigger = true;
+        }
 
         Rigidbody rb = GetComponent<Rigidbody>();
 
@@ -55,18 +61,59 @@ public class NoHelmetViolationTrigger : MonoBehaviour
         if (vehicleViolation == null)
             return;
 
-        // Only activate this trigger once for each violating vehicle.
+        // Prevent the same motorist from activating the violation twice.
         if (triggeredVehicles.Contains(vehicleViolation))
             return;
 
         triggeredVehicles.Add(vehicleViolation);
+        currentVehicle = vehicleViolation;
 
-        // Play the warning sound once when this rider enters the trigger.
-        if (warningAudioSource != null && warningSound != null)
+        // Start the alarm and keep looping it.
+        StartWarningSound();
+
+        // Start slowdown + red outline + interaction timer.
+        vehicleViolation.BeginViolationWarning();
+
+        Debug.Log("Motorist entered No Helmet Zone - alarm started.");
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        NoHelmetVehicleViolation vehicleViolation =
+            other.GetComponentInParent<NoHelmetVehicleViolation>();
+
+        if (vehicleViolation == null)
+            return;
+
+        if (vehicleViolation == currentVehicle)
         {
-            warningAudioSource.PlayOneShot(warningSound);
+            StopWarningSound();
+            currentVehicle = null;
+        }
+    }
+
+    private void StartWarningSound()
+    {
+        if (warningAudioSource == null || warningSound == null)
+            return;
+
+        warningAudioSource.clip = warningSound;
+        warningAudioSource.loop = true;
+
+        if (!warningAudioSource.isPlaying)
+        {
+            warningAudioSource.Play();
+        }
+    }
+
+    // NPCChoiceInteraction calls this when the player stops the motorist.
+    public void StopWarningSound()
+    {
+        if (warningAudioSource != null)
+        {
+            warningAudioSource.Stop();
         }
 
-        vehicleViolation.BeginViolationWarning();
+        Debug.Log("No Helmet alarm stopped.");
     }
 }

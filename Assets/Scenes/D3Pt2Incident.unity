@@ -16146,7 +16146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c600855942a57f4694c0795afe99004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NoHelmetViolationTrigger
-  warningAudioSource: {fileID: 371817264}
+  warningAudioSource: {fileID: 2102161524}
   warningSound: {fileID: 8300000, guid: f3a81b0e48b5e964cba9610d7870b5e4, type: 3}
 --- !u!54 &233406265
 Rigidbody:
@@ -148049,6 +148049,7 @@ MonoBehaviour:
   conversationPanel: {fileID: 1481489118}
   optionPanel: {fileID: 1976604932}
   nextButton: {fileID: 0}
+  noHelmetViolationTrigger: {fileID: 0}
   option1Button: {fileID: 0}
   option2Button: {fileID: 0}
   option1ButtonText: {fileID: 0}
@@ -148080,6 +148081,7 @@ MonoBehaviour:
     sentence: Are you serious Sir?! It's just a one time thing!
   playerHUD: {fileID: 1477231629}
   changeHazardAvoided: 1
+  changeCommunityTrust: 1
   pointAudioSource: {fileID: 1799365481}
   pointIncreaseSound: {fileID: 8300000, guid: 3a286ef46885ed84797efa81e4945705, type: 3}
   pointDecreaseSound: {fileID: 8300000, guid: c7c51ec85dd75594e84be2a922ca06d8, type: 3}
@@ -148087,6 +148089,10 @@ MonoBehaviour:
   blackScreen: {fileID: 745165744}
   fadeDuration: 1.5
   nextSceneName: Day2
+  useSeparateChoiceScenes: 0
+  option1SceneName: 
+  option2SceneName: 
+  accidentUsesOption2Scene: 0
   accidentSceneName: D1Accident
 --- !u!114 &932854754
 MonoBehaviour:
@@ -220889,6 +220895,7 @@ MonoBehaviour:
   conversationPanel: {fileID: 1481489118}
   optionPanel: {fileID: 1976604932}
   nextButton: {fileID: 1922823551}
+  noHelmetViolationTrigger: {fileID: 233406264}
   option1Button: {fileID: 1286290484}
   option2Button: {fileID: 661655597}
   option1ButtonText: {fileID: 2123765192}
@@ -220925,14 +220932,19 @@ MonoBehaviour:
     sentence: Seriously officer?! It's just a one time thing!
   playerHUD: {fileID: 1477231629}
   changeHazardAvoided: 0
+  changeCommunityTrust: 0
   pointAudioSource: {fileID: 0}
   pointIncreaseSound: {fileID: 0}
   pointDecreaseSound: {fileID: 0}
   playerControlScripts: []
   blackScreen: {fileID: 745165744}
   fadeDuration: 1.5
-  nextSceneName: Day2
-  accidentSceneName: Day1AccidentScene
+  nextSceneName: 
+  useSeparateChoiceScenes: 1
+  option1SceneName: D3Pt2IWearHelmet
+  option2SceneName: D3Pt2INoHelmet
+  accidentUsesOption2Scene: 1
+  accidentSceneName: D3Pt2INoHelmet
 --- !u!136 &1246966180
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -348494,6 +348506,135 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1314209518980857642, guid: ad4cd5cf56b4da2479a5a2684c39fd42, type: 3}
   m_PrefabInstance: {fileID: 2102054056}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2102161523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2102161525}
+  - component: {fileID: 2102161524}
+  m_Layer: 0
+  m_Name: AlarmSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &2102161524
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102161523}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: f3a81b0e48b5e964cba9610d7870b5e4, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.042
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &2102161525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102161523}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 988.84686, y: 542.357, z: -29.49614}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2102171498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -390063,4 +390204,5 @@ SceneRoots:
   - {fileID: 2054622301}
   - {fileID: 233406267}
   - {fileID: 371817265}
+  - {fileID: 2102161525}
   - {fileID: 3840465}

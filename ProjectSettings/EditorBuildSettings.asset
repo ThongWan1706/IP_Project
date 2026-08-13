@@ -28,16 +28,19 @@ EditorBuildSettings:
     guid: 9987f5a3a76d13e4b98cade7e8079ce9
   - enabled: 1
     path: Assets/Scenes/Day3.unity
-    guid: 9d58ddccaa358fe4a910003e5344308f
+    guid: 807bb80092b8adb4d97c107e083b5d8f
   - enabled: 1
     path: Assets/Scenes/D3Pt1Accident.unity
     guid: cd09ec543832b2f48ae7cc218c884ee2
   - enabled: 1
     path: Assets/Scenes/D3Pt2Incident.unity
     guid: 3363bddddb866014f8e5b27a40edf8d9
-  - enabled: 0
-    path: Assets/Scenes/D3Accident.unity
-    guid: 6777b5bde2b91774990e99d35521f811
+  - enabled: 1
+    path: Assets/Scenes/D3Pt2INoHelmet.unity
+    guid: 1329fceb4232054488cdc5ed4d0c457d
+  - enabled: 1
+    path: Assets/Scenes/D3Pt2IWearHelmet.unity
+    guid: 763cd0e46e6f6c44382e3a795851c38f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
