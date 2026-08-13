@@ -147207,7 +147207,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!95 &932854752 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 4580565849737540237, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
@@ -147227,14 +147227,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
   isPhone: 0
   transitionAfterConversation: 1
+  doctorAI: {fileID: 0}
   outlineVisual: {fileID: 0}
   objectsToDestroy: []
   npcMovement: {fileID: 0}
+  incidentManager: {fileID: 0}
+  completeIncidentAfterConversation: 0
   interactionAudioSource: {fileID: 1799365481}
   policeWhistleSound: {fileID: 8300000, guid: 60d5bb7732644604b829863b23cbe828, type: 3}
   defaultHUDPanel: {fileID: 124629666}
   conversationPanel: {fileID: 1481489118}
   optionPanel: {fileID: 1976604932}
+  nextButton: {fileID: 1922823551}
+  option1Button: {fileID: 1286290484}
+  option2Button: {fileID: 661655597}
+  option1ButtonText: {fileID: 2123765192}
+  option2ButtonText: {fileID: 188452761}
+  option1Text: Politely inform him
+  option2Text: Scold and fine him
   characterNameText: {fileID: 1732517299}
   conversationText: {fileID: 1521663922}
   residentName: Resident
@@ -147355,6 +147365,7 @@ MonoBehaviour:
   blackScreen: {fileID: 745165744}
   fadeDuration: 2.5
   accidentSceneName: D1Accident
+  restartMovementWhenEnabled: 0
 --- !u!4 &933049160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1958792504750802904, guid: f3e8b3a407021c544afe69faa0e72fcd, type: 3}

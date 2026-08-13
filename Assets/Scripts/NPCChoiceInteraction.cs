@@ -71,6 +71,19 @@ public class NPCChoiceInteraction : MonoBehaviour
     [Tooltip("Optional. Assign this when multiple NPCs share the same Option 2 button. Leave None to keep using an existing Inspector OnClick setup.")]
     [SerializeField] private Button option2Button;
 
+    [Header("Option Button Text")]
+    [Tooltip("Assign the TextMeshProUGUI text object inside Option 1 Button.")]
+    [SerializeField] private TextMeshProUGUI option1ButtonText;
+
+    [Tooltip("Assign the TextMeshProUGUI text object inside Option 2 Button.")]
+    [SerializeField] private TextMeshProUGUI option2ButtonText;
+
+    [Tooltip("Text displayed on Option 1 for this NPC.")]
+    [SerializeField] private string option1Text = "Politely inform them";
+
+    [Tooltip("Text displayed on Option 2 for this NPC.")]
+    [SerializeField] private string option2Text = "Scold them";
+
     [Header("Conversation Text")]
     [SerializeField] private TextMeshProUGUI characterNameText;
     [SerializeField] private TextMeshProUGUI conversationText;
@@ -351,6 +364,18 @@ public void NextDialogue()
         {
             optionPanel.SetActive(true);
             optionPanel.transform.SetAsLastSibling();
+        }
+
+        // Update the text shown on the shared option buttons.
+        // Each NPC can have different option wording in the Inspector.
+        if (option1ButtonText != null)
+        {
+            option1ButtonText.text = option1Text;
+        }
+
+        if (option2ButtonText != null)
+        {
+            option2ButtonText.text = option2Text;
         }
 
         // OPTIONAL SHARED OPTION BUTTONS:
