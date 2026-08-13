@@ -1,4 +1,4 @@
-# IP_Project
+# SafeStreetsSG
 
 **Author:** Lam Thong Wan, Xavier Ong Yi Cheng, Keno Ang Kheng Kiat
 
