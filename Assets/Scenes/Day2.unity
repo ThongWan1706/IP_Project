@@ -55550,7 +55550,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: f3a81b0e48b5e964cba9610d7870b5e4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.075
+  m_Volume: 0.284
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -55673,7 +55673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408489e27f5f1d046bb7a27a79ba2451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JaywalkTriggerArea
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 497285818}
   warningSound: {fileID: 8300000, guid: f3a81b0e48b5e964cba9610d7870b5e4, type: 3}
 --- !u!65 &497285821
 BoxCollider:
@@ -202497,7 +202497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408489e27f5f1d046bb7a27a79ba2451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JaywalkTriggerArea
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1176375153}
   warningSound: {fileID: 8300000, guid: f3a81b0e48b5e964cba9610d7870b5e4, type: 3}
 --- !u!65 &1176375151
 BoxCollider:
@@ -202548,7 +202548,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: f3a81b0e48b5e964cba9610d7870b5e4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.075
+  m_Volume: 0.409
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -235004,7 +235004,7 @@ MonoBehaviour:
   busStopPoint: {fileID: 0}
   busStopDuration: 10
   busStopReachDistance: 1
-  leftDestination: {fileID: 905033646}
+  leftDestination: {fileID: 0}
   straightDestination: {fileID: 797343044}
   respawnPoint: {fileID: 196640573}
   respawnDelay: 1
