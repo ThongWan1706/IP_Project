@@ -128,6 +128,7 @@ Throughout this project our team meet a few limitations and some bugs while deve
 
 ### Bugs
 - For our game in order to restrict the player walking area, we implemented airwall at 4 areas of the map, but sometime the player can walk pass the airwall barrier as it's not long enough.
+- For the cars that are turning to the left, the cars somehow will goes through the kerb areas even though the car nav mesh surface didn't cover that area
 
 # FSM Diagrams
 - The FSM diagrams pictures (.jpeg) are located in the FSM Diagram Folder (https://github.com/ThongWan1706/IP_Project/tree/main/Assets/FSM%20diagrams)
