@@ -96,7 +96,7 @@ The game consist of 3 levels which requires the player to investigate incidents 
 2. Press E key to interact with him and continue the conversation
 3. After the conversation, it will pop out 2 options, can select either of them which can resulted in increase or decreasing of hazard avoided and community trust
 4. After the incident is done, the 2nd incident will start by having the group of children running.
-5. Approaching the child NPC that contains the red outline with addition of alarm sound
+5. Approach the child NPC that contains the red outline with addition of alarm sound
 6. Press E key to interact with the group and continue the conversation
 7. After the conversation, it will pop out 2 options, can select either of them which can resulted in increase or decreasing of hazard avoided and community trust
 8. Lastly when the conversation ended, it will lead to the next day scene.
@@ -125,9 +125,11 @@ Throughout this project our team meet a few limitations and some bugs while deve
 - For the player perspective, the camera will move together with the screen when the player need to click onto the Next Button in order to read the next line, we tried to set fixed camera but it will make the user experience weird as the camera would be stuck in place.
 - Due to difference of screen sizes, the text would either looks too small or look misalign in the player screen.
 - The dropdown of the language box even though I had increased the height of the box, the Tamil box would still be cut off.
+- For the cars, after the player stop the NPCs that are violating the roads, it would get pushed away by the cards if the player were to stop the NPC on time but standing around the road lanes where the cars goes.
 
 ### Bugs
 - For our game in order to restrict the player walking area, we implemented airwall at 4 areas of the map, but sometime the player can walk pass the airwall barrier as it's not long enough.
+- For the cars that are turning to the left, the cars somehow will goes through the kerb areas even though the car nav mesh surface didn't cover that area
 
 # FSM Diagrams
 - The FSM diagrams pictures (.jpeg) are located in the FSM Diagram Folder (https://github.com/ThongWan1706/IP_Project/tree/main/Assets/FSM%20diagrams)
