@@ -111316,7 +111316,7 @@ MonoBehaviour:
   residentName: The Doctor
   policeName: Police Officer
   residentNameColour: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  policeNameColour: {r: 0, g: 1, b: 1, a: 1}
+  policeNameColour: {r: 0, g: 0.19607843, b: 1, a: 1}
   openingDialogue:
   - speaker: 0
     sentence: 'Hi Officer, we have some news after investigating the scene. '
@@ -111370,9 +111370,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 2.6094394
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.8047199, z: 0}
 --- !u!1001 &640965489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -178456,6 +178456,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3931702980234998557, guid: 08b54ba0f2f7144449f88bec7c708c06, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1118011203}
+    - targetCorrespondingSourceObject: {fileID: 3931702980234998557, guid: 08b54ba0f2f7144449f88bec7c708c06, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1118011206}
   m_SourcePrefab: {fileID: 100100000, guid: 08b54ba0f2f7144449f88bec7c708c06, type: 3}
 --- !u!1 &1118011202 stripped
 GameObject:
@@ -178527,7 +178530,7 @@ MonoBehaviour:
   residentName: 
   policeName: Police Officer
   residentNameColour: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  policeNameColour: {r: 0, g: 1, b: 1, a: 1}
+  policeNameColour: {r: 0, g: 0.19607843, b: 1, a: 1}
   openingDialogue:
   - speaker: 1
     sentence: A phone was spotted. This could mean that the driver was using his
@@ -178556,6 +178559,23 @@ MonoBehaviour:
   option2SceneName: 
   accidentUsesOption2Scene: 0
   accidentSceneName: 
+--- !u!114 &1118011206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118011202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 904fe2f653049214b9c4e3fabf30b8da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCViolationOutline
+  outlineMaterial: {fileID: 2100000, guid: f781bd4ed85a6094fb502b704c3fb6c0, type: 2}
+  violationPoint: {fileID: 0}
+  warningDistance: 2
+  reachedDistance: 0.5
+  aboutToViolate: 0
 --- !u!1001 &1118387831
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -179800,7 +179820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1118223208833245734, guid: eb2798f570b51754d947830bfb43b3dc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2810133694955050404, guid: eb2798f570b51754d947830bfb43b3dc, type: 3}
       propertyPath: m_Layer
@@ -179926,8 +179946,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1118223208833245734, guid: eb2798f570b51754d947830bfb43b3dc, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -228679,7 +228698,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4755986301128093617, guid: 4fc33a951d34373468b5fc14982d176f, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4755986301128093617, guid: 4fc33a951d34373468b5fc14982d176f, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5556848611175231390, guid: 4fc33a951d34373468b5fc14982d176f, type: 3}
       propertyPath: m_Layer
@@ -228701,8 +228724,7 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4755986301128093617, guid: 4fc33a951d34373468b5fc14982d176f, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -308798,6 +308820,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 992785887442622742, guid: 51b8cd9e64dc867439b7580243c9c6cf, type: 3}
   m_PrefabInstance: {fileID: 1779698929}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1780022618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1780022621}
+  - component: {fileID: 1780022620}
+  - component: {fileID: 1780022619}
+  m_Layer: 6
+  m_Name: TriggerConversation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1780022619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780022618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52cab232f3f8d174ba2d366ec2f01f24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerNPCInteractor
+  playerCamera: {fileID: 2141874595}
+  interactionDistance: 4
+  npcLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  interactPrompt: {fileID: 1134072956}
+  interactPromptText: {fileID: 1158205644}
+--- !u!65 &1780022620
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780022618}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.6759644, y: 1.984314, z: 1.8353329}
+  m_Center: {x: -0.33798218, y: 0.9273987, z: -0.41766644}
+--- !u!4 &1780022621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780022618}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 964.411, y: 540.311, z: -20.01}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1780881158
 GameObject:
   m_ObjectHideFlags: 0
@@ -332511,7 +332606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7918576422770425010, guid: 81983ab7d7170b44299d16ff6429b8e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 540.216
+      value: 540.211
       objectReference: {fileID: 0}
     - target: {fileID: 7918576422770425010, guid: 81983ab7d7170b44299d16ff6429b8e5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -390484,3 +390579,4 @@ SceneRoots:
   - {fileID: 1118011201}
   - {fileID: 1852853575}
   - {fileID: 1095776522}
+  - {fileID: 1780022621}

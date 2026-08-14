@@ -148035,6 +148035,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
   isPhone: 0
   transitionAfterConversation: 1
+  hasChoices: 1
   onlyInteractDuringNoHelmetViolation: 0
   helmetController: {fileID: 0}
   doctorAI: {fileID: 0}
@@ -148082,6 +148083,9 @@ MonoBehaviour:
   playerHUD: {fileID: 1477231629}
   changeHazardAvoided: 1
   changeCommunityTrust: 1
+  applyScoreOnConversationEnd: 0
+  endConversationHazardChange: 0
+  endConversationTrustChange: 0
   pointAudioSource: {fileID: 1799365481}
   pointIncreaseSound: {fileID: 8300000, guid: 3a286ef46885ed84797efa81e4945705, type: 3}
   pointDecreaseSound: {fileID: 8300000, guid: c7c51ec85dd75594e84be2a922ca06d8, type: 3}
@@ -220881,6 +220885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
   isPhone: 0
   transitionAfterConversation: 1
+  hasChoices: 1
   onlyInteractDuringNoHelmetViolation: 1
   helmetController: {fileID: 1246966174}
   doctorAI: {fileID: 0}
@@ -220907,7 +220912,7 @@ MonoBehaviour:
   residentName: Motorist
   policeName: Police Officer
   residentNameColour: {r: 1, g: 0.40140873, b: 0.015686274, a: 1}
-  policeNameColour: {r: 0, g: 0.069946766, b: 1, a: 1}
+  policeNameColour: {r: 0, g: 0.19607843, b: 1, a: 1}
   openingDialogue:
   - speaker: 1
     sentence: Hi Sir! It's rainy now, and why you're not wearing a helmet while travelling?
@@ -220933,6 +220938,9 @@ MonoBehaviour:
   playerHUD: {fileID: 1477231629}
   changeHazardAvoided: 0
   changeCommunityTrust: 0
+  applyScoreOnConversationEnd: 0
+  endConversationHazardChange: 0
+  endConversationTrustChange: 0
   pointAudioSource: {fileID: 0}
   pointIncreaseSound: {fileID: 0}
   pointDecreaseSound: {fileID: 0}

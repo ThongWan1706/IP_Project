@@ -147541,7 +147541,7 @@ MonoBehaviour:
   residentName: Resident
   policeName: Police Officer
   residentNameColour: {r: 1, g: 0.52491343, b: 0, a: 1}
-  policeNameColour: {r: 0, g: 0.2, b: 1, a: 1}
+  policeNameColour: {r: 0, g: 0.19607843, b: 1, a: 1}
   openingDialogue:
   - speaker: 1
     sentence: Hello Sir! Are you aware that jaywalking is dangerous?
@@ -147635,7 +147635,7 @@ MonoBehaviour:
   animator: {fileID: 932854752}
   violationOutline: {fileID: 932854749}
   jaywalkDestination: {fileID: 1072243439}
-  normalWalkSpeed: 2
+  normalWalkSpeed: 1
   slowWalkSpeed: 0.65
   slowAnimationSpeed: 0.566
   interactionTimeLimit: 5
@@ -276532,7 +276532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2490420537610255543, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -60.225
+      value: -86.37
       objectReference: {fileID: 0}
     - target: {fileID: 2490420537610255543, guid: 89176b74e77661e4ebe0dc74d72ed623, type: 3}
       propertyPath: m_LocalRotation.w
@@ -340448,6 +340448,8 @@ MonoBehaviour:
   blackScreen: {fileID: 60783402}
   playerControlScripts:
   - {fileID: 121833268}
+  carCrashManager: {fileID: 0}
+  playerCarLookDetector: {fileID: 0}
   fadeDuration: 1.5
   dayIntroDuration: 2.5
 --- !u!1 &1979833953
