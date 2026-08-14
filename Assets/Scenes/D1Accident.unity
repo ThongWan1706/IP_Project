@@ -116126,7 +116126,6 @@ MonoBehaviour:
   busStopReachDistance: 1
   leftDestination: {fileID: 0}
   straightDestination: {fileID: 0}
-  rightDestination: {fileID: 0}
   respawnPoint: {fileID: 0}
   respawnDelay: 1
   speed: 5
@@ -143513,6 +143512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AccidentSequenceController
   crashCar: {fileID: 750481695}
+  detachVictimOnImpact: 0
   impactPoint: {fileID: 243525768}
   carEndPoint: {fileID: 974182192}
   carSpeed: 8
@@ -143523,6 +143523,10 @@ MonoBehaviour:
   victimRigidbody: {fileID: 932854757}
   victimAnimator: {fileID: 932854752}
   victimAgent: {fileID: 932854750}
+  motorcycleRigidbody: {fileID: 0}
+  motorcyclePushForce: 5
+  motorcycleUpwardForce: 1.5
+  motorcycleSpinForce: 6
   flyForce: 15
   upwardForce: 5
   spinForce: 5
@@ -144847,13 +144851,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0ef4719a4ca2cb498dfb7aea3381e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
+  isPhone: 0
+  transitionAfterConversation: 1
+  hasChoices: 1
+  onlyInteractDuringNoHelmetViolation: 0
+  helmetController: {fileID: 0}
+  doctorAI: {fileID: 0}
   outlineVisual: {fileID: 0}
+  objectsToDestroy: []
   npcMovement: {fileID: 0}
+  incidentManager: {fileID: 0}
+  completeIncidentAfterConversation: 0
   interactionAudioSource: {fileID: 1799365481}
   policeWhistleSound: {fileID: 8300000, guid: 60d5bb7732644604b829863b23cbe828, type: 3}
   defaultHUDPanel: {fileID: 0}
   conversationPanel: {fileID: 0}
   optionPanel: {fileID: 0}
+  nextButton: {fileID: 0}
+  noHelmetViolationTrigger: {fileID: 0}
+  option1Button: {fileID: 0}
+  option2Button: {fileID: 0}
+  option1ButtonText: {fileID: 0}
+  option2ButtonText: {fileID: 0}
+  option1Text: Politely inform them
+  option2Text: Scold them
   characterNameText: {fileID: 0}
   conversationText: {fileID: 0}
   residentName: Resident
@@ -144878,10 +144899,23 @@ MonoBehaviour:
   - speaker: 0
     sentence: Are you serious Sir?! It's just a one time thing!
   playerHUD: {fileID: 0}
+  changeHazardAvoided: 1
+  changeCommunityTrust: 1
+  applyScoreOnConversationEnd: 0
+  endConversationHazardChange: 0
+  endConversationTrustChange: 0
   pointAudioSource: {fileID: 1799365481}
   pointIncreaseSound: {fileID: 8300000, guid: 3a286ef46885ed84797efa81e4945705, type: 3}
   pointDecreaseSound: {fileID: 8300000, guid: c7c51ec85dd75594e84be2a922ca06d8, type: 3}
   playerControlScripts: []
+  blackScreen: {fileID: 0}
+  fadeDuration: 1.5
+  nextSceneName: Day2
+  useSeparateChoiceScenes: 0
+  option1SceneName: 
+  option2SceneName: 
+  accidentUsesOption2Scene: 0
+  accidentSceneName: Day1AccidentScene
 --- !u!114 &932854754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144949,7 +144983,6 @@ MonoBehaviour:
   cameraFocusDuration: 0.65
   turnTowardPlayerDuration: 0.4
   playerControlScripts: []
-  accidentSceneName: Day1AccidentScene
   onStoppedInTime:
     m_PersistentCalls:
       m_Calls:
@@ -144968,6 +145001,10 @@ MonoBehaviour:
   onFailedToStop:
     m_PersistentCalls:
       m_Calls: []
+  blackScreen: {fileID: 0}
+  fadeDuration: 1.5
+  accidentSceneName: Day1AccidentScene
+  restartMovementWhenEnabled: 0
 --- !u!54 &932854757
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -214910,7 +214947,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1

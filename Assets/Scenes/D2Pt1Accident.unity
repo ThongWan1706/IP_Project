@@ -144084,6 +144084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AccidentSequenceController
   crashCar: {fileID: 183550926}
+  detachVictimOnImpact: 0
   impactPoint: {fileID: 1573494072}
   carEndPoint: {fileID: 457992536}
   carSpeed: 10
@@ -144094,6 +144095,10 @@ MonoBehaviour:
   victimRigidbody: {fileID: 1231220101}
   victimAnimator: {fileID: 1231220089}
   victimAgent: {fileID: 1231220090}
+  motorcycleRigidbody: {fileID: 0}
+  motorcyclePushForce: 5
+  motorcycleUpwardForce: 1.5
+  motorcycleSpinForce: 6
   flyForce: 15
   upwardForce: 5
   spinForce: 5
@@ -213271,14 +213276,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCChoiceInteraction
   isPhone: 0
   transitionAfterConversation: 1
+  hasChoices: 1
+  onlyInteractDuringNoHelmetViolation: 0
+  helmetController: {fileID: 0}
+  doctorAI: {fileID: 0}
   outlineVisual: {fileID: 0}
   objectsToDestroy: []
   npcMovement: {fileID: 0}
+  incidentManager: {fileID: 0}
+  completeIncidentAfterConversation: 0
   interactionAudioSource: {fileID: 0}
   policeWhistleSound: {fileID: 8300000, guid: 60d5bb7732644604b829863b23cbe828, type: 3}
   defaultHUDPanel: {fileID: 0}
   conversationPanel: {fileID: 0}
   optionPanel: {fileID: 0}
+  nextButton: {fileID: 0}
+  noHelmetViolationTrigger: {fileID: 0}
+  option1Button: {fileID: 0}
+  option2Button: {fileID: 0}
+  option1ButtonText: {fileID: 0}
+  option2ButtonText: {fileID: 0}
+  option1Text: Politely inform them
+  option2Text: Scold them
   characterNameText: {fileID: 0}
   conversationText: {fileID: 0}
   residentName: Elderly
@@ -213373,6 +213392,11 @@ MonoBehaviour:
   - speaker: 0
     sentence: You're so rude!
   playerHUD: {fileID: 0}
+  changeHazardAvoided: 1
+  changeCommunityTrust: 1
+  applyScoreOnConversationEnd: 0
+  endConversationHazardChange: 0
+  endConversationTrustChange: 0
   pointAudioSource: {fileID: 0}
   pointIncreaseSound: {fileID: 8300000, guid: 3a286ef46885ed84797efa81e4945705, type: 3}
   pointDecreaseSound: {fileID: 8300000, guid: c7c51ec85dd75594e84be2a922ca06d8, type: 3}
@@ -213380,6 +213404,10 @@ MonoBehaviour:
   blackScreen: {fileID: 0}
   fadeDuration: 1.5
   nextSceneName: Day3
+  useSeparateChoiceScenes: 0
+  option1SceneName: 
+  option2SceneName: 
+  accidentUsesOption2Scene: 0
   accidentSceneName: D2_1stAccident
 --- !u!114 &1231220096
 MonoBehaviour:
@@ -213472,6 +213500,7 @@ MonoBehaviour:
   blackScreen: {fileID: 0}
   fadeDuration: 1.5
   accidentSceneName: CarAccident
+  restartMovementWhenEnabled: 0
 --- !u!54 &1231220101
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -213596,7 +213625,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
