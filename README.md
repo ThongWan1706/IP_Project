@@ -96,7 +96,7 @@ The game consist of 3 levels which requires the player to investigate incidents 
 2. Press E key to interact with him and continue the conversation
 3. After the conversation, it will pop out 2 options, can select either of them which can resulted in increase or decreasing of hazard avoided and community trust
 4. After the incident is done, the 2nd incident will start by having the group of children running.
-5. Approaching the child NPC that contains the red outline with addition of alarm sound
+5. Approach the child NPC that contains the red outline with addition of alarm sound
 6. Press E key to interact with the group and continue the conversation
 7. After the conversation, it will pop out 2 options, can select either of them which can resulted in increase or decreasing of hazard avoided and community trust
 8. Lastly when the conversation ended, it will lead to the next day scene.
