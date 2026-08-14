@@ -125,6 +125,7 @@ Throughout this project our team meet a few limitations and some bugs while deve
 - For the player perspective, the camera will move together with the screen when the player need to click onto the Next Button in order to read the next line, we tried to set fixed camera but it will make the user experience weird as the camera would be stuck in place.
 - Due to difference of screen sizes, the text would either looks too small or look misalign in the player screen.
 - The dropdown of the language box even though I had increased the height of the box, the Tamil box would still be cut off.
+- For the cars, after the player stop the NPCs that are violating the roads, it would get pushed away by the cards if the player were to stop the NPC on time but standing around the road lanes where the cars goes.
 
 ### Bugs
 - For our game in order to restrict the player walking area, we implemented airwall at 4 areas of the map, but sometime the player can walk pass the airwall barrier as it's not long enough.
