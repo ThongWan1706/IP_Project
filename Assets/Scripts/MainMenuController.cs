@@ -8,6 +8,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject homepagePanel;
     [SerializeField] private GameObject settingsPanel;
 
+
     [Header("Scene Settings")]
     [SerializeField] private string tutorialSceneName = "TutorialView";
 
@@ -16,6 +17,11 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private float fadeDuration = 1.5f;
 
     private bool isTransitioning;
+
+    public void ReturnScene()
+    {
+        SceneManager.LoadScene("MainMenuView");
+    }
 
     private void Awake()
     {
