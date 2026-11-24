@@ -23,6 +23,11 @@ public class MainMenuController : MonoBehaviour
         SceneManager.LoadScene("MainMenuView");
     }
 
+    public void ControlsPage()
+    {
+        SceneManager.LoadScene("ControlsPage");
+    }
+
     private void Awake()
     {
         if (blackScreen == null)
