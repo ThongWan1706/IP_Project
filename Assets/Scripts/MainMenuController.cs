@@ -7,6 +7,7 @@ public class MainMenuController : MonoBehaviour
     [Header("Panels")]
     [SerializeField] private GameObject homepagePanel;
     [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject controlsPanel;
 
 
     [Header("Scene Settings")]
@@ -21,11 +22,6 @@ public class MainMenuController : MonoBehaviour
     public void ReturnScene()
     {
         SceneManager.LoadScene("MainMenuView");
-    }
-
-    public void ControlsPage()
-    {
-        SceneManager.LoadScene("ControlsPage");
     }
 
     private void Awake()
@@ -80,12 +76,21 @@ public class MainMenuController : MonoBehaviour
     {
         homepagePanel.SetActive(false);
         settingsPanel.SetActive(true);
+        controlsPanel.SetActive(false);
+    }
+
+    public void OpenControls()
+    {
+        homepagePanel.SetActive(false);
+        settingsPanel.SetActive(false);
+        controlsPanel.SetActive(true);
     }
 
     public void OpenHomepage()
     {
         settingsPanel.SetActive(false);
         homepagePanel.SetActive(true);
+        controlsPanel.SetActive(false);
     }
 
     public void QuitGame()
